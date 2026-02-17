@@ -39,8 +39,10 @@ Threshold voltage is the minimum gate-to-source voltage required to create a con
 <img width="1185" height="425" alt="image" src="https://github.com/user-attachments/assets/d0643f77-6f5f-4c70-be2a-90ab2f123416" />
 
 **When small voltage is applied(Vgs<Vth)**
+
 <img width="763" height="445" alt="image" src="https://github.com/user-attachments/assets/be0b6d73-a480-4b08-83c4-b003a61c4566" />
-- Positive charges appears on gate
+
+- Positive charges appears on gate surface
 - An electric field is created from gate toward substrate
 - It forms oxide capacitor, holes(majority carriers in P-substrate) are pushed away from substrate
 - Fixed negative acceptors ions remain near to the surface
@@ -51,6 +53,7 @@ Threshold voltage is the minimum gate-to-source voltage required to create a con
 
 ## Lecture 3:- Strong Inversion
 **When we increase the gate voltage(Vgs=Vth)**
+
 <img width="769" height="425" alt="image" src="https://github.com/user-attachments/assets/c479621c-5c1f-49c9-bc3c-0cfe98084bea" />
 
 - Width of the depletion region increases
@@ -64,6 +67,7 @@ Threshold voltage is the minimum gate-to-source voltage required to create a con
 - Large number of electrons are accumulated the surface
 - The positive potential of the gate area attract the negative charge particle from the n+ source area like a magnet
 - Channel width get increased and no change of the depletion layer width
+- 
 <img width="503" height="411" alt="image" src="https://github.com/user-attachments/assets/264ecd41-982b-4f01-80b1-318555beb6d5" />
 
 - There will be a point at which a continuous n-channel formation from Source to Drain, posibility of current flow whose conductivity is modulated by Vgs
