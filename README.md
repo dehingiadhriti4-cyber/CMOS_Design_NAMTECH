@@ -28,9 +28,9 @@ The circuit design process employing SPICE simulations is the source of the dela
 -An NMOS transistor is a four-terminal device built on lightly doped p-type substrate, with two heavily doped n-type regions which are source and drain . The isolation region isolate the transistor from other transistor,There is a thin gate oxide layer of Silicon Dioxide separates gate from semiconductor and prevents direct current flow and above it metal or Polysilicon is deposited which is the gate terminal.
 <img width="1094" height="472" alt="image" src="https://github.com/user-attachments/assets/8496d382-0ad1-4808-85e7-7c59f506080c" />
 
-  ## Threshold Voltage (Vt)
+  **Threshold Voltage (Vt)**
 Threshold voltage is the minimum gate-to-source voltage required to create a conducting channel in an NMOS transistor. It determines when the device turns ON and controls current flow, switching speed, and power consumption.
-  ## Threshold Voltage Modelling
+  **Threshold Voltage Modelling**
 - Let Vgs=0
 - Drain, Source and Body is connected to GND
 - Substrate-Source(B-S) and Substrate-Drain(B-D) form p-n junction diodes
