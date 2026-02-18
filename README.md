@@ -127,12 +127,101 @@ Threshold voltage is the minimum gate-to-source voltage required to create a con
 - Plotting a graph with the y-axis denoting channel charge/strength and the x-axis showing the channel length (from 0 to L, taking into account that L ≈ Leff)
     - When VDS is not present, the gate overdrive voltage (VGS − Vt) is the same at all points along the channel.
     - The local channel potential changes from 0 at the source to VDS at the drain when VDS is applied, becoming V(x).
-    - As a result, the channel charge gradually drops from source to drain, and the effective overdrive at any time x becomes (VGS − V(x) − Vt).
-  
+    - As a result, the channel charge gradually drops from source to drain, and the effective overdrive at any time x becomes (Vgs − V(x) − Vt).
+    - Q(i) = -Cox([Vgs − V(x)] − Vt)
 - **Channel Length (L)**:- The channel length is the physical distance between Source and Drain defined during fabrication. It is physical gate length.
 
 - **Effective Channel Lenght(Lₑff)**:- The actual conducting channel length after fabrication effects.
    - Leff=L−2ΔL
+ <img width="556" height="339" alt="image" src="https://github.com/user-attachments/assets/a807161d-83c9-4a93-93b5-04842c678a51" />
+
+ ## Lecture 2: Drift current theory
+
+ <img width="555" height="525" alt="image" src="https://github.com/user-attachments/assets/a67c0814-2aac-402a-8b50-2cc47af1cdbd" />
+
+ - In the channel (yellow region below), the induced inversion charge at any point x depends on the local gate overdrive voltage.
+ - The effective gate voltage at location x is VGS − V(x) because the channel potential changes throughout its length.
+ - The local overdrive voltage at location x is proportional to the inversion charge per unit area.
+
+<img width="408" height="401" alt="image" src="https://github.com/user-attachments/assets/a7a3efa3-c829-48b2-8e8b-261ae1d2eeb8" />
+
+ - From device physice point of view, we have two types of current
+    - **Drift current** :- The current caused by the movement of charge carriers due to an applied electric field.
+    - **Diffusion current** :- The current caused by the movement of charge carriers from high concentration region to low concentration region.
+
+<img width="1195" height="682" alt="image" src="https://github.com/user-attachments/assets/1aa26eeb-9297-4cce-9aa3-790d6be20e15" />
+
+ 
+ - Drift current(Id)= (Velocity of charge carriers x available charge)
+   
+## Lecture 3: Drain current model for linear region of operation
+
+<img width="409" height="130" alt="image" src="https://github.com/user-attachments/assets/c3d2484d-0d39-43b1-9cef-0918e26b562a" />
+
+- Substituting and integrating dx over channel length L with give the V-I relation of NMOS transistor
+<img width="431" height="133" alt="image" src="https://github.com/user-attachments/assets/d5846991-ade0-4523-852d-ef80f495d029" />
+
+- Integrate over length L on LHS and over drain-source voltage Vds on RHS we get the below
+<img width="404" height="49" alt="image" src="https://github.com/user-attachments/assets/0eff1261-45d3-4941-84cb-47854bbda7aa" />
+
+- μn, ​Cox, ​L/W are technology parameters
+
+<img width="402" height="71" alt="image" src="https://github.com/user-attachments/assets/63b20a70-3484-4f4e-880d-4d6759f6b6e6" />
+
+- Considering kn= unCox, where kn is the process transconductance, which determines how effectively the device converts gate voltage into drain current.
+<img width="399" height="76" alt="image" src="https://github.com/user-attachments/assets/d29a8631-725d-4cd7-a866-3b4b20aee7ff" />
+
+- The drain current is still a quadratic  function of Vds, after further simplification, we obtain
+<img width="443" height="262" alt="image" src="https://github.com/user-attachments/assets/25f62945-2904-48a3-a1ee-9be2c197783d" />
+
+- Therefore all values of Vds ≤ (Vgs − Vt), the MOSFET operates in the resistive (linear) region.
+- In this region the channel is  uniform from source to drain and the MOSFET behaves like a **voltage-controlled resistor**.
+
+## Lecture 4: SPICE conclusion to resistive operation
+
+- To analyse the impact of Vgs and Vds on the drain current(Id), we consider different values of both voltages.
+- For a given VGS, the device remains in the linear (triode) region as long as Vds < (Vgs − Vt).
+  <img width="496" height="134" alt="image" src="https://github.com/user-attachments/assets/2c6f1f07-e7d1-40de-856e-893a4b5e10e8" />
+
+- To calculate ID for different values of VGS, at every value of VGS, sweep VDS from 0 till (VGS − Vt).
+- In this region, drain current(Id) follows the linear-region equation, and SPICE simulations can be used to obtain and verify the Id–Vds characteristics for each Vgs.
+  
+## Lecture 5: SPICE conclusion to resistive operation
+
+<img width="1233" height="584" alt="image" src="https://github.com/user-attachments/assets/54f571ed-d057-4b84-b368-376b32fd9124" />
+
+- when (VGS − VDS) > Vt, the effective gate voltage at the drain end remains higher than the threshold voltage even. This indicates that even at the drain side, inversion is maintained.
+- A continuous conducting path connects source and drain because inversion occurs across the channel from source (x = 0) to drain (x = L).
+- Under these circumstances, the device functions in the linear (triode) region, and for small values of VDS, the drain current rises roughly linearly with VDS.
+
+<img width="1209" height="582" alt="image" src="https://github.com/user-attachments/assets/74a6de03-35c7-44f6-ae18-b5e76b76937f" />
+
+- When Vgs-Vds = Vt, the effective gate voltage at the drain end becomes equal to the threshold voltage. At this point, inversion just begins at the drain side, so the channel thickness reduces to zero there and the channel starts to pinch off (disappear) near the drain. This is called **pinch-off**.
+- In the pinch-off region, the channel disappears near the drain, but current does not stop. Electrons are swept into the drain by a strong electric field, and the MOSFET enters saturation. The drain current becomes almost constant and is mainly controlled by Vgs.
+
+<img width="1236" height="588" alt="image" src="https://github.com/user-attachments/assets/a73a35ad-d268-4116-b5f2-bc4dd89f6fce" />
+
+- When Vds exceeds Vgs-Vth, the MOSFET enters the saturation region. At this point, the drain end no longer satisfies the inversion condition, and pinch-off occurs near the drain.
+- No channel present at the drain side, as the result of that the area near the drain channel got disappeared, some channel present in the source area, this is referred as saturation region and cannot do anything further.
+- As Vds increases further beyond Vgs-Vth, the pinch-off point moves slightly toward the source.
+
+
+
+
+  ​
+
+  
+
+
+ 
+   
+
+
+   
+   
+       
+
+
 
      
   
