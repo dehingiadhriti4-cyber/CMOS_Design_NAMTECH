@@ -205,6 +205,28 @@ Threshold voltage is the minimum gate-to-source voltage required to create a con
 - No channel present at the drain side, as the result of that the area near the drain channel got disappeared, some channel present in the source area, this is referred as saturation region and cannot do anything further.
 - As Vds increases further beyond Vgs-Vth, the pinch-off point moves slightly toward the source.
 
+## Lecture 6: Drain current model for saturation region of operation
+
+- When Vgs-Vds ≤ Vt, the channel disappears at the drain side
+- In the saturation region, the channel voltage is approximately fixed at Vgs-Vt, unlike in the linear region where it changes along the channel as V(x).
+- Ideally, the drain current becomes independent of Vds and is primarily determined by Vgs-Vt, provided channel length modulation is ignored.
+<img width="399" height="227" alt="image" src="https://github.com/user-attachments/assets/fb104807-7c02-42c9-8b13-8aedcb7091f5" />
+- Replace Vds by Vgs-Vt
+<img width="435" height="207" alt="image" src="https://github.com/user-attachments/assets/da32c0c3-7a05-4bba-adde-e4e1c76b09c9" />
+
+
+- Drain Current (Id) is no more linear function of Vt, if we keep Vgs at constant value and increase Vds as such extent Id act as a constant current 
+<img width="268" height="90" alt="image" src="https://github.com/user-attachments/assets/0f4b78f4-c262-41ce-b8b3-219c054ad95f" />
+
+- Drain current(Id) looks to be a perfect current source because it is the function of all the constants.
+- But somewhere it's not true, effective channel length is reduced, is moduleted by applied Vds.
+- Drain current is increase a bit when Vds increases, depletion resion at the drain increases( minor linear function of Vds)
+<img width="726" height="131" alt="image" src="https://github.com/user-attachments/assets/9378f5ea-39d8-4c97-ace1-ca3a38f9b1ca" />
+
+- Drain current is slightly increase when Vds is increases
+
+
+
 
 
 
