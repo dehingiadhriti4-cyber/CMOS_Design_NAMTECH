@@ -72,6 +72,73 @@ Threshold voltage is the minimum gate-to-source voltage required to create a con
 
 - There will be a point at which a continuous n-channel formation from Source to Drain, posibility of current flow whose conductivity is modulated by Vgs
 - Initially Vgs=0, the Source to Drain resistance is so high, there was absolutely zero current flow
+
+  **Case 1(Vsb=0)**
+
+<img width="494" height="469" alt="image" src="https://github.com/user-attachments/assets/5ada57f4-4f1d-49e4-a19c-6f680c0474dd" />
+
+- When Gate to Source potential will be increase, a strong inversion is observed here
+- Semiconductor surface inverts to n-type material at Vgs=Vto,Vsb=0(say)
+- Threshold voltage equation:- Vth=Vto
+    
+**Case 2(Vsb=positive potential to the source and negative potential to the body)**
+
+<img width="629" height="479" alt="image" src="https://github.com/user-attachments/assets/6a646079-757e-4efd-8cac-c41dc1c6c1a5" />
+
+- Depletion region will be slightly high near 'S', there is more additional reverse bias between Source'S' and Body'B' to this p-n junction diode
+- More holes (positive charges) are drawn deeper into the substrate and away from the surface as a result of the increased electric field between the source and the p-substrate.
+ - Due to positive Vsb few charges from channel are pulled towards source 'S'
+ - This indicates that more ionized acceptor ions, or negative fixed charge, are left behind close to the surface, more gate voltage is required to form inversion, causing the threshold voltage to increase. This phenomenon is called the **body effect**.
+- When we increase Vgs more then finally at some potential Vgs=Vth+V1, additional potential V1 needed for the strong inversion of the surface due to Vsb=+ve
+- Threshold voltage equation:-
+<img width="622" height="248" alt="image" src="https://github.com/user-attachments/assets/f7293435-f519-4900-9a78-78579c32a64c" />
+
+- Vto is the threshold voltage at Vsb=0
+
+<img width="403" height="230" alt="image" src="https://github.com/user-attachments/assets/0b67a726-ba6c-4cca-bb1c-af95c3e185a8" />
+
+- γ is the body effect coefficient, it shows how strongly Vth changes with Vsb.It depends on substrate doping and oxide capacitance.
+
+<img width="486" height="137" alt="image" src="https://github.com/user-attachments/assets/a8770307-b5a4-46ad-a1fd-cb3081cf4a08" />
+
+- φF is the Fermi potential of the substrate, represents energy difference between fermi level and intrinsic level
+- NA is substrate doping concentration
+
+- This all vales are fef into SPICE simulator, SPICE tool derive the threshold voltage, that threshold voltage represent the device NMOS
+- This is about the behaviour of the NMOS below threshold.
+
+# NMOS resistive region and saturation region of operation
+## Lecture 1: Resistive region of operation with small drain-source voltage
+
+<img width="637" height="422" alt="image" src="https://github.com/user-attachments/assets/cf132d5e-5424-4ebb-a027-92e421bdc52f" />
+
+- When Vgs>Vth, it attract a large number of electrons to the surface
+- Hence in the channel Induced charge(Qi) is directly proportional to (Vgs-Vt). This excess voltage, known as the overdrive voltage, creates additional mobile electrons in the channel, increasing the drain current.
+- Let's analyze at Vgs=1v and small Vds (say 0.05V). Assume at(NMOS)=0.45V
+<img width="658" height="402" alt="image" src="https://github.com/user-attachments/assets/eb30a6e8-07e0-4150-a07b-ccd953223c88" />
+
+- Vgs=1v, it is good enough to create a short circuit channel between the source and drain.
+- Vgs>Vt, the transistor will turn ON
+- Because the source is grounded and the drain is at a positive voltage, a voltage gradient develops along the channel from source to drain.
+
+<img width="768" height="485" alt="image" src="https://github.com/user-attachments/assets/f2c78b40-0e67-4122-9866-bc98840a2eca" />
+
+
+- Plotting a graph with the y-axis denoting channel charge/strength and the x-axis showing the channel length (from 0 to L, taking into account that L ≈ Leff)
+    - When VDS is not present, the gate overdrive voltage (VGS − Vt) is the same at all points along the channel.
+    - The local channel potential changes from 0 at the source to VDS at the drain when VDS is applied, becoming V(x).
+    - As a result, the channel charge gradually drops from source to drain, and the effective overdrive at any time x becomes (VGS − V(x) − Vt).
+  
+- **Channel Length (L)**:- The channel length is the physical distance between Source and Drain defined during fabrication. It is physical gate length.
+
+- **Effective Channel Lenght(Lₑff)**:- The actual conducting channel length after fabrication effects.
+   - Leff=L−2ΔL
+
+     
+  
+
+
+
   
   
 
