@@ -279,11 +279,19 @@ The circuit design process employing SPICE simulations is the source of the dela
 - ```ls```(contains nfet_01 and pfet_01 weight,)
 -```nfet_01v8/```
 
+ <img width="1920" height="892" alt="Screenshot from 2026-02-19 12-45-30" src="https://github.com/user-attachments/assets/e659b0a2-b2fa-43bf-97e5-0d6ea19eb534" />
+
 - ```ls```(contains all the libraries)
 - Inside nfet we will see spice libraries at different corners, we will select one such typical corner
 - We use ```sky130_fd_pr__nfet_01v8__tt.pm3.spice```
 
-  We will see all the model paramteres required for the process.
+<img width="1920" height="892" alt="Screenshot from 2026-02-19 13-17-34" src="https://github.com/user-attachments/assets/a1a5e68f-9f3d-459d-ade1-9dc5c90cae5b" />
+
+ - We will see all the model paramteres required for the process.
+ - We use ```sky130_
+ - <img width="1920" height="892" alt="Screenshot from 2026-02-19 13-17-34" src="https://github.com/user-attachments/assets/930ca602-610c-4c8d-adf1-950d3863852b" />
+
+  
 
 
    
