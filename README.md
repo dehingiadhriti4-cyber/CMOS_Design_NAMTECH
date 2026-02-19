@@ -1,4 +1,4 @@
-# CMOS_DESIGN
+<img width="1920" height="892" alt="image" src="https://github.com/user-attachments/assets/f8b11e93-e877-4d58-9934-2821218c047e" /># CMOS_DESIGN
 
 
 # Introduction to Circuit Design and Spice Simulations
@@ -290,8 +290,41 @@ The circuit design process employing SPICE simulations is the source of the dela
  - We will see all the model paramteres required for the process.
  - We use ```sky130_
  - <img width="1920" height="892" alt="Screenshot from 2026-02-19 13-17-34" src="https://github.com/user-attachments/assets/930ca602-610c-4c8d-adf1-950d3863852b" />
+  <img width="1920" height="892" alt="Screenshot from 2026-02-19 14-31-50" src="https://github.com/user-attachments/assets/aefd998c-707b-4c1f-8f25-cd72948ac0a7" />
 
-  
+ - We have different W and L values which pre-described. For simulation we need to take any one value which is present inside the library.
+ <img width="1920" height="892" alt="Screenshot from 2026-02-19 14-34-11" src="https://github.com/user-attachments/assets/9505ac92-40a0-402b-985b-b92978160a33" />
+<img width="1254" height="175" alt="Screenshot from 2026-02-19 14-35-33" src="https://github.com/user-attachments/assets/ccca539f-4b0c-4c2d-a659-01f1c093a0fd" />
+
+ - Now go inside models --> lib.spice file. We will see library files which are present for nfet and pfet. The corner files are present, include Typical, slow-fast and fast-fast corner files
+<img width="1459" height="175" alt="image" src="https://github.com/user-attachments/assets/7ab57c72-c1a7-41b7-bd48-e51551e5f8b7" />
+
+<img width="1920" height="892" alt="Screenshot from 2026-02-19 14-39-23" src="https://github.com/user-attachments/assets/3c74b2d6-3812-4b65-a3b3-5d61c48657f0" />
+
+<img width="1920" height="892" alt="image" src="https://github.com/user-attachments/assets/22be82cf-e225-4d7c-be4e-7b62204dd0bd" />
+
+<img width="1920" height="892" alt="Screenshot from 2026-02-19 14-49-30" src="https://github.com/user-attachments/assets/4af7034e-b77b-44fa-a8c0-76b367cbb501" />
+
+<img width="308" height="155" alt="image" src="https://github.com/user-attachments/assets/221a3a0d-e586-45e4-920e-3380a637e8f4" />
+
+## L5 SPICE lab with Sky130 models
+
+- dddd
+
+
+
+# NgspiceSky130-Day2-Velocity saturation and basics of CMOS inverter VTC
+## SPICE simulation for lower nodes and velocity saturation effect
+### L1 SPICE simulation for lower nodes
+
+
+
+
+
+ 
+
+
+
 
 
    
