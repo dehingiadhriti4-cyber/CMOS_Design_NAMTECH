@@ -231,6 +231,8 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 
 
+
+
   ​
 
   
@@ -238,6 +240,28 @@ The circuit design process employing SPICE simulations is the source of the dela
 
  
    
+## L3 Define Technology parameters
+
+<img width="519" height="505" alt="image" src="https://github.com/user-attachments/assets/d0252724-ea7d-4cb6-ac25-01bf50a416a3" />
+
+- Now we will look for model of this particular NMOS
+- All the model parameters are comes as a package. We give attribute and call model name (it has to correctly match with the netlist) also name given by the foundary
+- Inside the brackets, technology paramteters will exist.
+  
+ <img width="473" height="200" alt="image" src="https://github.com/user-attachments/assets/fd9a8581-00b9-464b-a00e-7de7a37fcb7d" />
+
+- We give description on NMOS and PMOS and the final step is to provide the gate voltage
+- We have to give a name of the model```( .lib cmos_model)```
+
+<img width="527" height="319" alt="image" src="https://github.com/user-attachments/assets/5b055c8a-12f9-4b55-b258-47ecf02bf2b1" />
+
+- we just plug in this packaged file in ```.mod``` file and call this file in top level SPICE netlist.
+  
+<img width="576" height="163" alt="image" src="https://github.com/user-attachments/assets/c684e8d3-4a42-4620-8fac-a7c7224333e2" />
+<img width="662" height="577" alt="image" src="https://github.com/user-attachments/assets/b9f35a88-6f5a-4df8-9a16-e88f9cabb4cf" />
+
+- This is the complete SPICE tag and give a name ```NETLIST Description``` on the top and below is ```.include```
+- We have to add the simulation command(provide the voltage, sweep the Vgs and Vds for SPICE simulations)
 
 
    
