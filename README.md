@@ -317,8 +317,18 @@ The circuit design process employing SPICE simulations is the source of the dela
 ## SPICE simulation for lower nodes and velocity saturation effect
 ### L1 SPICE simulation for lower nodes
 
+<img width="659" height="518" alt="image" src="https://github.com/user-attachments/assets/52ca2440-442f-46fd-b92d-f875f85d2e71" />
+
+- In the graph(Id vs Vds for different Vgs)
+   - x-axis is Vds(Drain-to-Source Voltage)
+   - Y-axis is Id(Drain Current)
+- When Vgs=0, zero drain current so the device is not turn on hence no channel.
+- At Vgs=1V, it just cross the threshold voltage so bare minimum channel is available for drain current flow so small amount of drain current at Vgs=0.5v
 
 
+- In the above graph, the region to the left of the curve defined by Vds=Vgs-Vt corresponds to the **linear region**, where the drain current increases approximately linearly with Vds.
+- The region to the right represents the **saturation region**, where the current shows only a slight increase due to effects such as velocity saturation. The lower portion of the graph indicates the cutoff region, where the device is essentially turned off.
+- This behavior is characteristic of a MOSFET with a relatively long channel length.
 
 
  
