@@ -226,8 +226,11 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 - Drain current is slightly increase when Vds is increases
 
+# Introduction to SPICE
 
-
+## L1 Basic SPICE setup
+- SPICE is a simulation software that contains predefined device models. To generate output waveforms, the user must provide the appropriate input parameters or a properly defined netlist, which the simulation engine then processes to produce the desired results.
+- The waveforms are eventually used to calculate the 
 
 
 
@@ -262,6 +265,25 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 - This is the complete SPICE tag and give a name ```NETLIST Description``` on the top and below is ```.include```
 - We have to add the simulation command(provide the voltage, sweep the Vgs and Vds for SPICE simulations)
+
+## Lecture-4 First SPICE simulation
+
+- Open Vertual Box
+- Type ```cd`` in comand prompt
+- ```git clone https://github.com/kunalg123/sky130CircuitDesignWorkshop.git```
+- ```cd sky130CircuitDesignWorkshop/design/```
+- ```ls```(get list of files)
+- ```cd sky130_fd_pr/
+- ```ls``` (Contains cells, models and tech files)
+- ```cd cells/```
+- ```ls```(contains nfet_01 and pfet_01 weight,)
+-```nfet_01v8/```
+
+- ```ls```(contains all the libraries)
+- Inside nfet we will see spice libraries at different corners, we will select one such typical corner
+- We use ```sky130_fd_pr__nfet_01v8__tt.pm3.spice```
+
+  We will see all the model paramteres required for the process.
 
 
    
