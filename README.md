@@ -324,23 +324,88 @@ The circuit design process employing SPICE simulations is the source of the dela
    - Y-axis is Id(Drain Current)
 - When Vgs=0, zero drain current so the device is not turn on hence no channel.
 - At Vgs=1V, it just cross the threshold voltage so bare minimum channel is available for drain current flow so small amount of drain current at Vgs=0.5v
+  
+ <img width="1167" height="663" alt="image" src="https://github.com/user-attachments/assets/1a44c54a-40e4-4211-90d6-7fc599a25f86" />
 
 
 - In the above graph, the region to the left of the curve defined by Vds=Vgs-Vt corresponds to the **linear region**, where the drain current increases approximately linearly with Vds.
 - The region to the right represents the **saturation region**, where the current shows only a slight increase due to effects such as velocity saturation. The lower portion of the graph indicates the cutoff region, where the device is essentially turned off.
 - This behavior is characteristic of a MOSFET with a relatively long channel length.
+- When W/L ratio is constant, drain current will same at any node.
+- Now we are taking different W and L, but the ration of W/L is same as previous, so the Id should not change. But this is not the case practically.
+- Below is the spice deck, where only the values of W and L is changed, rest everything remains same.
+    ```*** MODEL Description ***
+       *** NETLIST Description ***
+       M1 vdd n1 0 0 nmos W=0.375u L=0.25u
+       R1 in n1 55
+       Vdd vdd 0 2.5
+       Vin in 0 2.5
+       *** SIMULATION Command ***
+       .op
+       .dc Vdd 0 2.5 0.1 Vin 0 2.5 0.5
+       *** .include mosis_1um_model.mod
+       .LIB "tsmc_025um_model.mod" CMOS_MODELS
+       .end
+    
+<img width="785" height="307" alt="image" src="https://github.com/user-attachments/assets/45b897de-0d34-4796-a85d-131912ee17bc" />
+
+- Below is the setplot of the code
+<img width="769" height="609" alt="image" src="https://github.com/user-attachments/assets/de12d5e4-b925-4497-b4a0-64a6a66e0d6e" />
 
 
- 
+- In the previous case the current value for saturation region is different
+- The difference between two adjacent curve appeared to be constant
 
+  ### L2 Drain current vs gate voltage for long and short channel device
+<img width="1248" height="538" alt="image" src="https://github.com/user-attachments/assets/a6ece7e4-b229-4eb5-888e-cdcee4f04586" />
 
+- Let us now compare the results obtained from the two simulations we performed to analyze the differences in device behavior.
+- The technology nodes of the two graphs are different
+- **Observation 1**:-
+     - In 1st graph(1.2u), the drain current at each and every gate voltage at Vds=2.5v there is a quadratic dependance (the drain current quadratically increases with increase in gate voltage)
+       <img width="650" height="518" alt="image" src="https://github.com/user-attachments/assets/a022f365-ad9f-41dc-839f-cb169c125442" />
 
+     - For short channel device 2nd graph(0.25u), initially the lower value of gate voltage still have a quadratic dependence, as gate voltage will increases the drain current will increasing linearly due to velocity saturation.
+  
+- Now we will plot graph of Id vs Vgs and sweeping Vds or keeping Vds constant = 2.5V.
+        ```*** MODEL Description ***
+       *** NETLIST Description ***
+       M1 vdd n1 0 0 nmos W=0.375u L=0.25u
+       R1 in n1 55
+       Vdd vdd 0 2.5
+       Vin in 0 2.5
+       *** .include mosis_1um_model.mod ***
+       .LIB "tsmc_025um_model.mod" CMOS_MODELS
+       *** SIMULATION Commands ***
+       .op
+       .dc Vin 0 2.5 0.1 Vdd 0 2.5 2.5
+       .end
+- In the syntex whatever in the left hand side that will be tunned every value of right hand side
+<img width="756" height="298" alt="image" src="https://github.com/user-attachments/assets/47ebb653-c354-42d2-8b3f-0c981fbe0d26" />
+<img width="719" height="559" alt="image" src="https://github.com/user-attachments/assets/6936b584-0426-420f-9f59-8449d7d5d1a6" />
 
-
+- For example, in this case, for each value of Vdd, the input voltage Vin is swept across a specified range.The resulting plot exhibits a quadratic characteristic, which is observed specifically when Vds=2.5V.
    
+- Let us see the same effect for short channel device. For L=0.25 micron.
+        ```*** MODEL Description ***
+       *** NETLIST Description ***
+       M1 vdd n1 0 0 nmos W=0.375u L=0.25u
+       R1 in n1 55
+       Vdd vdd 0 2.5
+       Vin in 0 2.5
+       *** .include mosis_1um_model.mod ***
+       .LIB "tsmc_025um_model.mod" CMOS_MODELS
+       *** SIMULATION Commands ***
+       .op
+       .dc Vin 0 2.5 0.1 Vdd 0 2.5 2.5
+       .end
    
-       
 
+### L3 Velocity saturation at lower and higher electric fields  
+<img width="1266" height="600" alt="image" src="https://github.com/user-attachments/assets/bd83447d-3ab6-4a23-a290-73f6cd938181" />
+
+- For short-channel devices, the drain current tends to exhibit a more linear dependence on Vgs as it increases. This behavior arises due to the velocity saturation effect, which limits the carrier velocity at high electric fields and reduces the quadratic nature of the current–voltage relationship.
+- For lower node, we have four region of operations:- **Cut-off**,**Linear**,**Saturation** and **velocity saturation**
 
 
      
