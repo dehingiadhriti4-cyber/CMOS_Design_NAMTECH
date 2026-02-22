@@ -471,21 +471,67 @@ The circuit design process employing SPICE simulations is the source of the dela
 - Calculate threshold voltage for Id vs Vgs graph
 - In the graph current starts increasing rapidly with a small change of Vgs value. To plot threshold voltage we have to take the tengent of the slope and extended on the x-axis
 
-  
-  
+## CMOS voltage transfer characteristics (VTC)
+### L1 MOSFET as a switch
+- We will now look at the device parameters from the switch point of view.
+ <img width="819" height="471" alt="image" src="https://github.com/user-attachments/assets/b8336827-6b0d-4439-8a04-a195ffb90528" />
 
+- It's just a MOS transistor, it is work when |Vgs| is greater than Vt
+    -  In case of N-MOS it is +ve Vgs
+    -  In case of P-MOS it is -ve Vgs
+- Whenever |Vgs|>Vt, the device turns ON,  it acts as closed switch
+- Let's try to bias the devices properly. We will take one PMOS and one NMOS transistor, connect them together, and form a CMOS configuration.
+  
+- CMOS stands for Complementary MOSFET. It is called “complementary” because it uses both NMOS and PMOS transistors, which operate in opposite (complementary) manners—when one transistor turns ON, the other turns OFF. 
+- We have PMOS at the top and NMOS at the bottom, the source of NMOS is connected to the GND(Vss) and the source of PMOS is connected to the Vdd, both the gates are tie together and connected to Vin, both the drains are tie together to get the output potential Vout, also we have a load Cl
+ <img width="1143" height="690" alt="image" src="https://github.com/user-attachments/assets/64e6990f-3ce5-400f-ac35-efd54729dd5b" />
 
+- The calculation of Vgs will differ by the value of potential that we apply
+    -  In the case of NMOS, if Vin=0V then Vgs is 0V, NMOS is OFF
+    -  In the case of PMOS, if Vin=0V then Vgs is negative Vdd, PMOS is ON
     
+- When Vgs>Vt, NMOS can be replaced by a resistor and we have output load as well when Vin=Vdd
 
-    
-
-
+### L2 Introduction to standard MOS voltage current parameters
+- We are trying to get the equivalent circuit of CMOS when Vin is 'high' and 'low', so that we can get the Voltage Transfer Characteristics (VTC) and therefore calculate the delay of the cell(the cell here is inverter).
   
+  <img width="1172" height="700" alt="image" src="https://github.com/user-attachments/assets/a18fd590-26b0-4da3-8337-144f67b73c4a" />
+
+- We take different condition when Vin is 'low' or 0V
+    -  For PMOS Vgs will be -5V, it turn ON the PMOS, it can be modeled as resistor
+    -  For NMOS Vgs will be 0V, NMOS is OFF
+- Now, we need to analyze and understand how the currents behave in the circuit under different input conditions
+   <img width="1183" height="645" alt="image" src="https://github.com/user-attachments/assets/80fd94ed-2920-443c-a68e-d143471d7e42" />
 
 
+    -  when Vin=Vdd, there is a direct path exists between Vout and Vss, resulting in Vout=0( if the capacitance is completely charged, all the charges will discharged through the resistor Rn)
+    -   when Vin=0V, there is a direct current flow from Vdd to the capacitance, resulting in Vout=Vdd(charging this caapacitor under this condition) 
 
+- Let us give the naming convention of the CMOS
+   <img width="1183" height="630" alt="image" src="https://github.com/user-attachments/assets/35b3ecdb-24d9-40e5-b1e2-2183b045f87c" />
+    -  Idsp = -Idsn, both are opposite in direction to each other.
 
+### L3 PMOS/NMOS drain current vs drain voltage
+- We try to get some equations and tune them to get voltage-current characteristics, voltage transfer characteristics is purely a function of voltage
+  <img width="441" height="687" alt="image" src="https://github.com/user-attachments/assets/8e6732f8-7f43-495d-96a8-95f83f95607b" />
+- When we plot the Id VS Vds for both the NMOS and PMOS devices, the characteristic curves look like the ones shown here.
+  <img width="825" height="442" alt="image" src="https://github.com/user-attachments/assets/7be81114-098e-4bb6-b64a-d7ff97f83c3b" />
+- On the left, we see how NMOS drain current increases with drain voltage for different gate voltages. At low VDS it behaves like a resistor, and at high VDS it enters saturation where current becomes constant. On the right, PMOS shows similar behavior but with negative voltages and current direction reversed. 
 
+### L4 Step1- Convert PMOS gate-source-voltage to Vin
+
+- We have analyzed several internal node voltages inside the CMOS circuit. However, from a user’s perspective, these internal voltages are not directly visible. The user can only observe the external input voltage 𝑉in and the output voltage 𝑉out.
+- Now we will se the steps to obtain voltage transfer characteristics for static CMOS inverter(Let's assume that it is a long channel device with Vdd=2V)
+   <img width="397" height="261" alt="image" src="https://github.com/user-attachments/assets/3ae2c5b1-7c26-4ccc-8f8b-37adf8a584c4" />
+
+	- We know that for the PMOS transistor,
+      -  Vgsp=Vin−Vdd From this relation, we can rewrite it as:
+      -  Vin=Vgsp+Vdd (our objective is to express all internal voltages in terms of the external variables Vin and Vout)
+ - Next, we attempt to plot the PMOS characteristics in terms of Idsn(to compare NMOS and PMOS currents on the same axis). In this plot, the corresponding Vin values are obtained from the calculated Vgsp values using the relation above, as shown in the table.
+	<img width="810" height="382" alt="image" src="https://github.com/user-attachments/assets/0f3c0f3b-2da3-428c-8515-d90677c04d31" />
+​
+
+​
 
 
 
