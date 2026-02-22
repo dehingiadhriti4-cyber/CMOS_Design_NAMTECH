@@ -522,18 +522,55 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 - We have analyzed several internal node voltages inside the CMOS circuit. However, from a user’s perspective, these internal voltages are not directly visible. The user can only observe the external input voltage 𝑉in and the output voltage 𝑉out.
 - Now we will se the steps to obtain voltage transfer characteristics for static CMOS inverter(Let's assume that it is a long channel device with Vdd=2V)
-   <img width="397" height="261" alt="image" src="https://github.com/user-attachments/assets/3ae2c5b1-7c26-4ccc-8f8b-37adf8a584c4" />
+
+  <img width="397" height="261" alt="image" src="https://github.com/user-attachments/assets/3ae2c5b1-7c26-4ccc-8f8b-37adf8a584c4" />
 
 	- We know that for the PMOS transistor,
       -  Vgsp=Vin−Vdd From this relation, we can rewrite it as:
       -  Vin=Vgsp+Vdd (our objective is to express all internal voltages in terms of the external variables Vin and Vout)
  - Next, we attempt to plot the PMOS characteristics in terms of Idsn(to compare NMOS and PMOS currents on the same axis). In this plot, the corresponding Vin values are obtained from the calculated Vgsp values using the relation above, as shown in the table.
+	
 	<img width="810" height="382" alt="image" src="https://github.com/user-attachments/assets/0f3c0f3b-2da3-428c-8515-d90677c04d31" />
 ​
+### L5 Step2 & Step3 – Convert PMOS and NMOS drain-source-voltage to vout
+- Now we have to convert the Vdsp into the function of output voltage​, we know Vdsp = Vout-Vdd
+- Let us convert Vdsp into Vout. So to get Vout there is a shift of Vdd towards left hand side.
+  
+  <img width="1274" height="389" alt="image" src="https://github.com/user-attachments/assets/31839a96-39be-4953-b080-16cc0e04a23b" />
 
-​
+- If Vdsp is -2V we add a +2V to it to get Vout, so Vout=0V,  we will see a finite current(the output capacitor is completely discharged, we need to charge it so this is the charging current of it)
+- Whenever Vdsp=0V, Vout=2V so the current is zero and the output capacitor is completely charged (this is true only when PMOS is combination with NMOS to form a CMOS inverter, not as PMOS as independent device)
+- When Vdsp=1V, Vout=+1V, it means it is half charged and it need some amount of current to get charge.
+- When we convert the graph as a function of Vin and Vout and Idsn, we called is as the load curve for PMOS transistor
+
+ <img width="461" height="392" alt="image" src="https://github.com/user-attachments/assets/af33fbc4-8312-4f0c-b609-17b167128a49" />
+
+- Now we will try to get the "load curve" for NMOS transistor from this equations.
+  <img width="241" height="88" alt="image" src="https://github.com/user-attachments/assets/7497c15e-fd07-4120-947a-db663dbfc96b" />
+- It is actually simple as Vgsn = Vin and Vdsn = Vout, directly we can get the graphs.
+
+<img width="400" height="299" alt="image" src="https://github.com/user-attachments/assets/dc350e43-a8d9-49c9-915b-d7018e00650c" />
+
+- It is just a matter of replacing the names.
+  <img width="858" height="378" alt="image" src="https://github.com/user-attachments/assets/a43307db-11af-47ae-b1f3-f0a013f106b3" />
+
+### L6 Step4 – Merge PMOS – NMOS load curves and plot VTC
+
+- Now we will combine the two characteristic curves and use them to obtain the Voltage Transfer Characteristics (VTC) of the CMOS inverter.
+- We will superimpose the load curve of NMOS on the load curve of POMS because Vin and Vout common to PMOS and NMOS so graphically if we want to derive the VTC of CMOS it has to be the intersection point between the PMOS and NMOS load curve.
+   <img width="547" height="361" alt="image" src="https://github.com/user-attachments/assets/a994f23d-2ce8-40d4-8448-48b1d492feb3" />
+- So the range of Vin and Vout is 0V-2V.
+
+<img width="1267" height="699" alt="image" src="https://github.com/user-attachments/assets/b0ded0b1-71a1-422d-9524-32a2625f262c" />
 
 
+| **Vin (V)** | **Vout (V)** | **NMOS Region** | **PMOS Region** |
+| ----------- | ------------ | --------------- | --------------- |
+| 0 V         | 2 V          | Cut-Off         | Linear          |
+| 0.5 V       | 1.5–2 V      | Saturation      | Linear          |
+| 1 V         | 0.5–1.5 V    | Saturation      | Saturation      |
+| 1.5 V       | 0–0.5 V      | Linear          | Saturation      |
+| 2 V         | 0 V          | Linear          | Cut-Off         |
 
 
 
