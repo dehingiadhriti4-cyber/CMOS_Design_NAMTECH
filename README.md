@@ -445,7 +445,31 @@ The circuit design process employing SPICE simulations is the source of the dela
      
 ### L5 Labs Sky130 Id-Vgs
 
+<img width="1920" height="891" alt="Screenshot from 2026-02-22 21-02-52" src="https://github.com/user-attachments/assets/7eee0388-827f-4ac9-800f-d7d5c83dcb14" />
+<img width="1920" height="891" alt="Screenshot from 2026-02-22 21-09-40" src="https://github.com/user-attachments/assets/f30e2dc8-439b-439b-aac6-2dd6d39079f2" />
+<img width="1920" height="891" alt="Screenshot from 2026-02-22 21-19-31" src="https://github.com/user-attachments/assets/0564abed-5cc9-40b8-99c4-4ec663fa9f4b" />
+<img width="1920" height="891" alt="Screenshot from 2026-02-22 21-20-04" src="https://github.com/user-attachments/assets/00fd61c0-b34f-4c65-a091-c4927f09ae29" />
+<img width="1920" height="891" alt="Screenshot from 2026-02-22 21-20-56" src="https://github.com/user-attachments/assets/28445160-0191-475f-bc06-1786c7ab4154" />
 
+
+
+
+
+
+
+<img width="284" height="58" alt="image" src="https://github.com/user-attachments/assets/5f5939bb-1cf1-4f2a-b52a-db906055e40a" />
+
+
+- Similarly we observe Id vs Vgs graph
+  
+  <img width="1920" height="891" alt="Screenshot from 2026-02-22 23-07-55" src="https://github.com/user-attachments/assets/999e8493-c145-4de6-95a5-0a8fd2474da3" />
+
+- Keeping Vds constant which is 1.8V
+<img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/08f14279-15b6-4298-ab09-a5412211a95a" 
+ - It is showing linear behaviour
+
+- Calculate threshold voltage for Id vs Vgs graph
+- In the graph current starts increasing rapidly with a small change of Vgs value. To plot threshold voltage we have to take the tengent of the slope and extended on the x-axis
 
   
   
