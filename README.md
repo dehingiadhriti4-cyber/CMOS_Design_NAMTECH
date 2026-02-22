@@ -406,10 +406,44 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 - For short-channel devices, the drain current tends to exhibit a more linear dependence on Vgs as it increases. This behavior arises due to the velocity saturation effect, which limits the carrier velocity at high electric fields and reduces the quadratic nature of the current–voltage relationship.
 - For lower node, we have four region of operations:- **Cut-off**,**Linear**,**Saturation** and **velocity saturation**
+  <img width="458" height="199" alt="image" src="https://github.com/user-attachments/assets/9bc6f4a1-d247-439f-87c2-b84dae169c32" />
 
+- **velocity saturation** is for lower value of electric field the velocity tends to be linear function of electric field but after cut-off point velocity saturated(velocity becomes constat due to scattering effect)
+    -   Velocity Vn(x)=mobilty.electric field
+    -   <img width="398" height="81" alt="image" src="https://github.com/user-attachments/assets/c51155a3-4ce0-4f97-8a2d-079a7d9579e3" />
+    -   <img width="418" height="129" alt="image" src="https://github.com/user-attachments/assets/03a75a09-c334-4827-b688-ec39725c55c9" />
+    -    <img width="170" height="37" alt="image" src="https://github.com/user-attachments/assets/be194df7-0735-4f03-a2ef-568b85cad2ec" />
+    - Re derive the drain current equation in the presence of electric field
+      <img width="1153" height="353" alt="image" src="https://github.com/user-attachments/assets/93cc39de-205f-47f9-b4b2-3e1f10a580a5" />
+    - It becomes to complex to handle so we try to simplify the equation
+       <img width="886" height="396" alt="image" src="https://github.com/user-attachments/assets/37f0511f-0e75-4c1a-a5b1-a2d561cae2e3" />
 
+### L4 Velocity saturation drain current model
+ <img width="900" height="514" alt="image" src="https://github.com/user-attachments/assets/8edfd449-d368-4554-a1e3-2ad5376d6eb7" />
+
+-   Let us take Vgs-Vt=Vgt because we will be taking Vgs as large values. Current equation we will be using as shown above, For lower values of Vds the channel length modulation parameter λ can be ignored. 
+- There is another important technology parameter called 𝑉dsat. It represents the drain-to-source voltage at which the device just begins to enter the velocity saturation region.
+   <img width="349" height="74" alt="image" src="https://github.com/user-attachments/assets/35a7e0b8-c419-4713-b7f9-5a7a830254ce" />
+   <img width="572" height="249" alt="image" src="https://github.com/user-attachments/assets/dd75dfa8-e23a-40e2-bb59-65a95c346889" />
+
+   - When Vgs-Vt is minimum, Vds is at maximum voltage
      
+   <img width="563" height="333" alt="image" src="https://github.com/user-attachments/assets/e662acfd-bf77-4f32-9dfb-17f509749c2c" />
+
+   - When Vds is minimum, device enters into resistive or linear region of operation
+     
+   <img width="886" height="447" alt="image" src="https://github.com/user-attachments/assets/b9530f4c-d841-42cc-be0b-1123ebd9b00a" />
+
+   - When Vdsat is minimum, this is applicable only for short channel devices
+   - In the above equation, it seems when W is constant and L is lowered then Id should increase, But it is not so practically.
+
+- **Observation 2**:-
   
+  <img width="1317" height="662" alt="image" src="https://github.com/user-attachments/assets/657ecfa9-e79c-4f02-90c5-7142ec75d70f" />
+
+- For smaller technology nodes, the saturation current is lower instead of higher. This happens because velocity saturation occurs earlier in short-channel devices. As a result, the device reaches saturation sooner, and the maximum (peak) drain current becomes significantly smaller compared to larger technology nodes.
+     
+### L5 Labs Sky130 Id-Vgs
 
 
 
