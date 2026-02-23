@@ -612,36 +612,68 @@ The circuit design process employing SPICE simulations is the source of the dela
 - If we closely look this waveform and previous waveform, we notice that it is slightly shifted toward the left(in previous waveform it is exactly in the middle). This shift occurs because the NMOS transistor is stronger than the PMOS transistor in that configuration.
   
 ### Lecture 3:-Labs Sky130 SPICE simulation for CMOS
-- gggg
+- Now we will get the VTC characteristics
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/14545e14-17de-494b-8934-0eece06034eb" />
-- ffgh
+- We are using both a PFET and an NFET to implement the CMOS inverter. The W/L ratio of the PMOS is chosen to be 2.33 times larger than that of the NMOS, so that their drive strengths are properly balanced. Now, we will perform a DC sweep of Vin from 0 V to 1.8 V, with a step size of 0.01 V, and observe the corresponding variation in Vout. From this, we can plot the Voltage Transfer Characteristics (VTC) of the CMOS inverter.
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/6bbdab1f-88f6-48df-abc4-9ea7bf8538c5" />
-- To get
+- To get the plot type ```ngspice``` and ```plot out vs in```.
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/d90735c5-090d-4e65-87eb-f1f255f26771" />
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/48c012ce-1c2c-4d30-9fa2-fa56daa0ee37" />
-- Now we need to plot switching threshold from the graph, it is the point when Vin=Vout.
+- Now we need to plot switching threshold from the graph, it is the point when Vin=Vout.To zoom in the curve; press righ mouse button + hold it.
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/c9656a91-c772-4d29-9ed4-ec1d80ada6b7" />
+  So switching threshold for W/L=2.3 is around 0.876V
+   <img width="280" height="30" alt="image" src="https://github.com/user-attachments/assets/070ab57e-33ce-4770-b29e-2f8ef5f49b6b" />
 
-- We will se the transient analysis
+- We will se the transient analysis, for that we will go inside the tansient SPICE file for day3
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/b76d281f-e91c-47a1-9fe9-0ea55f42a281" />
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/4a431c39-bd2f-449a-ad21-ded7f850f912" />
-- We can see that
+- We can observe that this simulation is performed at the typical process corner, and the W/L ratios remain the same as before.Now, instead of a DC sweep, we are applying a transient pulse input that switches from 0 V to 1 V, with no time delay. The rise time and fall time are both 0.1 ns. The pulse width is 2 ns, and the total time period is 4 ns. Let us run the transient simulation to analyze the dynamic response of the CMOS inverter.
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/949158f8-b03f-4354-9b3a-b65cc24f46d7" />
-  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/3dfa2a43-f6d5-43b1-8c9d-1cf1f737ae6c" />
+ 
 
-- To calculate rise delay and fall delay we have to consider the 50% of Vdd
+- To calculate rise delay and fall delay we have to consider the 50% of Vdd, i.e. at 0.9V.
+  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/3dfa2a43-f6d5-43b1-8c9d-1cf1f737ae6c" />
   <img width="341" height="76" alt="image" src="https://github.com/user-attachments/assets/24b21a61-fada-4e55-a5ee-4858270ec34d" />
-     - gggh
-     - thhh
-- For fall delay
+     - Rise delay = 2.482ns-2.15ns = 0.333ns
+- For calculation of fall delay fall delay
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/cd67b09e-6d2e-4384-bf52-9753d00b8d25" />
   <img width="292" height="109" alt="image" src="https://github.com/user-attachments/assets/f855c68d-49c6-4d7b-bfcc-afabf8386f60" />
+      - Fall Delay = 4.334ns-4.050ns = 0.285ns
+  
+## Static behaviour evaluation-CMOS inverter robustness-Switching Threshold
+
+### Lecture 1:-Switching Threshold, Vm
+- Now we will compare the two CMOS inverters that have different W/L ratios for the PMOS and NMOS transistors(one is Wn/Ln=Wp/Lp=1.5 and another one is Wn/Ln=1.5,Wp/Lp=3.75). We observe that in both cases, the overall shape of the Voltage Transfer Characteristics (VTC) remains the same. However, the switching threshold voltage shifts depending on the relative strength of the transistors.
+  <img width="1148" height="545" alt="image" src="https://github.com/user-attachments/assets/50091d6b-fda6-46cc-b623-51e68e607a6f" />
+
+- Whe we look into the waveforms, the shapes of the waveform are same irrespective of voltage level in which they are switching, this tells us the CMOS inverter is a very robust device. There are certain parameters which define the robustness of the CMOS.
+    -  1)**Switching threshold**:- It is the point at which the device switches, it is a point when Vin=Vout. Vm in both the cases by drawing a 45 degree line.
+So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm=1.2V.
+       <img width="1124" height="603" alt="image" src="https://github.com/user-attachments/assets/dc0b5143-cff7-4abf-a2a8-52901fb303a9" />
+	   <img width="1133" height="449" alt="image" src="https://github.com/user-attachments/assets/9b8eecb2-632d-4427-968f-5924cae09fe5" />
 
 
+      -  This is the area where PMOS and NMOS both are in saturation region(both are kind of turn ON). Current flows from both the transistor, it is actually a dangerous situation(There is a high possibility of leakage, which increases the chance of current flowing directly from the power supply to ground).
 
+       <img width="996" height="446" alt="image" src="https://github.com/user-attachments/assets/9263731d-5222-4a78-87da-08c674af5f14" />
 
-
-
-
-
+### Lecture 2:-Analytical expression of Vm as a function of (W/L)p and (W/L)n
+- There are two parts of solving the equation
+    - 1)Try to evaluate the value of Vm for given W/L PMOS and NMOS
+    - 2)Define the value of Vm then find the value of W/L PMOS and NMOS
+- 1) We will now calculate the value of Vm w.r.t the NMOS and PMOS width and length.
+     <img width="774" height="287" alt="image" src="https://github.com/user-attachments/assets/68a6871a-ad2e-4b0c-8c42-d938f4b866f3" />
+     <img width="510" height="209" alt="image" src="https://github.com/user-attachments/assets/18ddfa14-baf3-4663-94ab-5ac89dbb2707" />
+- Put the epression of ```Idsn``` and ```Idsp``` in the equation ```Idsn+Idsp=0```
+      <img width="797" height="227" alt="image" src="https://github.com/user-attachments/assets/c26af15a-6703-42bf-b6bc-794d4089cf75" />
+     - kn and kp are transconductance parameters.
+          - kn=(Wn/Ln)Kn'
+          - kp=(Wp/Lp)Kp'
+              -  Where:
+                 - W = Width of transistor
+                 - L = Length of transistor 
+                 - K= Process transconductance parameter, dpends on device size and mobility
+                      - Kn=μn.Cox
+                      - Kp=μp.Cox
+	                      ​
 
