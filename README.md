@@ -685,7 +685,59 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
    - We will start from the current equation itself i.e. Idsn = -Idsp
      <img width="437" height="89" alt="image" src="https://github.com/user-attachments/assets/fedbbb9c-27c9-416b-ac7b-e49cabf759a3" />
 	   - Expanding Kp and Kn (Gain factor)
-       - <img width="510" height="86" alt="image" src="https://github.com/user-attachments/assets/643b325a-d496-4348-bb66-19af17070cfc" />
-	   - <img width="481" height="94" alt="image" src="https://github.com/user-attachments/assets/09d5689d-1921-433d-93e7-6fb5b7889688" />
+         <img width="510" height="86" alt="image" src="https://github.com/user-attachments/assets/643b325a-d496-4348-bb66-19af17070cfc" />
+	     <img width="481" height="94" alt="image" src="https://github.com/user-attachments/assets/09d5689d-1921-433d-93e7-6fb5b7889688" />
+	   - Now here on the RHS all of them are constant except Vm, If we know Vm then we can get the W/L ratios.
+       - So now this will allow us to find out for what value of W/L ratio of PMOS will be N times greater than NMOS, we can decide the value od N based on the size of the transistor(Vm value).
+ - Now we will analyze the behaviour of CMOS for below difference in W/L ratios of PMOS and NMOS and see where does the switching threshold lies.
+   <img width="325" height="256" alt="image" src="https://github.com/user-attachments/assets/7cd5d605-b870-4c9b-b93b-2d91070696a2" />
+### Lecture 4:-Static and dynamic simulation of CMOS inverter
+- 1) For (W/L)n = (W/L)p = 1.5
+     <img width="749" height="605" alt="image" src="https://github.com/user-attachments/assets/2f17b5ca-2d57-42b6-9990-88b15ccd9713" />
+      - We can also calculate the "Rise Delay" and "Fall Delay" by using the transient analysis.
+      <img width="219" height="158" alt="image" src="https://github.com/user-attachments/assets/81ed0696-1226-461c-b805-2244f3fcfe14" />
+      <img width="746" height="609" alt="image" src="https://github.com/user-attachments/assets/ecee09c7-2846-41ef-a3eb-5700fa126453" />
 
+	  - Rise delay = 1.162ns-1.014ns = 0.148ns
+      - Fall delay = 2.076ns-2.004ns = 0.071ns
+     <img width="1168" height="511" alt="image" src="https://github.com/user-attachments/assets/f70574e5-9107-4d31-84d0-ef904837420b" />
+	  - Switching threshold is 0.99V.
+- Similarly we do the same thing for all the set of combination and plot table specifying the value of the switching voltage.
+
+### Lecture 5:-Static and Dynamic simulation of CMOS inverter with increased PMOS width
+-  2) For (W/L)p = 2(W/L)n
+      <img width="755" height="602" alt="image" src="https://github.com/user-attachments/assets/8f662877-63df-40be-b5ac-e22fb3eef273" />
+	  - The curve has shifted toward the right side because the PMOS transistor is stronger than the NMOS transistor in this configuration. Since the PMOS has a larger W/L ratio, it provides higher drive strength.
+      - Rise delay = 1.094ns-1.014ns = 0.08ns
+      - Fall delay = 2.081ns-2.004ns = 0.076ns
+      <img width="1169" height="498" alt="image" src="https://github.com/user-attachments/assets/54eb88e4-8ccf-42e5-9114-11eae1484fce" />
+	  - We can see that the Vm is now increased as the PMOS has become more stronger and it needs more current to charge the output load capacitor.
+- 3) For (W/L)p = 3(W/L)n
+      <img width="1172" height="486" alt="image" src="https://github.com/user-attachments/assets/802808d7-8073-4e2c-af1f-5473daa7557e" />
+	  - Switching threshold lies exactly at the centre or somewhere near the centre.
+- 4) For (W/L)p = 4(W/L)n
+      <img width="1169" height="492" alt="image" src="https://github.com/user-attachments/assets/a0650293-51de-44da-a148-1b599fc10f6d" />
+	  - Switching threshold moves towards the right, it is about 1.35V.
+- 5) For (W/L)p = 5(W/L)n
+      <img width="1173" height="493" alt="image" src="https://github.com/user-attachments/assets/5f0bc8cf-3a9c-4775-80cd-7701e977edd1" />
+	  - The rise delay has significantly reduced
+- Rise delay decreases with increase in PMOS width, this shows the time required to charge the output capacitor decreases significantly this is because we have a bigger area.
+
+### Lecture 6:-Applications of CMOS inverter in clock network and STA
+- We try to tabulate everything what we got:-
+    <img width="702" height="250" alt="image" src="https://github.com/user-attachments/assets/ed6eb011-b9b9-4077-8fd8-20144669a9f0" />
+- From this experiment, we can draw the following conclusions:-
+   - 1) If we vary the PMOS size w.r.t NMOS by some few numbers, the variation of the switching threshold is very small range. It is due to the robustness of CMOS inverter.
+   - 2) When (W/L)p = 2(W/L)n, in this case the rise delay approximately equal to the fall delay, By performing simulation, we can determine the appropriate sizing ratio between PMOS and NMOS such that the rise delay and fall delay become equal. When the rising and falling propagation delays are equal, the CMOS inverter exhibits symmetrical switching behavior. This symmetry indicates that both pull-up and pull-down networks have balanced drive strengths.
+
+- This is a typical characteristic of Clock Inverter/buffer where we want the rise delay and fall delay to be equal.
+  <img width="1229" height="688" alt="image" src="https://github.com/user-attachments/assets/f7446eb4-8b60-4c3e-8a4a-bcdb692e3323" />
+- Other types of cells can be used according to the data path requirement.
+  <img width="1241" height="676" alt="image" src="https://github.com/user-attachments/assets/f3021af0-2725-4266-8590-733322cfa342" />
+
+- SLACK should be either +ve or 0, data arrival time<data required time
+- In a situation when data required time<data arrival time, increase the delay of data arrival time by plug in the right inverter.The theta(θ), combinational delay is much higher, in that case we must use a cell which got lower delay.
+
+### NgspiceSky130-Day4-CMOS Noise Margin robustness evaluation
+## 
 
