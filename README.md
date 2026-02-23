@@ -673,7 +673,7 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
                  - W = Width of transistor
                  - L = Length of transistor 
                  - K= Process transconductance parameter, dpends on device size and mobility
-                      - Kn=μn.Cox
-                      - Kp=μp.Cox
+                      - Kn'=μn.Cox
+                      - Kp'=μp.Cox
 	                      ​
 
