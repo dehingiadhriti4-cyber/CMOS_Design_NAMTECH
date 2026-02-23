@@ -612,3 +612,36 @@ The circuit design process employing SPICE simulations is the source of the dela
 - If we closely look this waveform and previous waveform, we notice that it is slightly shifted toward the left(in previous waveform it is exactly in the middle). This shift occurs because the NMOS transistor is stronger than the PMOS transistor in that configuration.
   
 ### Lecture 3:-Labs Sky130 SPICE simulation for CMOS
+- gggg
+  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/14545e14-17de-494b-8934-0eece06034eb" />
+- ffgh
+  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/6bbdab1f-88f6-48df-abc4-9ea7bf8538c5" />
+- To get
+  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/d90735c5-090d-4e65-87eb-f1f255f26771" />
+  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/48c012ce-1c2c-4d30-9fa2-fa56daa0ee37" />
+- Now we need to plot switching threshold from the graph, it is the point when Vin=Vout.
+  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/c9656a91-c772-4d29-9ed4-ec1d80ada6b7" />
+
+- We will se the transient analysis
+  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/b76d281f-e91c-47a1-9fe9-0ea55f42a281" />
+  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/4a431c39-bd2f-449a-ad21-ded7f850f912" />
+- We can see that
+  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/949158f8-b03f-4354-9b3a-b65cc24f46d7" />
+  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/3dfa2a43-f6d5-43b1-8c9d-1cf1f737ae6c" />
+
+- To calculate rise delay and fall delay we have to consider the 50% of Vdd
+  <img width="341" height="76" alt="image" src="https://github.com/user-attachments/assets/24b21a61-fada-4e55-a5ee-4858270ec34d" />
+     - gggh
+     - thhh
+- For fall delay
+  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/cd67b09e-6d2e-4384-bf52-9753d00b8d25" />
+  <img width="292" height="109" alt="image" src="https://github.com/user-attachments/assets/f855c68d-49c6-4d7b-bfcc-afabf8386f60" />
+
+
+
+
+
+
+
+
+
