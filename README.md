@@ -759,4 +759,19 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
 
 ### Lecture 2:-Noise Margin voltage paramters
 
-- 
+- Now we will comside the more practical scenario and take the non-idealities of a CMOS inverter, the VTC curve deviates from the ideal case. Due to finite gain, parasitic resistances, and capacitances, the output levels are not perfectly equal to 0 and Vdd.
+- In this case:
+    - When 0<Vin<VIL, the output remains in the high region, but
+        - VOH<Vout<Vdd
+    - When VIH<Vin<Vdd, the output remains in the low region, but
+        -  0<Vout<VOL
+    - Also, the logic levels satisfy the following practical conditions:
+        -  VOL<VOH<Vdd
+           -  because VOH must be recognized as a valid logic high by the next inverter stage.
+        -  0<VOL<VIL
+           -   because VOL must be safely interpreted as a logic low by the next stage.
+   <img width="352" height="340" alt="image" src="https://github.com/user-attachments/assets/625c0a1d-e12a-4348-89f2-66400b4330e9" />
+
+- These relationships ensure proper cascading of CMOS inverters and define the noise margin of the circuit.
+- The slope is close to -1,as for increase in input, output is reducing.
+  
