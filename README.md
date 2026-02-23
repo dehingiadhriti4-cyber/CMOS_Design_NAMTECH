@@ -775,3 +775,4 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
 - These relationships ensure proper cascading of CMOS inverters and define the noise margin of the circuit.
 - The slope is close to -1,as for increase in input, output is reducing.
   
+### Lecture 3:-margin equation and summary
