@@ -1,4 +1,4 @@
-<img width="1920" height="892" alt="image" src="https://github.com/user-attachments/assets/f8b11e93-e877-4d58-9934-2821218c047e" /># CMOS_DESIGN
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/67100ee6-6f37-46d5-8e3e-754d1a9dfbd5" /><img width="1920" height="892" alt="image" src="https://github.com/user-attachments/assets/f8b11e93-e877-4d58-9934-2821218c047e" /># CMOS_DESIGN
 
 
 # Introduction to Circuit Design and Spice Simulations
@@ -776,3 +776,52 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
 - The slope is close to -1,as for increase in input, output is reducing.
   
 ### Lecture 3:-margin equation and summary
+
+- Now we will calculate the noise margin equation, for that we will plot the voltages on the same scale.
+  <img width="683" height="510" alt="image" src="https://github.com/user-attachments/assets/09e512be-294b-478a-b38c-384826066abb" />
+
+- In the above scale:-
+   - 1)Noise Margin High(NMH) - value between VIH and VOH.
+       -  It says that any voltage level whether it is in input or output side will be detected as logic'1'
+   - 2)Noise Margin Low(NML) - value between VIL and VOL.
+       -  It says that any voltage level whether it is in input or output side will be detected as logic'0'
+- If the induced noise remains within these allowable ranges, it will not affect the circuit operation. This is because the signal will still be correctly interpreted as  logic ‘1’ or logic ‘0’.Such noise levels fall within the noise margin and, therefore, do not cause any logic error. This type of noise can be safely tolerated and effectively rejected by the CMOS inverter. Apart from this region the value is "Undefined" and the logic level can swing between 'high' and 'low'.
+  <img width="666" height="354" alt="image" src="https://github.com/user-attachments/assets/abb16190-4fd1-455f-98e1-5cf6ff2c2200" />
+  <img width="715" height="444" alt="image" src="https://github.com/user-attachments/assets/9055c109-4d9a-4d53-b501-a45db9184ee5" />
+
+### Lecture 4:-Noise margin variation with respect to PMOS width
+
+- We will evaluate the noise margin as a function of the PMOS width and analyze how it influences the inverter characteristics. By varying the PMOS sizing and observing the corresponding changes in the VTC and noise margins, we can demonstrate the robustness of the CMOS inverter.
+- First step is to find out the point on the particular curve where the slope is -1 and we need to extend them towards x-y axis and find the Noise Margin High and Noise Margin Low.
+   - 1)For (W/L)p = (W/L)n
+     <img width="1185" height="527" alt="image" src="https://github.com/user-attachments/assets/cfef7365-c7d5-47ed-b57c-9122326d6a5d" />
+
+        - NMH=0.3V
+        - NML=0.3V
+        - It's able gto sustain the noise which are lying on the spacific ranges.
+    - 2)For (W/L)p = 2(W/L)n
+      <img width="1162" height="534" alt="image" src="https://github.com/user-attachments/assets/a71cc0c3-bfe3-4e26-bb2c-7ddb675a0be8" />
+
+        - Noise Margin High is increased by 0.05, NMH=0.35V
+        - NML=0.3V
+        - The larger the Noise margin, stronger is CMOS inverter and immune to Noises.
+    - 3)For (W/L)p = 3(W/L)n
+      <img width="1175" height="514" alt="image" src="https://github.com/user-attachments/assets/77244b67-c8d1-471d-aa1a-ddff0bde27cb" />
+
+        - NMH=0.4V(increase more)
+        - NML=0.3V
+        - PMOS is resoinsible for holding logic '1' on the output capacitor and NMOS is responsible for holding logic '0' on the output capacitor
+     - 4)For (W/L)p = 4(W/L)n
+       <img width="1169" height="523" alt="image" src="https://github.com/user-attachments/assets/df1b1cc7-3f08-44f7-aa62-a973e3bea675" />
+	    - NMH=0.42V
+        - NML=0.27V
+        - Dorp in the NML because NMOS becomes weaker as compared to the PMOS, the ability for the noise margin for NMOS to hold the logic '0' has deminished.
+     - 5)For (W/L)p = 5(W/L)n
+       <img width="1164" height="527" alt="image" src="https://github.com/user-attachments/assets/fd5fdd2f-6e71-4403-a2f3-47963047b1c9" />
+
+        - NMH=0.42V
+        - NML=0.27V
+        - The noise margin high almost comes to static value,so even if we increase the widths further noise margin will be static.
+
+
+  
