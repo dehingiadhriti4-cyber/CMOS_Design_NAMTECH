@@ -573,4 +573,42 @@ The circuit design process employing SPICE simulations is the source of the dela
 | 2 V         | 0 V          | Linear          | Cut-Off         |
 
 
+# NgspiceSky130-Day3-CMOS switching threshold and dynamic simulations
 
+## Voltage transfer characteristics-SPICE simulations
+### Lecture 1:-SPICE deck creation for CMOS inverter
+- 1) For this, we first need to create a SPICE deck, which contains the connectivity information of the circuit in the form of a netlist. This netlist defines the devices, their parameters, and how they are interconnected in the CMOS inverter configuration.
+   <img width="415" height="429" alt="image" src="https://github.com/user-attachments/assets/db819675-42c5-4a02-ad4e-5ad874917431" />
+- 2) The next task is to define the component values,  keeping W/L for both NMOS and PMOS same( i.e. same size of POMS and NMOS)
+   <img width="399" height="437" alt="image" src="https://github.com/user-attachments/assets/dd5145f8-f492-493c-b085-9269ac1c6800" />
+
+- 3) Next we will assume the Vin and Vout values, both are 2.5V and the output load is 10fF
+   <img width="527" height="414" alt="image" src="https://github.com/user-attachments/assets/c0ff7919-62c9-407f-a469-7f179a877b46" />
+- 4) Next step is to identify the Nodes (Node is the point where two components meet)
+   <img width="683" height="524" alt="image" src="https://github.com/user-attachments/assets/938d61a1-0d82-4a1b-ae6f-a3a9f903e229" />
+- 5) Name the nodes (example-2.5V input lies between Vin and 0, similarly Vdd lies between vdd and 0)
+   <img width="528" height="453" alt="image" src="https://github.com/user-attachments/assets/533f3181-c16c-43f9-99d1-17807f16efdf" />
+- 6) Now we write the SPICE deck
+     ```*** MODEL Descriptions ***
+        *** NETLIST Description ***
+        M1 out in vdd vdd pmos W=0.375u L=0.25u(Drain-Gate-Substrate-Source)
+        M2 out in 0 0 nmos W=0.375u L=0.25u```
+     
+   <img width="1190" height="542" alt="image" src="https://github.com/user-attachments/assets/a59c7418-dba3-44f7-a52e-9f024c544041" />
+ 
+### Lecture 2:-SPICE simulation for CMOS inverter
+
+   <img width="1186" height="562" alt="image" src="https://github.com/user-attachments/assets/a9958fcb-a612-41aa-8492-0a8dc62fb7da" />
+   <img width="1180" height="565" alt="image" src="https://github.com/user-attachments/assets/f17d0f06-2a77-4ef3-a184-8156b90da83a" />
+   <img width="1182" height="560" alt="image" src="https://github.com/user-attachments/assets/94b56878-3884-4f69-8589-cc0fd0ac2646" />
+
+- 7) Next we have to give simulation command, Here we will be sweeping the gate input voltage from 0 to 2.5V with steps of 0.05. The reason we are doing this to calculate the VTC, the voltage at the output while sweeping the input voltage.
+- 8) The final step is to describe the model file, all the technological parameters is describe in the model file.
+   <img width="1176" height="558" alt="image" src="https://github.com/user-attachments/assets/138c83f7-5433-4710-9eb5-c093888f4ccf" />
+- Now we will do the SPICE simulation for Wn=Wp=0.375u, Ln=Lp=0.25u, Wn/ln=Wp/Lp=1.5. Below is the VTC we get for the above netlist.
+   <img width="754" height="618" alt="image" src="https://github.com/user-attachments/assets/75d94d09-0b9e-400d-87a6-8792840c54e6" />
+- Next we will get the VTC for Wn= 0.375u, Wp= 0.9375u, Ln,p=0.25u; Wn/Ln=1.5, Wp/Lp=2.5 (PMOS width is 2.5 times more than NMOS)
+   <img width="753" height="606" alt="image" src="https://github.com/user-attachments/assets/5bf03145-65c9-40fa-ba41-87ab0771cae2" />
+- If we closely look this waveform and previous waveform, we notice that it is slightly shifted toward the left(in previous waveform it is exactly in the middle). This shift occurs because the NMOS transistor is stronger than the PMOS transistor in that configuration.
+  
+### Lecture 3:-Labs Sky130 SPICE simulation for CMOS
