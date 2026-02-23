@@ -738,6 +738,25 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
 - SLACK should be either +ve or 0, data arrival time<data required time
 - In a situation when data required time<data arrival time, increase the delay of data arrival time by plug in the right inverter.The theta(θ), combinational delay is much higher, in that case we must use a cell which got lower delay.
 
-### NgspiceSky130-Day4-CMOS Noise Margin robustness evaluation
-## 
+# NgspiceSky130-Day4-CMOS Noise Margin robustness evaluation
+## Static behaviour evaluation-CMOS inverter robustness-Noise Margin
+### Lecture 1:-Introduction to noise margin
+- The next step in evaluating the robustness of the CMOS inverter is to determine its noise margin. Every digital device has a certain noise margin, which defines its tolerance to unwanted disturbances.
+- Noise margin is primarily related to issues such as crosstalk noise and transient glitches. It indicates how much noise can be superimposed on the input signal without causing an incorrect logic transition at the output.
+- By varying the CMOS inverter switching threshold, how does the noise margin varies.
+  <img width="535" height="498" alt="image" src="https://github.com/user-attachments/assets/327db8db-ea94-43e5-9a33-c8e96fc25ced" />
 
+- For example if we consider an ideal Inverter, for inputs 0/1 it gives output as 1/0. The slope of switch is infinite.
+- At Vdd/2 switch happening (sudden shift of output voltage from logic '1' to logic '0'),slope defines the change in the output voltage w.r.t input voltage.The slope of switch is ideally infinite.
+- However, in practical circuits, this is not possible. Due to the presence of parasitic resistances and capacitances, the inverter exhibits delay during switching.
+- The slope is finite slope, it has some value, putput will be a gradual move.
+  <img width="360" height="335" alt="image" src="https://github.com/user-attachments/assets/73c16c08-bd0b-4303-931b-4efdd1f10e49" />
+
+- Now, we observe the following behavior from the VTC curve:
+  -  1) Whenever the input voltage is between 0 and VIL(Input Low Voltage), the output remains at VOH(Output High Voltage).
+  -  2) Similarly, whenever the input voltage is between VIH(Input High Voltage) and Vdd, the output remains at VOL(Output Low Voltage).
+-  This defines the valid logic regions of operation for the CMOS inverter and helps in determining the noise margins.
+
+### Lecture 2:-Noise Margin voltage paramters
+
+- 
