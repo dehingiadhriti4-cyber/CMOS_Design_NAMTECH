@@ -669,11 +669,23 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
      - kn and kp are transconductance parameters.
           - kn=(Wn/Ln)Kn'
           - kp=(Wp/Lp)Kp'
-              -  Where:
+             - Where:
                  - W = Width of transistor
                  - L = Length of transistor 
                  - K= Process transconductance parameter, dpends on device size and mobility
                       - Kn'=μn.Cox
                       - Kp'=μp.Cox
 	                      ​
+### Lecture 3:-Analytical expression of (W/L)n and (W/L)p as a function of Vm
+
+- 2)We will now calculate the value of W/L for PMOS and NMOS when Vm is given.
+   - Now, we need to approach the problem in a reverse manner. Instead of choosing the W/L ratios first and then observing the switching threshold, we will start by fixing the desired switching threshold.Since the power supply voltage is Vdd=2.5V, we want the switching threshold Vm to be exactly half of Vdd. Therefore,
+      - Vm=Vdd/2=2.5/2=1.25V
+   - Our goal is to determine the appropriate W/L ratios of the PMOS and NMOS transistors such that the inverter switches precisely at 1.25V.
+   - We will start from the current equation itself i.e. Idsn = -Idsp
+     <img width="437" height="89" alt="image" src="https://github.com/user-attachments/assets/fedbbb9c-27c9-416b-ac7b-e49cabf759a3" />
+	   - Expanding Kp and Kn (Gain factor)
+       - <img width="510" height="86" alt="image" src="https://github.com/user-attachments/assets/643b325a-d496-4348-bb66-19af17070cfc" />
+	   - <img width="481" height="94" alt="image" src="https://github.com/user-attachments/assets/09d5689d-1921-433d-93e7-6fb5b7889688" />
+
 
