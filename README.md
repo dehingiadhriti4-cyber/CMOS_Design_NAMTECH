@@ -833,16 +833,67 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
    - This area is use for amplification purpose.
 
 ### Lecture 5:-Sky130 Noise margin labs
-- 
+- We will calculate the noise margin in SPICE simulation.
  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/4000e653-b3c5-4a90-a5c0-ab31e0d8217a" />
  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/1f235a1d-7aff-4d32-88ff-4b8ceff152fb" />
-- We have set
+- We have set the PMOS to NMOS W/L ratio as 2.77 and are sweeping the input voltage from 0 V to 1.8 V with a step size of 0.01 V to obtain the VTC of the CMOS inverter.
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/413edc5a-e3c2-458b-8c96-3fcf137646cd" />
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/ccf003de-6d1c-4e59-92ec-17911b9e4e7d" />
-- To plot the noise margin we have to consider the slope where it will be -1
+- To plot the noise margin we have to consider the slope where it will be -1, x axis will give VIL and VIH, whereas y axis will give VOH and VOL.
   <img width="236" height="63" alt="image" src="https://github.com/user-attachments/assets/880d1968-7cd6-46e7-a4ff-1d7b6bf63fdd" />
+-The noice magin :-
+   -  Noise margin NH = VOH - VIH = 1.7153-0.98555 = 0.72975
+   -  Noise margin NL = VIL - VOL = 0.77-0.1 = 0.67
+
+# NgspiceSky130-Day5-CMOS power supply and device variation robustness evaluation
+## Static behaviour evaluation-CMOS inverter robustness-Power supply variation
+### Lecture 1:-Smart SPICE simulations for power supply variations
+
+- While we try to evaluate the inverter robustness of the CMOS we need to conside one more factor which is **Power Supply Scalling**. Whenever we move from 250nm to lower node like 20 nm we scale our supply voltage as well. Reducing the gate length lowers the operating power, and during power scaling, the CMOS characteristics should ideally remain unchanged to maintain proper circuit functionality.
+- Now we will do some SPICE simulation:-
+  <img width="1064" height="254" alt="image" src="https://github.com/user-attachments/assets/e99f9f9f-33f1-4d2a-90a7-2b447060e010" />
+   - We sweep the voltage from 2.5V to 1V by keeping the same width Wp=0.9375u and Wn=0.375u.
+   - The goal is that the CMOS inveter behaviour should not be change.That eventually the CMOS robustness.
+```*** MODEL Descriptions ***
+*** NETLIST Description ***
+***2.5 supply voltage***
+
+M1 out in vdd vdd pmos W=0.9375u L=0.25u
+M2 out in 0 0 nmos W=0.375u L=0.25u
+
+cload out 0 10F
+
+Vdd vdd 0 2.5
+Vin in 0 2.5
+
+.control
+let powerSupply = 2.5
+alter Vdd = powerSupply
+
+let voltageSupplyVariation = 0
+dowhile voltageSupplyVariation < 5
+dc Vin 0 2.5 0.01
+let powerSupply = powerSupply - 0.5
+alter Vdd = powerSupply
+let voltageSupplyVariation = voltageSupplyVariation + 1
+end
+
+plot dc1.out vs in dc2.out vs in dc3.out vs in dc4.out vs in dc5.out vs in
+xlabel "input voltage [V]" ylabel "output voltage [V]"
+title "Inverter dc characteristics as a function of supply voltage"
+quit
+.endc
+
+*** SIMULATION Commands ***
+***.op
+***.dc Vin 0 2.5 0.05 Vdd 0 2.5 0.5
+
+***
+.include tsmc_025um_model.mod  ***
+.LIB "tsmc_025um_model.mod" CMOS_MODELS
+.end```
 
 
-
-
-
+ <img width="1153" height="939" alt="image" src="https://github.com/user-attachments/assets/135e94a1-f410-4c3e-8f86-66f45c7fecba" />
+- This is the VTC charactersitics for Vdd= 0.5V, 1V, 1.5V, 2V, 2.5V.
+- Even at 0.5V CMOS is able to operate.
