@@ -1,16 +1,35 @@
+# CMOS-Circuit-Design-Spice-Simulation-using-Sky130nm-technology
+## Table Of Contents
+
+- [NgspiceSky130-Day1-Basics of NMOS Drain Current(Id) vs Drain-to-source Voltage(Vds)](#ngspicesky130-day1-basics-of-nmos-drain-currentid-vs-drain-to-source-voltagevds)
+
+  - [Introduction to Circuit Design and Spice Simulations](#introduction-to-circuit-design-and-spice-simulations)
+
+    - [L1 Why do we need SPICE simulations?](#l1-why-do-we-need-spice-simulations?)
+    - [L2 Introduction to basic element in circuit design-NMOS](#l2-introduction-to-basic-element-in-circuit-design-nmos)
+    - [L3 Strong inversion and threshold voltage](#l3-strong-inversion-and-threshold-voltage)
+    - [L4 Threshold voltage with positive substrate potential](#l4-threshold-voltage-with-positive-substrate-potential)
+
+  - [NMOS resistive region and Saturation region of operation](#nmos-resistive-region-and-saturation-region-of-operation)
+
+    - [L1 Resistive region of operation with small drain-source voltage](#l1-resistive-region-of-operation-with-small-drain-source-voltage)
+    - [L2 Drift current theory](#l2-drift-current-theory)
+    - [L3 Drain current model for Linear region of operation](#l3-drain-current-model-for-linear-region-of-operation)
+
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/73d8419f-9f55-46b7-81e4-f7c4e1c4a8d5" /><img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/67100ee6-6f37-46d5-8e3e-754d1a9dfbd5" /><img width="1920" height="892" alt="image" src="https://github.com/user-attachments/assets/f8b11e93-e877-4d58-9934-2821218c047e" /># CMOS_DESIGN
 
+### NgspiceSky130-Day1-Basics of NMOS Drain Current(Id) vs Drain-to-source Voltage(Vds)
 
-# Introduction to Circuit Design and Spice Simulations
+#### Introduction to Circuit Design and Spice Simulations
 
-## Lecture 1:- Why do we need SPICE simulations?
+##### L1 Why do we need SPICE simulations?
 - All the logic gates such as NAND, NOR, OR, AND etc are implemented at the transistor level using combinations of PMOS (p-channel MOSFET) and NMOS (n-channel MOSFET) devices arranged in specific configurations. They perform their required functionality of that particular respective gate. Example- Inverter.
 <img width="495" height="378" alt="image" src="https://github.com/user-attachments/assets/93ef85d4-0137-4bb4-8929-32b889fe4741" />
 
 This circuit is fed with some wavefrom to identify the output response, the characteristic curve of this circuit decide the delay and based on that delay we will get the W/L ratio of the particular transistor using SPICE simulation.
 <img width="890" height="698" alt="image" src="https://github.com/user-attachments/assets/39991449-4568-4f5f-b87c-84bf0f80ccde" />
 
-## WHy do we need SPICE?
+#### WHy do we need SPICE?
 -The physical design flow, clock tree synthesis, crosstalks, and timing are built on SPICE (Simulation Program with Integrated Circuit Emphasis),it allows designers to analyze, verify, and optimize a circuit’s performance using delay tables before physical fabrication.
 
 -Assume that the given circuit has undergone Clock Tree Synthesis (CTS), where multiple clock buffers have been inserted throughout the design. These buffers are sized appropriately to drive varying capacitive loads at different output nodes, ensuring balanced clock distribution and controlled skew across the network.
@@ -24,7 +43,7 @@ This circuit is fed with some wavefrom to identify the output response, the char
 The circuit design process employing SPICE simulations is the source of the delay tables seen above. Characterization of any CMOS logic is part of SPICE simulations.
 - Due to lower drive and higher drive of 
 
-## Lecture 2:- Introduction to basic element in circuit design-NMOS
+### Lecture 2:- Introduction to basic element in circuit design-NMOS
 -An NMOS transistor is a four-terminal device built on lightly doped p-type substrate, with two heavily doped n-type regions which are source and drain . The isolation region isolate the transistor from other transistor,There is a thin gate oxide layer of Silicon Dioxide separates gate from semiconductor and prevents direct current flow and above it metal or Polysilicon is deposited which is the gate terminal.
 <img width="1094" height="472" alt="image" src="https://github.com/user-attachments/assets/8496d382-0ad1-4808-85e7-7c59f506080c" />
 
@@ -52,7 +71,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 - Due to negative charges accumulation, a depletion layer forms under the gate where majority carriers are delpeted.
 
-## Lecture 3:- Strong Inversion
+### Lecture 3:- Strong Inversion
 **When we increase the gate voltage(Vgs=Vth)**
 
 <img width="769" height="425" alt="image" src="https://github.com/user-attachments/assets/c479621c-5c1f-49c9-bc3c-0cfe98084bea" />
@@ -108,8 +127,8 @@ The circuit design process employing SPICE simulations is the source of the dela
 - This all vales are fef into SPICE simulator, SPICE tool derive the threshold voltage, that threshold voltage represent the device NMOS
 - This is about the behaviour of the NMOS below threshold.
 
-# NMOS resistive region and saturation region of operation
-## Lecture 1: Resistive region of operation with small drain-source voltage
+## NMOS resistive region and saturation region of operation
+### Lecture 1:-Resistive region of operation with small drain-source voltage
 
 <img width="637" height="422" alt="image" src="https://github.com/user-attachments/assets/cf132d5e-5424-4ebb-a027-92e421bdc52f" />
 
@@ -136,7 +155,7 @@ The circuit design process employing SPICE simulations is the source of the dela
    - Leff=L−2ΔL
  <img width="556" height="339" alt="image" src="https://github.com/user-attachments/assets/a807161d-83c9-4a93-93b5-04842c678a51" />
 
- ## Lecture 2: Drift current theory
+ ### Lecture 2:-Drift current theory
 
  <img width="555" height="525" alt="image" src="https://github.com/user-attachments/assets/a67c0814-2aac-402a-8b50-2cc47af1cdbd" />
 
@@ -155,7 +174,7 @@ The circuit design process employing SPICE simulations is the source of the dela
  
  - Drift current(Id)= (Velocity of charge carriers x available charge)
    
-## Lecture 3: Drain current model for linear region of operation
+### Lecture 3:-Drain current model for linear region of operation
 
 <img width="409" height="130" alt="image" src="https://github.com/user-attachments/assets/c3d2484d-0d39-43b1-9cef-0918e26b562a" />
 
@@ -178,7 +197,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 - Therefore all values of Vds ≤ (Vgs − Vt), the MOSFET operates in the resistive (linear) region.
 - In this region the channel is  uniform from source to drain and the MOSFET behaves like a **voltage-controlled resistor**.
 
-## Lecture 4: SPICE conclusion to resistive operation
+### Lecture 4:-SPICE conclusion to resistive operation
 
 - To analyse the impact of Vgs and Vds on the drain current(Id), we consider different values of both voltages.
 - For a given VGS, the device remains in the linear (triode) region as long as Vds < (Vgs − Vt).
@@ -187,7 +206,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 - To calculate ID for different values of VGS, at every value of VGS, sweep VDS from 0 till (VGS − Vt).
 - In this region, drain current(Id) follows the linear-region equation, and SPICE simulations can be used to obtain and verify the Id–Vds characteristics for each Vgs.
   
-## Lecture 5: SPICE conclusion to resistive operation
+### Lecture 5:-SPICE conclusion to resistive operation
 
 <img width="1233" height="584" alt="image" src="https://github.com/user-attachments/assets/54f571ed-d057-4b84-b368-376b32fd9124" />
 
@@ -206,7 +225,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 - No channel present at the drain side, as the result of that the area near the drain channel got disappeared, some channel present in the source area, this is referred as saturation region and cannot do anything further.
 - As Vds increases further beyond Vgs-Vth, the pinch-off point moves slightly toward the source.
 
-## Lecture 6: Drain current model for saturation region of operation
+### Lecture 6:-Drain current model for saturation region of operation
 
 - When Vgs-Vds ≤ Vt, the channel disappears at the drain side
 - In the saturation region, the channel voltage is approximately fixed at Vgs-Vt, unlike in the linear region where it changes along the channel as V(x).
@@ -226,9 +245,9 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 - Drain current is slightly increase when Vds is increases
 
-# Introduction to SPICE
+## Introduction to SPICE
 
-## L1 Basic SPICE setup
+### Lecture 1:-Basic SPICE setup
 - SPICE is a simulation software that contains predefined device models. To generate output waveforms, the user must provide the appropriate input parameters or a properly defined netlist, which the simulation engine then processes to produce the desired results.
 - The waveforms are eventually used to calculate the delays, characterize cells, and further support analyses such as Static Timing Analysis (STA) and other performance evaluations. These are accurate delays used to STA.
 - First step is to create a correct SPICE setup, feed the model into SPICE engine and evaluate the drain current equation.
@@ -292,7 +311,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 ```
 <img width="1111" height="346" alt="image" src="https://github.com/user-attachments/assets/4d8e2069-e6cd-4878-9d65-009713d7a49f" />
    
-## L3 Define Technology parameters
+### Lecture 3:-Define Technology parameters
 
 <img width="519" height="505" alt="image" src="https://github.com/user-attachments/assets/d0252724-ea7d-4cb6-ac25-01bf50a416a3" />
 
@@ -315,7 +334,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 - This is the complete SPICE tag and give a name ```NETLIST Description``` on the top and below is ```.include```
 - We have to add the simulation command(provide the voltage, sweep the Vgs and Vds for SPICE simulations)
 
-## Lecture-4 First SPICE simulation
+### Lecture:-4 First SPICE simulation
 
 - Open Vertual Box
 - Type ```cd`` in comand prompt
@@ -356,7 +375,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 <img width="308" height="155" alt="image" src="https://github.com/user-attachments/assets/221a3a0d-e586-45e4-920e-3380a637e8f4" />
 
-## L5 SPICE lab with Sky130 models
+### Lecture 5:-SPICE lab with Sky130 models
 
 - dddd
 
@@ -364,7 +383,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 # NgspiceSky130-Day2-Velocity saturation and basics of CMOS inverter VTC
 ## SPICE simulation for lower nodes and velocity saturation effect
-### L1 SPICE simulation for lower nodes
+### Lecture 1:-SPICE simulation for lower nodes
 
 <img width="659" height="518" alt="image" src="https://github.com/user-attachments/assets/52ca2440-442f-46fd-b92d-f875f85d2e71" />
 
@@ -405,7 +424,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 - In the previous case the current value for saturation region is different
 - The difference between two adjacent curve appeared to be constant
 
-  ### L2 Drain current vs gate voltage for long and short channel device
+  ### Lecture 2:-Drain current vs gate voltage for long and short channel device
 <img width="1248" height="538" alt="image" src="https://github.com/user-attachments/assets/a6ece7e4-b229-4eb5-888e-cdcee4f04586" />
 
 - Let us now compare the results obtained from the two simulations we performed to analyze the differences in device behavior.
@@ -450,7 +469,7 @@ The circuit design process employing SPICE simulations is the source of the dela
        .end
    
 
-### L3 Velocity saturation at lower and higher electric fields  
+### Lecture 3:-Velocity saturation at lower and higher electric fields  
 <img width="1266" height="600" alt="image" src="https://github.com/user-attachments/assets/bd83447d-3ab6-4a23-a290-73f6cd938181" />
 
 - For short-channel devices, the drain current tends to exhibit a more linear dependence on Vgs as it increases. This behavior arises due to the velocity saturation effect, which limits the carrier velocity at high electric fields and reduces the quadratic nature of the current–voltage relationship.
@@ -467,7 +486,7 @@ The circuit design process employing SPICE simulations is the source of the dela
     - It becomes to complex to handle so we try to simplify the equation
        <img width="886" height="396" alt="image" src="https://github.com/user-attachments/assets/37f0511f-0e75-4c1a-a5b1-a2d561cae2e3" />
 
-### L4 Velocity saturation drain current model
+### Lecture 4:-Velocity saturation drain current model
  <img width="900" height="514" alt="image" src="https://github.com/user-attachments/assets/8edfd449-d368-4554-a1e3-2ad5376d6eb7" />
 
 -   Let us take Vgs-Vt=Vgt because we will be taking Vgs as large values. Current equation we will be using as shown above, For lower values of Vds the channel length modulation parameter λ can be ignored. 
@@ -492,7 +511,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 - For smaller technology nodes, the saturation current is lower instead of higher. This happens because velocity saturation occurs earlier in short-channel devices. As a result, the device reaches saturation sooner, and the maximum (peak) drain current becomes significantly smaller compared to larger technology nodes.
      
-### L5 Labs Sky130 Id-Vgs
+### Lecture 5:-Labs Sky130 Id-Vgs
 
 <img width="1920" height="891" alt="Screenshot from 2026-02-22 21-02-52" src="https://github.com/user-attachments/assets/7eee0388-827f-4ac9-800f-d7d5c83dcb14" />
 <img width="1920" height="891" alt="Screenshot from 2026-02-22 21-09-40" src="https://github.com/user-attachments/assets/f30e2dc8-439b-439b-aac6-2dd6d39079f2" />
@@ -521,7 +540,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 - In the graph current starts increasing rapidly with a small change of Vgs value. To plot threshold voltage we have to take the tengent of the slope and extended on the x-axis
 
 ## CMOS voltage transfer characteristics (VTC)
-### L1 MOSFET as a switch
+### Lecture 1:-MOSFET as a switch
 - We will now look at the device parameters from the switch point of view.
  <img width="819" height="471" alt="image" src="https://github.com/user-attachments/assets/b8336827-6b0d-4439-8a04-a195ffb90528" />
 
@@ -541,7 +560,7 @@ The circuit design process employing SPICE simulations is the source of the dela
     
 - When Vgs>Vt, NMOS can be replaced by a resistor and we have output load as well when Vin=Vdd
 
-### L2 Introduction to standard MOS voltage current parameters
+### Lecture 2:Introduction to standard MOS voltage current parameters
 - We are trying to get the equivalent circuit of CMOS when Vin is 'high' and 'low', so that we can get the Voltage Transfer Characteristics (VTC) and therefore calculate the delay of the cell(the cell here is inverter).
   
   <img width="1172" height="700" alt="image" src="https://github.com/user-attachments/assets/a18fd590-26b0-4da3-8337-144f67b73c4a" />
