@@ -71,7 +71,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 - Due to negative charges accumulation, a depletion layer forms under the gate where majority carriers are delpeted.
 
-### Lecture 3:- Strong Inversion
+##### L3 Strong Inversion
 **When we increase the gate voltage(Vgs=Vth)**
 
 <img width="769" height="425" alt="image" src="https://github.com/user-attachments/assets/c479621c-5c1f-49c9-bc3c-0cfe98084bea" />
@@ -127,8 +127,8 @@ The circuit design process employing SPICE simulations is the source of the dela
 - This all vales are fef into SPICE simulator, SPICE tool derive the threshold voltage, that threshold voltage represent the device NMOS
 - This is about the behaviour of the NMOS below threshold.
 
-## NMOS resistive region and saturation region of operation
-### Lecture 1:-Resistive region of operation with small drain-source voltage
+#### NMOS resistive region and saturation region of operation
+##### L1 Resistive region of operation with small drain-source voltage
 
 <img width="637" height="422" alt="image" src="https://github.com/user-attachments/assets/cf132d5e-5424-4ebb-a027-92e421bdc52f" />
 
@@ -155,7 +155,7 @@ The circuit design process employing SPICE simulations is the source of the dela
    - Leff=L−2ΔL
  <img width="556" height="339" alt="image" src="https://github.com/user-attachments/assets/a807161d-83c9-4a93-93b5-04842c678a51" />
 
- ### Lecture 2:-Drift current theory
+ ##### L2 Drift current theory
 
  <img width="555" height="525" alt="image" src="https://github.com/user-attachments/assets/a67c0814-2aac-402a-8b50-2cc47af1cdbd" />
 
