@@ -941,3 +941,23 @@ quit
     - 1) Performance impact
      
 ### Lecture 3:-Sky130 Supply variation Labs
+
+- Now we calculate the supply variation
+  <img width="1920" height="891" alt="Screenshot from 2026-02-24 15-31-36" src="https://github.com/user-attachments/assets/5c253d09-b503-4f57-b000-0f2916645f8f" />
+
+  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/d26adc95-d913-49d6-9d7b-39ece28ea455" />
+
+- we will
+  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/62260f86-63e6-487e-9e98-2d403e8ec5ff" />
+  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/b9f796e6-069d-480b-b5ae-99c4b679d089" />
+- Now we will calculate the gain:-
+   - For Vdd=1.8V,
+      <img width="289" height="65" alt="image" src="https://github.com/user-attachments/assets/882cd18d-49b1-4d25-8e4f-6d0af9753890" />
+
+        - |Gain|=(1.7-0.115)/(0.976-0.777)=7.53
+
+   - For Vdd=0.8V,
+      <img width="289" height="65" alt="image" src="https://github.com/user-attachments/assets/f407bd36-d164-4e88-8b77-69e00cd2df5f" />
+
+        - |Gain|=(1.346-0.061)/(0.770-0.638)=9.73
+
