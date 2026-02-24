@@ -1127,12 +1127,18 @@ Vin in 0 2.5
 - We will now do the SPICE simulations for the device variations
 
     <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/03732a82-112a-40d7-a07b-2006993c85e4" />
-
+     
     <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/39e8c2dc-767f-48e5-b264-954599fa33c8" />
+     - We can observe that the width of the PMOS is significantly larger than that of the NMOS, indicating a strong PMOS and weak NMOS configuration. As a result, the switching threshold voltage VM shifts toward the right.
     <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/893a0fe3-71ae-4931-b172-78a4600153b3" />
     <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/8e7f9f1d-2e56-44b3-9667-95a5ba2fc344" />
-
-
+     - We observe that huge holding on Vdd for longer duration as compared to the ground because we increase the width of PFET to be very high compared to the NFET width, basically we increase the drive strength of the PFET.
+     - To find the value of the switching threshold:
+         - Zoom in on the plot where Vin ~ Vout by right clicking and dragging the cursor to select the area
+         - Zoom until the value of switching threshold becomes almost certain
+         - Left click on the point where Vin is roughly equal to Vout
+         - A point x0 = 0.988209, y0 = 0.988191 is obtained. Since x0 ~ y0. Therefore, Switching Threshold Voltage = Vm = x0 = y0 = 0.988V.
+- From this we can say that the CMOS is very robust.
 
    
 
