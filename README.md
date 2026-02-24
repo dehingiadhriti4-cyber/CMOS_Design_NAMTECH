@@ -230,18 +230,67 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 ## L1 Basic SPICE setup
 - SPICE is a simulation software that contains predefined device models. To generate output waveforms, the user must provide the appropriate input parameters or a properly defined netlist, which the simulation engine then processes to produce the desired results.
-- The waveforms are eventually used to calculate the 
+- The waveforms are eventually used to calculate the delays, characterize cells, and further support analyses such as Static Timing Analysis (STA) and other performance evaluations. These are accurate delays used to STA.
+- First step is to create a correct SPICE setup, feed the model into SPICE engine and evaluate the drain current equation.
+   <img width="436" height="491" alt="image" src="https://github.com/user-attachments/assets/d1b93bc0-54f1-4bcb-b541-3bf1ef58cc03" />
+   - In the equations, certain parameters remain constant for a given fabrication process. Parameters such as Vth, kn, γ, and λ are referred to as technology constants, as their values are determined by the semiconductor manufacturing technology used.
+     <img width="1143" height="589" alt="image" src="https://github.com/user-attachments/assets/41dda52c-820b-4fe1-b4d1-448c0b3e4e68" />
 
+   - These constants are provided by the foundry, and therefore do not need to be derived by the designer. Each technology node has its own unique set of parameter values, which are defined by the specific fabrication process used.
+     <img width="1221" height="662" alt="image" src="https://github.com/user-attachments/assets/7856f87c-f9d0-4ee8-ae09-40d0b3633762" />
 
-
-
-
-  ​
-
-  
-
-
+  - These values (SPICE model parameters) are provided to the simulation engine through a dedicated file known as a model file. In addition, the user must supply the circuit description in the form of a netlist, which the SPICE engine uses along with the model file to perform the simulation.
+  - By performing a DC sweep, we can obtain Id vs Vds curves for different values of Vgs.
  
+  #### SPICE Netlist:-
+
+  - The device must be specified using a particular syntax that is recognized and interpreted by the SPICE simulation engine.
+  - A MOSFET is defined by specifying its node connections (Drain, Gate, Source, and Bulk), along with the device dimensions (W/L) and the applied bias sources. The corresponding circuit representation of the MOSFET is then modeled accordingly, and the simulator internally utilizes the provided model parameters to calculate its electrical characteristics and behavior.
+    <img width="1124" height="562" alt="image" src="https://github.com/user-attachments/assets/b77767ae-e02b-460e-97bc-4d4aba37d751" />
+  - In the SPICE netlist, the MOSFET is defined using four nodes: Drain, Gate, Source, Bulk (Body)	
+  - Voltage sources are connected to apply VGS and VDS, while the bulk is usually tied to VSS (ground) for NMOS.
+  - The simulator does not model the physical cross-section directly; instead, it uses the mathematical model parameters from the model file to compute the electrical behavior.
+  - A protection resistor is connected in series with the gate, and the supply is applied through it. This precaution prevents excessive current from flowing directly into the gate terminal, thereby protecting the thin gate oxide from potential damage.
+    <img width="466" height="261" alt="image" src="https://github.com/user-attachments/assets/60ceffe5-dc11-4d77-b3ac-86f30e9d7c82" />
+
+  - All VSS nodes are connected together and treated as a common reference node. Each component in the circuit is assigned a unique name or identifier. The complete description of these connections and component definitions constitutes the SPICE netlist.
+
+### Lecture 2:-Circuit description in SPICE syntax
+
+- The next step is to provide the SPICE netlist to the simulator in the required input format so that the SPICE engine can interpret and execute the simulation correctly.
+- 1) We are giving some parameter value example Vin= 2.5V, R1=55ohms, M1=1.8u/1.2u, Vdd=2.5V, we have to put these in a way that our SPICE engine can understand.
+     <img width="453" height="264" alt="image" src="https://github.com/user-attachments/assets/b6959ba5-efbb-4082-acfa-32b5747d76c1" />
+
+- 2) Next step is to create node,
+     - Each element in a circuit must be connected between two electrical points known as nodes.A node represents a junction where two or more components are interconnected, and in a SPICE netlist, every node must be assigned a unique identifier to ensure proper circuit definition and simulation.
+     <img width="466" height="254" alt="image" src="https://github.com/user-attachments/assets/39218e1f-e8a9-44bb-b8fd-153e87472d53" />
+- 3) Naming the nodes
+     <img width="472" height="266" alt="image" src="https://github.com/user-attachments/assets/8587718e-8ab9-48d8-9536-9e71427a16b3" />
+- 4) Defining the spice netlist
+      - MOSFET lies between four diffrent nodes, similarly resistor is lying between 2 nodes.
+         - ```M1 vdd n1 0 0 nmos W=1.8u L=1.2u```
+         - M1 → Device name (MOSFET instance)
+         - vdd → Drain node
+         - n1 → Gate node
+         - 0 → Source node
+         - 0 → Body node
+         - nmos → Model name (cpmes from the technology file)
+         - W=1.8u L=1.2u → Device dimensions
+        <img width="1106" height="340" alt="image" src="https://github.com/user-attachments/assets/9e19df6a-5a53-4532-9e99-9a8ad8f27bd7" />
+	  - Common Nomenclature (for MOS): ```Device_name Drain_pin Gate_pin Source_pin Body_pin Model_name Device_dimensions```(DGSS).
+      - Common Nomenclature (for resistor): ```Resistor_name 1st_node 2nd_node Resistor_Value```
+         - R1 → Resistor name
+         - in → 1st node
+         - n1 → 2nd node
+         - 55 → resistor value
+         <img width="1100" height="337" alt="image" src="https://github.com/user-attachments/assets/21c65fed-419d-4dba-b45c-60ebe570c334" />
+#### Netlist
+```M1 vdd n1 0 0 nmos W=1.8u L=1.2u  
+   R1 in n1 55  
+   Vdd vdd 0 2.5
+   Vin in 0 2.5
+```
+<img width="1111" height="346" alt="image" src="https://github.com/user-attachments/assets/4d8e2069-e6cd-4878-9d65-009713d7a49f" />
    
 ## L3 Define Technology parameters
 
@@ -1054,5 +1103,27 @@ Vin in 0 2.5
 
 - The output curve we get :-
    <img width="754" height="608" alt="image" src="https://github.com/user-attachments/assets/c0c3f484-fc28-4db8-a1bf-bf42656c5e60" />
+
+### Lecture 4:-Conclusion
+
+- Let's conclude our discussion in CMOS inverter robustness, we prove on three different points in this robustness. Fourth one is device variation.
+- 4) **Device variation**
+       - We are trying to prove how inverter is insensitive to the variations.
+       - In this case we are looking for two parameters:-
+           - i)Switching Threshold
+           - ii)Noise Margin
+       - i)Switching Threshold:- 
+            <img width="861" height="530" alt="image" src="https://github.com/user-attachments/assets/ebbcf3d0-93e1-4ce7-a102-8563871cd826" />
+             - The Switching threshold 'Vm' is shifted right in case of strong PMOS and shifted left in case of Strong NMOS.
+             - Shift is minimal compared to the supply voltage.
+       - ii)Noise Margin:-
+             <img width="891" height="529" alt="image" src="https://github.com/user-attachments/assets/26d020f0-9e7e-4e42-b619-5a5ca9ab4d8a" />
+             - THere not much variation in NOise Margins in both the extreme cases, that means it behaves as a robust inverter in both the cases.
+             - It is easy to filter out those particular noise so it behaves as an inverter.
+              <img width="468" height="166" alt="image" src="https://github.com/user-attachments/assets/6646bc5f-8158-4c4d-b7bd-49c69c3c1c63" />
+
+### Lecture 5:-Sky130 device variations labs
+- We will now do the SPICE simulations for the device variations
+   
 
 
