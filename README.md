@@ -5,7 +5,7 @@
 
   - [Introduction to Circuit Design and Spice Simulations](#introduction-to-circuit-design-and-spice-simulations)
 
-    - [L1 Why do we need SPICE simulations?](#l1-why-do-we-need-spice-simulations?)
+    - [L1 Why do we need SPICE simulations](#l1-why-do-we-need-spice-simulations)
     - [L2 Introduction to basic element in circuit design-NMOS](#l2-introduction-to-basic-element-in-circuit-design-nmos)
     - [L3 Strong inversion and threshold voltage](#l3-strong-inversion-and-threshold-voltage)
     - [L4 Threshold voltage with positive substrate potential](#l4-threshold-voltage-with-positive-substrate-potential)
@@ -22,14 +22,14 @@
 
 #### Introduction to Circuit Design and Spice Simulations
 
-##### L1 Why do we need SPICE simulations?
+##### L1 Why do we need SPICE simulations
 - All the logic gates such as NAND, NOR, OR, AND etc are implemented at the transistor level using combinations of PMOS (p-channel MOSFET) and NMOS (n-channel MOSFET) devices arranged in specific configurations. They perform their required functionality of that particular respective gate. Example- Inverter.
 <img width="495" height="378" alt="image" src="https://github.com/user-attachments/assets/93ef85d4-0137-4bb4-8929-32b889fe4741" />
 
 This circuit is fed with some wavefrom to identify the output response, the characteristic curve of this circuit decide the delay and based on that delay we will get the W/L ratio of the particular transistor using SPICE simulation.
 <img width="890" height="698" alt="image" src="https://github.com/user-attachments/assets/39991449-4568-4f5f-b87c-84bf0f80ccde" />
 
-#### WHy do we need SPICE?
+###### WHy do we need SPICE?
 -The physical design flow, clock tree synthesis, crosstalks, and timing are built on SPICE (Simulation Program with Integrated Circuit Emphasis),it allows designers to analyze, verify, and optimize a circuit’s performance using delay tables before physical fabrication.
 
 -Assume that the given circuit has undergone Clock Tree Synthesis (CTS), where multiple clock buffers have been inserted throughout the design. These buffers are sized appropriately to drive varying capacitive loads at different output nodes, ensuring balanced clock distribution and controlled skew across the network.
@@ -43,7 +43,7 @@ This circuit is fed with some wavefrom to identify the output response, the char
 The circuit design process employing SPICE simulations is the source of the delay tables seen above. Characterization of any CMOS logic is part of SPICE simulations.
 - Due to lower drive and higher drive of 
 
-### Lecture 2:- Introduction to basic element in circuit design-NMOS
+##### L2 Introduction to basic element in circuit design-NMOS
 -An NMOS transistor is a four-terminal device built on lightly doped p-type substrate, with two heavily doped n-type regions which are source and drain . The isolation region isolate the transistor from other transistor,There is a thin gate oxide layer of Silicon Dioxide separates gate from semiconductor and prevents direct current flow and above it metal or Polysilicon is deposited which is the gate terminal.
 <img width="1094" height="472" alt="image" src="https://github.com/user-attachments/assets/8496d382-0ad1-4808-85e7-7c59f506080c" />
 
