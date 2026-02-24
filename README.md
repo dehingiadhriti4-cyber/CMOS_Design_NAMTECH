@@ -834,3 +834,15 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
 
 ### Lecture 5:-Sky130 Noise margin labs
 - 
+ <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/4000e653-b3c5-4a90-a5c0-ab31e0d8217a" />
+ <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/1f235a1d-7aff-4d32-88ff-4b8ceff152fb" />
+- We have set
+  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/413edc5a-e3c2-458b-8c96-3fcf137646cd" />
+  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/ccf003de-6d1c-4e59-92ec-17911b9e4e7d" />
+- To plot the noise margin we have to consider the slope where it will be -1
+  <img width="236" height="63" alt="image" src="https://github.com/user-attachments/assets/880d1968-7cd6-46e7-a4ff-1d7b6bf63fdd" />
+
+
+
+
+
