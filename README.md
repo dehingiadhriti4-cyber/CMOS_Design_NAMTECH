@@ -823,5 +823,14 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
         - NML=0.27V
         - The noise margin high almost comes to static value,so even if we increase the widths further noise margin will be static.
 
+- Now we will try to bring everything in tabular format:-
+  <img width="700" height="249" alt="image" src="https://github.com/user-attachments/assets/3f16ec3d-0780-48dc-9ab0-eb611efb4522" />
 
-  
+- Also we come to know the ranges for **Digital desig** and **Analog design** in the CMOS inverter.
+  <img width="683" height="537" alt="image" src="https://github.com/user-attachments/assets/899702e3-2311-44bb-b914-57606ddab243" />
+   - This area is use for switching purpose.
+  <img width="693" height="559" alt="image" src="https://github.com/user-attachments/assets/a8e868bf-6ee6-404d-8bc5-1a90a2fc56fd" />
+   - This area is use for amplification purpose.
+
+### Lecture 5:-Sky130 Noise margin labs
+- 
