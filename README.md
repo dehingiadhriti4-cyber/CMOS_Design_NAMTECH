@@ -1122,8 +1122,18 @@ Vin in 0 2.5
              - It is easy to filter out those particular noise so it behaves as an inverter.
               <img width="468" height="166" alt="image" src="https://github.com/user-attachments/assets/6646bc5f-8158-4c4d-b7bd-49c69c3c1c63" />
 
+
 ### Lecture 5:-Sky130 device variations labs
 - We will now do the SPICE simulations for the device variations
+
+    <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/03732a82-112a-40d7-a07b-2006993c85e4" />
+
+    <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/39e8c2dc-767f-48e5-b264-954599fa33c8" />
+    <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/893a0fe3-71ae-4931-b172-78a4600153b3" />
+    <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/8e7f9f1d-2e56-44b3-9667-95a5ba2fc344" />
+
+
+
    
 
 
