@@ -892,8 +892,9 @@ quit
 .include tsmc_025um_model.mod  ***
 .LIB "tsmc_025um_model.mod" CMOS_MODELS
 .end
-
+```
 
  <img width="1153" height="939" alt="image" src="https://github.com/user-attachments/assets/135e94a1-f410-4c3e-8f86-66f45c7fecba" />
+ 
 - This is the VTC charactersitics for Vdd= 0.5V, 1V, 1.5V, 2V, 2.5V.
 - Even at 0.5V CMOS is able to operate.
