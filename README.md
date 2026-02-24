@@ -961,3 +961,98 @@ quit
 
         - |Gain|=(1.346-0.061)/(0.770-0.638)=9.73
 
+## Static behaviour evaluation-CMOS inverter robustness-Device variation
+### Lecture 1:-Sources of variation - Etching process
+
+- We will try to identify the sources of variation  of VTC characteristic of CMOS inverter:-
+    - 1)**Etching Process**
+         - It is basically a fabrication step and it define the width ond height of the structure. It is very important step and based on the structure that get define by this process is directly impact the delay.
+    - Now we will see how the etching process can effect the behaviour of a single inverter:-
+     <img width="1098" height="517" alt="image" src="https://github.com/user-attachments/assets/e113c442-554a-41e3-ada3-26282928a859" />
+    - If we try to look into the layout, it has P diffusion region of some width and height,N diffusion, poly-silicon area, input and output with contacts.
+    - Now we look into chain of inverter.
+      <img width="1229" height="630" alt="image" src="https://github.com/user-attachments/assets/6b806d27-eef6-490b-9ff7-d0c4e693b283" />
+	- There could be flip-flop setting in input and output, as it could be part of data path or clock path.
+    - Now we look fabrication of only of them how it looks:-
+      <img width="896" height="630" alt="image" src="https://github.com/user-attachments/assets/a60120cd-dff2-4d3d-ae55-f7b88c80bcd5" />
+	  - The L and W shape will be destorted in actual mask senario,the variation is more at the edges or sides than at the center. So the area will be different.
+      - This variation is occur in all of the inverter because they are connected back to back.
+        <img width="1228" height="654" alt="image" src="https://github.com/user-attachments/assets/4f7f40de-1c30-40c5-9b06-670e436bad74" />
+	  - It is possible that the structure of the middle inverter and edge inverter will be different because the edge inveters are connected with some flip-fliops.
+    - Now we will look into how does the W and L will effect:-
+        <img width="807" height="539" alt="image" src="https://github.com/user-attachments/assets/47bb3740-427b-473a-bf6a-e858af392461" />
+		- Drain current is directly related to W and L, any variation in W and L will directly impact to the drain current
+ 
+### Lecture 2:-Sources of variation - Oxide thickness
+
+    - 2)**Oxide Thickness**
+	      <img width="1212" height="489" alt="image" src="https://github.com/user-attachments/assets/5fa8651a-df75-4dfe-9d36-67481455b77e" />
+
+	      - Now we will look into the cross-sectional view of the transistors of the CMOS inverter, it has gate oxide, poly-silicon or metal gate, P-type substrate, n+ diffusion area or source terminal and drain terminal.
+		  - We are talking about oxide thickness variation, we take only a single inverter from the chain of the inverters and see the cross sectional view of it:-
+		   <img width="719" height="365" alt="image" src="https://github.com/user-attachments/assets/3901fc09-83b6-42f8-ade0-832be3ae6409" />
+		  - In ideal case, the gate oxide thickness will be  constant throughout the channel but in real oxidation process the oxide thickness is not constant along the gate length.
+		  <img width="1155" height="592" alt="image" src="https://github.com/user-attachments/assets/1d8bf861-757c-4e6a-ae97-48a57fcf1dba" />
+		  - Similarly, in a circuit containing many transistors, each transistor may exhibit some variation in oxide thickness. The variation is generally smaller for the transistors located in the middle of the layout, while the edge transistors show greater variation because they are more exposed to surrounding structures and process non-uniformities.
+		  <img width="1013" height="468" alt="image" src="https://github.com/user-attachments/assets/6175cee5-6837-45d7-9470-ea0e7626e45f" />
+		  - The drain current directly get impacted due to the variation of oxide thickness.
+              - We know Cox=Eox/tox, therefore change in tox can actually change the drain current.
+
+### Lecture 3:-Smart SPICE simulation for device variations
+
+- Now we will do some SPICE simulation to identify how does the change in drain current effect the CMOS behaviour and prove the robustness of CMOS inverter inspite of different extreme conditions. We will see how the SPICE simulation responses the device variation.
+- We have strong PMOS and weak NMOS, strong PMOS means it is least resistance PMOS, it's size is wider as compared to NMOS. It will follow low resistace path for output capacitor to charge. Weak NMOS means that NMOS resistance is very high, it has least width. Also for weak PMOS and strong PMOS, that means the width of NMOS is more than PMOS and it has least resitance.
+- We will sewwp the width of the NMOS from 0.375u to 1.875u and lower down the width of the PMOS from 1.875u to 0.375u.
+  <img width="1059" height="262" alt="image" src="https://github.com/user-attachments/assets/955a9fd0-2e5b-47a2-a58a-2b5c1d1ea70c" />
+
+- ```*** MODEL Descriptions ***
+*** NETLIST Description ***
+***Nominal transistors***
+
+M1 out in vdd vdd pmos W=0.375u L=0.25u
+M2 out in 0 0 nmos W=0.375u L=0.25u
+
+cload out 0 10f
+
+.control
+let nmoswidth = 0.375u
+alter M2 W = nmoswidth
+
+let pmoswidth = 1.875u
+alter M1 W = pmoswidth
+
+let widthVariation = 0
+dowhile widthVariation < 5
+echo "nmos width is $&nmoswidth"
+echo "pmos width is $&pmoswidth"
+dc Vin 0 2.5 0.01
+let nmoswidth = nmoswidth + 0.375u
+let pmoswidth = pmoswidth - 0.375u
+alter @M2[W] = nmoswidth
+alter @M1[W] = pmoswidth
+let widthVariation = widthVariation + 1
+end
+
+plot dc1.out vs in dc2.out vs in dc3.out vs in dc4.out vs in
+dc5.out vs in xlabel "input voltage [V]" ylabel "output voltage [V]"
+title "Inverter dc characteristics as a function of NMOS width"
+quit
+.endc
+
+Vdd vdd 0 2.5
+Vin in 0 2.5
+
+*** SIMULATION Commands ***
+***.op
+***.dc Vin 0 2.5 0.05
+
+.include tsmc_025um_model.mod
+.LIB "tsmc_025um_model.mod" CMOS_MODELS
+.end
+```
+
+
+- The output curve we get :-
+   <img width="754" height="608" alt="image" src="https://github.com/user-attachments/assets/c0c3f484-fc28-4db8-a1bf-bf42656c5e60" />
+
+
