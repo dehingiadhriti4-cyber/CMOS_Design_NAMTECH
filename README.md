@@ -1,4 +1,4 @@
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/67100ee6-6f37-46d5-8e3e-754d1a9dfbd5" /><img width="1920" height="892" alt="image" src="https://github.com/user-attachments/assets/f8b11e93-e877-4d58-9934-2821218c047e" /># CMOS_DESIGN
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/73d8419f-9f55-46b7-81e4-f7c4e1c4a8d5" /><img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/67100ee6-6f37-46d5-8e3e-754d1a9dfbd5" /><img width="1920" height="892" alt="image" src="https://github.com/user-attachments/assets/f8b11e93-e877-4d58-9934-2821218c047e" /># CMOS_DESIGN
 
 
 # Introduction to Circuit Design and Spice Simulations
@@ -898,3 +898,46 @@ quit
  
 - This is the VTC charactersitics for Vdd= 0.5V, 1V, 1.5V, 2V, 2.5V.
 - Even at 0.5V CMOS is able to operate.
+  
+### L2 Advantages and disadvantages using low supply voltage
+
+- We will analyze the curve we got after the simulation of the CMOS inverter against various supply voltages and we observer that CMOS inveter ia able to operate at low voltage. Now we will see the advantage and disadvantage of this voltage.
+- 1) We start with 1st factor which is **Gain**. Let's try to identify how much gain do we get by operating our CMOS inverter at a voltage of 2.5V VS operating the same CMOS inverter at 0.5V. Gain is defined as the rate of change of the output voltage with respect to the change in the input voltage.
+    - For 2.5V, Gain is 7.38
+       <img width="1084" height="580" alt="image" src="https://github.com/user-attachments/assets/c45ee9a7-aedf-4d4f-b211-e519f2319cf5" />
+    - For 0.5V, Gain is 11.53
+       <img width="1112" height="576" alt="image" src="https://github.com/user-attachments/assets/dd05ccb2-2bb6-4275-9dff-6d9c1e7986bc" />
+
+    - There is very huge increase in the gain, it is about 56% improvement in the gain between the same CMOS inverter just being operated at two different voltage level.
+
+- 2)Let's move to another factor which is **Energy**. If we have this CMOS inverter in our mobile phone, how much energy that CMOS inverter consume. Energy is basically            - E=1/2CV2
+      - where,
+          - C is output load capacitance, that the inverter is trying to get charge or discharge
+          - V is the voltage
+      - Half CV2 is lost in power dissipation and half of the energy being consumed while transferring from logic '1' to logic '0'.
+      - For 2.5V, Energy is = 1/2C(2.5)2
+          <img width="1131" height="580" alt="image" src="https://github.com/user-attachments/assets/560441e0-27d5-48c1-b2f8-e5d52440da9e" />
+      - For 0.5V, Energy is = 1/2C(0.5)2
+          <img width="1138" height="583" alt="image" src="https://github.com/user-attachments/assets/2d210196-eef9-49b4-aa76-2248835024c2" />
+      - There is very significant improvement or reduction in the energy, it is about 96% reduction in the energy.
+ - The advantage of using low voltage 0.5V supply:-
+     - 1) Increase in gain(close to 50% improvement)
+     - 2) Significant reduction in energy(close to 90% improvement)
+- 3) If we calculate the **rise delay** and **fall delay** for CMOS inveter which has supply voltage of 2.5V and 0.5V.
+     - For 2.5V,
+         - Rise delay=66ps
+         - Fall delay=78ps
+       <img width="1112" height="581" alt="image" src="https://github.com/user-attachments/assets/ea11b8c0-7e36-435f-8aed-02f2af1359de" />
+	- For 0.5V,
+       <img width="1128" height="581" alt="image" src="https://github.com/user-attachments/assets/2ee50f53-7183-4655-8ae0-493001db6de2" />
+
+         - The device not even able to charge or completely discharge the load capacitance because for this amount of voltage, the rise time is not sufficient enough to charge the output load capacitance to 0.5V, that impact the performance of our device. So the device might get slow. It need some extra amount of time to perform the same which is operating at 2.5V.
+    - For 1V,
+        - Rise delay=220ps
+        - Fall delay=165ps
+      <img width="1121" height="577" alt="image" src="https://github.com/user-attachments/assets/f7b341cf-4717-41f2-a4f3-96f8b1f83095" />
+
+- The disadvantage of not using CMOS inverter with supply voltage of 0.5V is
+    - 1) Performance impact
+     
+### Lecture 3:-Sky130 Supply variation Labs
