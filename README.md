@@ -92,10 +92,6 @@
 
 
 
-
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/73d8419f-9f55-46b7-81e4-f7c4e1c4a8d5" /><img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/67100ee6-6f37-46d5-8e3e-754d1a9dfbd5" /><img width="1920" height="892" alt="image" src="https://github.com/user-attachments/assets/f8b11e93-e877-4d58-9934-2821218c047e" /># CMOS_DESIGN
-
 ### NgspiceSky130-Day1-Basics of NMOS Drain Current(Id) vs Drain-to-source Voltage(Vds)
 
 #### Introduction to Circuit Design and Spice Simulations
