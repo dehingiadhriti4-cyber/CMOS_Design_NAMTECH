@@ -15,6 +15,84 @@
     - [L1 Resistive region of operation with small drain-source voltage](#l1-resistive-region-of-operation-with-small-drain-source-voltage)
     - [L2 Drift current theory](#l2-drift-current-theory)
     - [L3 Drain current model for Linear region of operation](#l3-drain-current-model-for-linear-region-of-operation)
+    - [L4 SPICE conclusion to resistive operation](#l4-spice-conclusion-to-resistive-operation)
+    - [L5 Pinch-off region condition](#l5-pinch-off-region-condition)
+    - [L6 Drain current model for saturation region of operation](#l6-drain-current-model-for-saturation-region-of-operation)
+
+  - [Introduction to SPICE](#introduction-to-spice)
+    
+    - [L1 Basic SPICE setup](#l1-basic-spice-setup)
+    - [L2 Circuit description in SPICE syntax](#l2-circuit-description-in-spice-syntax)
+    - [L3 Define Technology parameters](#l3-define-technology-parameters)
+    - [L4 First SPICE simulation](#l4-first-spice-simulation)
+    - [L5 SPICE lab with Sky130 models](#l5-spice-lab-with-sky130-models)
+      
+- [NgspiceSky130-Day2-Velocity saturation and basics of CMOS inverter VTC](ngspicesky130-day2-velocity-saturation-and-basics-of-cmos-inverter-vtc)
+  
+  - [SPICE simulation for lower nodes and velocity saturation effect](#spice-simulation-for-lower-nodes-and-velocity-saturation-effect)
+    
+    - [L1 SPICE simulation for lower nodes](#l1-spice-simulation-for-lower-nodes)
+    - [L2 Drain current vs gate voltage for long and short channel device](#l2-drain-current-vs-gate-voltage-for-long-and-short-channel-device)
+    - [L3 Velocity saturation at lower and higher electric fields](#l3-velocity-saturation-at-lower-and-higher-electric-fields)
+    - [L4 Velocity saturation drain current model](#l4-velocity-saturation-drain-current-model)
+    - [L5 Labs Sky130 Id-Vgs](#l5-labs-sky130-id-vgs)
+    - [L6 Labs Sky130 Vt](#l6-labs-sky130-vt)
+      
+  - [CMOS voltage transfer characteristics (VTC)](#cmos-voltage-transfer-characteristics-vtc)
+    
+    - [L1 MOSFET as a switch](#l1-mosfet-as-a-switch)
+    - [L2 Introduction to standard MOS voltage current parameters](#l2-introduction-to-standard-mos-voltage-current-parameters)
+    - [L3 PMOS/NMOS drain current vs drain voltage](#l3-pmosnmos-drain-current-vs-drain-voltage)
+    - [L4 Step1- Convert PMOS gate-source-voltage to Vin](#l4-step1--convert-pmos-gate-source-voltage-to-vin)
+    - [L5 Step2 & Step3- Convert PMOS and NMOS drain-source-voltage to Vout](#l5-step2--step3--convert-pmos-and-nmos-drain-source-voltage-to-vout)
+    - [L6 Step4- Merge PMOS-NMOS load curves and plot VTC](#l6-step4--merge-pmos-nmos-load-curves-and-plot-vtc)
+      
+- [NgspiceSky130-Day3-CMOS switching threshold and dynamic simulations](#ngspicesky130-day3-cmos-switching-threshold-and-dynamic-simulations)
+  
+  - [Voltage transfer characteristics-SPICE simulations](#voltage-transfer-characteristics-spice-simulations)
+    
+    - [L1 SPICE deck creation for CMOS inverter](#l1-spice-deck-creation-for-cmos-inverter)
+    - [L2 SPICE simulation for CMOS inverter](#l2-spice-simulation-for-cmos-inverter)
+    - [L3 Labs Sky130 SPICE simulation for CMOS](#l3-labs-sky130-spice-simulation-for-cmos)
+      
+  - [Static behaviour evaluation-CMOS inverter robustness-Switching Threshold](#static-behaviour-evaluation-cmos-inverter-robustness-switching-threshold)
+    
+    - [L1 Switching Threshold, Vm](#l1-switching-threshold-vm)
+    - [L2 Analytical expression of Vm as a function of (W/L)n and (W/L)p](#l2-analytical-expression-of-vm-as-a-function-of-wln-and-wlp)
+    - [L3 Analytical expression of (W/L)n and (W/L)p as a function of Vm](#l3-analytical-expression-of-wln-and-wlp-as-a-function-of-vm)
+    - [L4 Static and Dynamic simulation of CMOS inverter](#l4-static-and-dynamic-simulation-of-cmos-inverter)
+    - [L5 Static and Dynamic simulation of CMOS inverter with increased PMOS width](#l5-static-and-dynamic-simulation-of-cmos-inverter-with-increased-pmos-width)
+    - [L6 Applications of CMOS inverter in clock network and STA](#l6-applications-of-cmos-inverter-in-clock-network-and-sta)
+      
+- [NgspiceSky130-Day4-CMOS Noise Margin robustness evaluation](#ngspicesky130-day4-cmos-noise-margin-robustness-evaluation)
+  
+  - [Static behaviour evaluation-CMOS inverter robustness-Noise Margin](#static-behaviour-evaluation-cmos-inverter-robustness-noise-margin)
+    
+    - [L1 Introduction to Noise Margin](#l1-introduction-to-noise-margin)
+    - [L2 Noise Margin voltage parameters](#l2-noise-margin-voltage-parameters)
+    - [L3 Noise margin equation and summary](#l3-noise-margin-equation-and-summary)
+    - [L4 Noise margin variation with respect to PMOS width](#l4-noise-margin-variation-with-respect-to-pmos-width)
+    - [L5 Sky130 Noise margin labs](#l5-sky130-noise-margin-labs)
+      
+- [NgspiceSky130-Day5-CMOS power supply and device variation robustness evaluation](#ngspicesky130-day5-cmos-power-supply-and-device-variation-robustness-evaluation)
+  
+  - [Static behaviour evaluation-CMOS inverter robustness-Power supply variation](#static-behaviour-evaluation-cmos-inverter-robustness-power-supply-variation)
+    
+    - [L1 Smart SPICE simulations for power supply variations](#l1-smart-spice-simulations-for-power-supply-variations)
+    - [L2 Advantages and disadvantages using low supply voltage](#l2-advantages-and-disadvantages-using-low-supply-voltage)
+    - [L3 Sky130 Supply variation Labs](#l3-sky130-supply-variation-labs)
+      
+  - [Static behaviour evaluation-CMOS inverter robustness-Device variation](#static-behaviour-evaluation-cmos-inverter-robustness-device-variation)
+    
+    - [L1 Sources of variation - Etching process](#l1-sources-of-variation---etching-process)
+    - [L2 Sources of variation - Oxide thickness](#l2-sources-of-variation---oxide-thickness)
+    - [L3 Smart SPICE simulation for device variations](#l3-smart-spice-simulation-for-device-variations)
+    - [L4 Conclusion](#l4-conclusion)
+    - [L5 Sky130 device variations labs](#l5-sky130-device-variations-labs)
+
+
+
+
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/73d8419f-9f55-46b7-81e4-f7c4e1c4a8d5" /><img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/67100ee6-6f37-46d5-8e3e-754d1a9dfbd5" /><img width="1920" height="892" alt="image" src="https://github.com/user-attachments/assets/f8b11e93-e877-4d58-9934-2821218c047e" /># CMOS_DESIGN
 
@@ -174,7 +252,7 @@ The circuit design process employing SPICE simulations is the source of the dela
  
  - Drift current(Id)= (Velocity of charge carriers x available charge)
    
-### Lecture 3:-Drain current model for linear region of operation
+##### L3 Drain current model for linear region of operation
 
 <img width="409" height="130" alt="image" src="https://github.com/user-attachments/assets/c3d2484d-0d39-43b1-9cef-0918e26b562a" />
 
@@ -197,7 +275,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 - Therefore all values of Vds ≤ (Vgs − Vt), the MOSFET operates in the resistive (linear) region.
 - In this region the channel is  uniform from source to drain and the MOSFET behaves like a **voltage-controlled resistor**.
 
-### Lecture 4:-SPICE conclusion to resistive operation
+##### L4 SPICE conclusion to resistive operation
 
 - To analyse the impact of Vgs and Vds on the drain current(Id), we consider different values of both voltages.
 - For a given VGS, the device remains in the linear (triode) region as long as Vds < (Vgs − Vt).
@@ -206,7 +284,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 - To calculate ID for different values of VGS, at every value of VGS, sweep VDS from 0 till (VGS − Vt).
 - In this region, drain current(Id) follows the linear-region equation, and SPICE simulations can be used to obtain and verify the Id–Vds characteristics for each Vgs.
   
-### Lecture 5:-SPICE conclusion to resistive operation
+##### L5 SPICE conclusion to resistive operation
 
 <img width="1233" height="584" alt="image" src="https://github.com/user-attachments/assets/54f571ed-d057-4b84-b368-376b32fd9124" />
 
@@ -225,7 +303,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 - No channel present at the drain side, as the result of that the area near the drain channel got disappeared, some channel present in the source area, this is referred as saturation region and cannot do anything further.
 - As Vds increases further beyond Vgs-Vth, the pinch-off point moves slightly toward the source.
 
-### Lecture 6:-Drain current model for saturation region of operation
+##### L6 Drain current model for saturation region of operation
 
 - When Vgs-Vds ≤ Vt, the channel disappears at the drain side
 - In the saturation region, the channel voltage is approximately fixed at Vgs-Vt, unlike in the linear region where it changes along the channel as V(x).
@@ -245,9 +323,9 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 - Drain current is slightly increase when Vds is increases
 
-## Introduction to SPICE
+#### Introduction to SPICE
 
-### Lecture 1:-Basic SPICE setup
+##### L1 Basic SPICE setup
 - SPICE is a simulation software that contains predefined device models. To generate output waveforms, the user must provide the appropriate input parameters or a properly defined netlist, which the simulation engine then processes to produce the desired results.
 - The waveforms are eventually used to calculate the delays, characterize cells, and further support analyses such as Static Timing Analysis (STA) and other performance evaluations. These are accurate delays used to STA.
 - First step is to create a correct SPICE setup, feed the model into SPICE engine and evaluate the drain current equation.
@@ -261,7 +339,7 @@ The circuit design process employing SPICE simulations is the source of the dela
   - These values (SPICE model parameters) are provided to the simulation engine through a dedicated file known as a model file. In addition, the user must supply the circuit description in the form of a netlist, which the SPICE engine uses along with the model file to perform the simulation.
   - By performing a DC sweep, we can obtain Id vs Vds curves for different values of Vgs.
  
-  #### SPICE Netlist:-
+  ###### SPICE Netlist:-
 
   - The device must be specified using a particular syntax that is recognized and interpreted by the SPICE simulation engine.
   - A MOSFET is defined by specifying its node connections (Drain, Gate, Source, and Bulk), along with the device dimensions (W/L) and the applied bias sources. The corresponding circuit representation of the MOSFET is then modeled accordingly, and the simulator internally utilizes the provided model parameters to calculate its electrical characteristics and behavior.
@@ -274,7 +352,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 
   - All VSS nodes are connected together and treated as a common reference node. Each component in the circuit is assigned a unique name or identifier. The complete description of these connections and component definitions constitutes the SPICE netlist.
 
-### Lecture 2:-Circuit description in SPICE syntax
+##### L2 Circuit description in SPICE syntax
 
 - The next step is to provide the SPICE netlist to the simulator in the required input format so that the SPICE engine can interpret and execute the simulation correctly.
 - 1) We are giving some parameter value example Vin= 2.5V, R1=55ohms, M1=1.8u/1.2u, Vdd=2.5V, we have to put these in a way that our SPICE engine can understand.
@@ -303,7 +381,7 @@ The circuit design process employing SPICE simulations is the source of the dela
          - n1 → 2nd node
          - 55 → resistor value
          <img width="1100" height="337" alt="image" src="https://github.com/user-attachments/assets/21c65fed-419d-4dba-b45c-60ebe570c334" />
-#### Netlist
+###### Netlist
 ```M1 vdd n1 0 0 nmos W=1.8u L=1.2u  
    R1 in n1 55  
    Vdd vdd 0 2.5
@@ -311,7 +389,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 ```
 <img width="1111" height="346" alt="image" src="https://github.com/user-attachments/assets/4d8e2069-e6cd-4878-9d65-009713d7a49f" />
    
-### Lecture 3:-Define Technology parameters
+##### L3 Define Technology parameters
 
 <img width="519" height="505" alt="image" src="https://github.com/user-attachments/assets/d0252724-ea7d-4cb6-ac25-01bf50a416a3" />
 
@@ -334,7 +412,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 - This is the complete SPICE tag and give a name ```NETLIST Description``` on the top and below is ```.include```
 - We have to add the simulation command(provide the voltage, sweep the Vgs and Vds for SPICE simulations)
 
-### Lecture:-4 First SPICE simulation
+##### L4 First SPICE simulation
 
 - Open Vertual Box
 - Type ```cd`` in comand prompt
@@ -375,15 +453,15 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 <img width="308" height="155" alt="image" src="https://github.com/user-attachments/assets/221a3a0d-e586-45e4-920e-3380a637e8f4" />
 
-### Lecture 5:-SPICE lab with Sky130 models
+##### L5 SPICE lab with Sky130 models
 
 - dddd
 
 
 
-# NgspiceSky130-Day2-Velocity saturation and basics of CMOS inverter VTC
-## SPICE simulation for lower nodes and velocity saturation effect
-### Lecture 1:-SPICE simulation for lower nodes
+### NgspiceSky130-Day2-Velocity saturation and basics of CMOS inverter VTC
+#### SPICE simulation for lower nodes and velocity saturation effect
+##### L1 SPICE simulation for lower nodes
 
 <img width="659" height="518" alt="image" src="https://github.com/user-attachments/assets/52ca2440-442f-46fd-b92d-f875f85d2e71" />
 
@@ -424,7 +502,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 - In the previous case the current value for saturation region is different
 - The difference between two adjacent curve appeared to be constant
 
-  ### Lecture 2:-Drain current vs gate voltage for long and short channel device
+  ##### L2 Drain current vs gate voltage for long and short channel device
 <img width="1248" height="538" alt="image" src="https://github.com/user-attachments/assets/a6ece7e4-b229-4eb5-888e-cdcee4f04586" />
 
 - Let us now compare the results obtained from the two simulations we performed to analyze the differences in device behavior.
@@ -469,7 +547,7 @@ The circuit design process employing SPICE simulations is the source of the dela
        .end
    
 
-### Lecture 3:-Velocity saturation at lower and higher electric fields  
+##### L3 Velocity saturation at lower and higher electric fields  
 <img width="1266" height="600" alt="image" src="https://github.com/user-attachments/assets/bd83447d-3ab6-4a23-a290-73f6cd938181" />
 
 - For short-channel devices, the drain current tends to exhibit a more linear dependence on Vgs as it increases. This behavior arises due to the velocity saturation effect, which limits the carrier velocity at high electric fields and reduces the quadratic nature of the current–voltage relationship.
@@ -486,7 +564,7 @@ The circuit design process employing SPICE simulations is the source of the dela
     - It becomes to complex to handle so we try to simplify the equation
        <img width="886" height="396" alt="image" src="https://github.com/user-attachments/assets/37f0511f-0e75-4c1a-a5b1-a2d561cae2e3" />
 
-### Lecture 4:-Velocity saturation drain current model
+##### L4 Velocity saturation drain current model
  <img width="900" height="514" alt="image" src="https://github.com/user-attachments/assets/8edfd449-d368-4554-a1e3-2ad5376d6eb7" />
 
 -   Let us take Vgs-Vt=Vgt because we will be taking Vgs as large values. Current equation we will be using as shown above, For lower values of Vds the channel length modulation parameter λ can be ignored. 
@@ -511,7 +589,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 - For smaller technology nodes, the saturation current is lower instead of higher. This happens because velocity saturation occurs earlier in short-channel devices. As a result, the device reaches saturation sooner, and the maximum (peak) drain current becomes significantly smaller compared to larger technology nodes.
      
-### Lecture 5:-Labs Sky130 Id-Vgs
+##### L5 Labs Sky130 Id-Vgs
 
 <img width="1920" height="891" alt="Screenshot from 2026-02-22 21-02-52" src="https://github.com/user-attachments/assets/7eee0388-827f-4ac9-800f-d7d5c83dcb14" />
 <img width="1920" height="891" alt="Screenshot from 2026-02-22 21-09-40" src="https://github.com/user-attachments/assets/f30e2dc8-439b-439b-aac6-2dd6d39079f2" />
@@ -539,8 +617,8 @@ The circuit design process employing SPICE simulations is the source of the dela
 - Calculate threshold voltage for Id vs Vgs graph
 - In the graph current starts increasing rapidly with a small change of Vgs value. To plot threshold voltage we have to take the tengent of the slope and extended on the x-axis
 
-## CMOS voltage transfer characteristics (VTC)
-### Lecture 1:-MOSFET as a switch
+#### CMOS voltage transfer characteristics (VTC)
+##### L1 MOSFET as a switch
 - We will now look at the device parameters from the switch point of view.
  <img width="819" height="471" alt="image" src="https://github.com/user-attachments/assets/b8336827-6b0d-4439-8a04-a195ffb90528" />
 
@@ -560,7 +638,7 @@ The circuit design process employing SPICE simulations is the source of the dela
     
 - When Vgs>Vt, NMOS can be replaced by a resistor and we have output load as well when Vin=Vdd
 
-### Lecture 2:Introduction to standard MOS voltage current parameters
+##### L2 Introduction to standard MOS voltage current parameters
 - We are trying to get the equivalent circuit of CMOS when Vin is 'high' and 'low', so that we can get the Voltage Transfer Characteristics (VTC) and therefore calculate the delay of the cell(the cell here is inverter).
   
   <img width="1172" height="700" alt="image" src="https://github.com/user-attachments/assets/a18fd590-26b0-4da3-8337-144f67b73c4a" />
@@ -579,14 +657,14 @@ The circuit design process employing SPICE simulations is the source of the dela
    <img width="1183" height="630" alt="image" src="https://github.com/user-attachments/assets/35b3ecdb-24d9-40e5-b1e2-2183b045f87c" />
     -  Idsp = -Idsn, both are opposite in direction to each other.
 
-### L3 PMOS/NMOS drain current vs drain voltage
+##### L3 PMOS/NMOS drain current vs drain voltage
 - We try to get some equations and tune them to get voltage-current characteristics, voltage transfer characteristics is purely a function of voltage
   <img width="441" height="687" alt="image" src="https://github.com/user-attachments/assets/8e6732f8-7f43-495d-96a8-95f83f95607b" />
 - When we plot the Id VS Vds for both the NMOS and PMOS devices, the characteristic curves look like the ones shown here.
   <img width="825" height="442" alt="image" src="https://github.com/user-attachments/assets/7be81114-098e-4bb6-b64a-d7ff97f83c3b" />
 - On the left, we see how NMOS drain current increases with drain voltage for different gate voltages. At low VDS it behaves like a resistor, and at high VDS it enters saturation where current becomes constant. On the right, PMOS shows similar behavior but with negative voltages and current direction reversed. 
 
-### L4 Step1- Convert PMOS gate-source-voltage to Vin
+##### L4 Step1- Convert PMOS gate-source-voltage to Vin
 
 - We have analyzed several internal node voltages inside the CMOS circuit. However, from a user’s perspective, these internal voltages are not directly visible. The user can only observe the external input voltage 𝑉in and the output voltage 𝑉out.
 - Now we will se the steps to obtain voltage transfer characteristics for static CMOS inverter(Let's assume that it is a long channel device with Vdd=2V)
@@ -600,7 +678,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 	
 	<img width="810" height="382" alt="image" src="https://github.com/user-attachments/assets/0f3c0f3b-2da3-428c-8515-d90677c04d31" />
 ​
-### L5 Step2 & Step3 – Convert PMOS and NMOS drain-source-voltage to vout
+##### L5 Step2 & Step3 – Convert PMOS and NMOS drain-source-voltage to vout
 - Now we have to convert the Vdsp into the function of output voltage​, we know Vdsp = Vout-Vdd
 - Let us convert Vdsp into Vout. So to get Vout there is a shift of Vdd towards left hand side.
   
@@ -622,7 +700,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 - It is just a matter of replacing the names.
   <img width="858" height="378" alt="image" src="https://github.com/user-attachments/assets/a43307db-11af-47ae-b1f3-f0a013f106b3" />
 
-### L6 Step4 – Merge PMOS – NMOS load curves and plot VTC
+##### L6 Step4 – Merge PMOS – NMOS load curves and plot VTC
 
 - Now we will combine the two characteristic curves and use them to obtain the Voltage Transfer Characteristics (VTC) of the CMOS inverter.
 - We will superimpose the load curve of NMOS on the load curve of POMS because Vin and Vout common to PMOS and NMOS so graphically if we want to derive the VTC of CMOS it has to be the intersection point between the PMOS and NMOS load curve.
@@ -641,10 +719,10 @@ The circuit design process employing SPICE simulations is the source of the dela
 | 2 V         | 0 V          | Linear          | Cut-Off         |
 
 
-# NgspiceSky130-Day3-CMOS switching threshold and dynamic simulations
+### NgspiceSky130-Day3-CMOS switching threshold and dynamic simulations
 
-## Voltage transfer characteristics-SPICE simulations
-### Lecture 1:-SPICE deck creation for CMOS inverter
+#### Voltage transfer characteristics-SPICE simulations
+##### L1 SPICE deck creation for CMOS inverter
 - 1) For this, we first need to create a SPICE deck, which contains the connectivity information of the circuit in the form of a netlist. This netlist defines the devices, their parameters, and how they are interconnected in the CMOS inverter configuration.
    <img width="415" height="429" alt="image" src="https://github.com/user-attachments/assets/db819675-42c5-4a02-ad4e-5ad874917431" />
 - 2) The next task is to define the component values,  keeping W/L for both NMOS and PMOS same( i.e. same size of POMS and NMOS)
@@ -664,7 +742,7 @@ The circuit design process employing SPICE simulations is the source of the dela
      
    <img width="1190" height="542" alt="image" src="https://github.com/user-attachments/assets/a59c7418-dba3-44f7-a52e-9f024c544041" />
  
-### Lecture 2:-SPICE simulation for CMOS inverter
+##### L2 SPICE simulation for CMOS inverter
 
    <img width="1186" height="562" alt="image" src="https://github.com/user-attachments/assets/a9958fcb-a612-41aa-8492-0a8dc62fb7da" />
    <img width="1180" height="565" alt="image" src="https://github.com/user-attachments/assets/f17d0f06-2a77-4ef3-a184-8156b90da83a" />
@@ -679,7 +757,7 @@ The circuit design process employing SPICE simulations is the source of the dela
    <img width="753" height="606" alt="image" src="https://github.com/user-attachments/assets/5bf03145-65c9-40fa-ba41-87ab0771cae2" />
 - If we closely look this waveform and previous waveform, we notice that it is slightly shifted toward the left(in previous waveform it is exactly in the middle). This shift occurs because the NMOS transistor is stronger than the PMOS transistor in that configuration.
   
-### Lecture 3:-Labs Sky130 SPICE simulation for CMOS
+##### L3 Labs Sky130 SPICE simulation for CMOS
 - Now we will get the VTC characteristics
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/14545e14-17de-494b-8934-0eece06034eb" />
 - We are using both a PFET and an NFET to implement the CMOS inverter. The W/L ratio of the PMOS is chosen to be 2.33 times larger than that of the NMOS, so that their drive strengths are properly balanced. Now, we will perform a DC sweep of Vin from 0 V to 1.8 V, with a step size of 0.01 V, and observe the corresponding variation in Vout. From this, we can plot the Voltage Transfer Characteristics (VTC) of the CMOS inverter.
@@ -708,9 +786,9 @@ The circuit design process employing SPICE simulations is the source of the dela
   <img width="292" height="109" alt="image" src="https://github.com/user-attachments/assets/f855c68d-49c6-4d7b-bfcc-afabf8386f60" />
       - Fall Delay = 4.334ns-4.050ns = 0.285ns
   
-## Static behaviour evaluation-CMOS inverter robustness-Switching Threshold
+#### Static behaviour evaluation-CMOS inverter robustness-Switching Threshold
 
-### Lecture 1:-Switching Threshold, Vm
+##### L1 Switching Threshold, Vm
 - Now we will compare the two CMOS inverters that have different W/L ratios for the PMOS and NMOS transistors(one is Wn/Ln=Wp/Lp=1.5 and another one is Wn/Ln=1.5,Wp/Lp=3.75). We observe that in both cases, the overall shape of the Voltage Transfer Characteristics (VTC) remains the same. However, the switching threshold voltage shifts depending on the relative strength of the transistors.
   <img width="1148" height="545" alt="image" src="https://github.com/user-attachments/assets/50091d6b-fda6-46cc-b623-51e68e607a6f" />
 
@@ -725,7 +803,7 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
 
        <img width="996" height="446" alt="image" src="https://github.com/user-attachments/assets/9263731d-5222-4a78-87da-08c674af5f14" />
 
-### Lecture 2:-Analytical expression of Vm as a function of (W/L)p and (W/L)n
+##### L2 Analytical expression of Vm as a function of (W/L)p and (W/L)n
 - There are two parts of solving the equation
     - 1)Try to evaluate the value of Vm for given W/L PMOS and NMOS
     - 2)Define the value of Vm then find the value of W/L PMOS and NMOS
@@ -744,7 +822,7 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
                       - Kn'=μn.Cox
                       - Kp'=μp.Cox
 	                      ​
-### Lecture 3:-Analytical expression of (W/L)n and (W/L)p as a function of Vm
+##### L3 Analytical expression of (W/L)n and (W/L)p as a function of Vm
 
 - 2)We will now calculate the value of W/L for PMOS and NMOS when Vm is given.
    - Now, we need to approach the problem in a reverse manner. Instead of choosing the W/L ratios first and then observing the switching threshold, we will start by fixing the desired switching threshold.Since the power supply voltage is Vdd=2.5V, we want the switching threshold Vm to be exactly half of Vdd. Therefore,
@@ -759,7 +837,7 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
        - So now this will allow us to find out for what value of W/L ratio of PMOS will be N times greater than NMOS, we can decide the value od N based on the size of the transistor(Vm value).
  - Now we will analyze the behaviour of CMOS for below difference in W/L ratios of PMOS and NMOS and see where does the switching threshold lies.
    <img width="325" height="256" alt="image" src="https://github.com/user-attachments/assets/7cd5d605-b870-4c9b-b93b-2d91070696a2" />
-### Lecture 4:-Static and dynamic simulation of CMOS inverter
+##### L4 Static and dynamic simulation of CMOS inverter
 - 1) For (W/L)n = (W/L)p = 1.5
      <img width="749" height="605" alt="image" src="https://github.com/user-attachments/assets/2f17b5ca-2d57-42b6-9990-88b15ccd9713" />
       - We can also calculate the "Rise Delay" and "Fall Delay" by using the transient analysis.
@@ -772,7 +850,7 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
 	  - Switching threshold is 0.99V.
 - Similarly we do the same thing for all the set of combination and plot table specifying the value of the switching voltage.
 
-### Lecture 5:-Static and Dynamic simulation of CMOS inverter with increased PMOS width
+##### L5 Static and Dynamic simulation of CMOS inverter with increased PMOS width
 -  2) For (W/L)p = 2(W/L)n
       <img width="755" height="602" alt="image" src="https://github.com/user-attachments/assets/8f662877-63df-40be-b5ac-e22fb3eef273" />
 	  - The curve has shifted toward the right side because the PMOS transistor is stronger than the NMOS transistor in this configuration. Since the PMOS has a larger W/L ratio, it provides higher drive strength.
@@ -791,7 +869,7 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
 	  - The rise delay has significantly reduced
 - Rise delay decreases with increase in PMOS width, this shows the time required to charge the output capacitor decreases significantly this is because we have a bigger area.
 
-### Lecture 6:-Applications of CMOS inverter in clock network and STA
+##### L6 Applications of CMOS inverter in clock network and STA
 - We try to tabulate everything what we got:-
     <img width="702" height="250" alt="image" src="https://github.com/user-attachments/assets/ed6eb011-b9b9-4077-8fd8-20144669a9f0" />
 - From this experiment, we can draw the following conclusions:-
@@ -806,9 +884,9 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
 - SLACK should be either +ve or 0, data arrival time<data required time
 - In a situation when data required time<data arrival time, increase the delay of data arrival time by plug in the right inverter.The theta(θ), combinational delay is much higher, in that case we must use a cell which got lower delay.
 
-# NgspiceSky130-Day4-CMOS Noise Margin robustness evaluation
-## Static behaviour evaluation-CMOS inverter robustness-Noise Margin
-### Lecture 1:-Introduction to noise margin
+### NgspiceSky130-Day4-CMOS Noise Margin robustness evaluation
+#### Static behaviour evaluation-CMOS inverter robustness-Noise Margin
+##### L1 Introduction to noise margin
 - The next step in evaluating the robustness of the CMOS inverter is to determine its noise margin. Every digital device has a certain noise margin, which defines its tolerance to unwanted disturbances.
 - Noise margin is primarily related to issues such as crosstalk noise and transient glitches. It indicates how much noise can be superimposed on the input signal without causing an incorrect logic transition at the output.
 - By varying the CMOS inverter switching threshold, how does the noise margin varies.
@@ -825,7 +903,7 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
   -  2) Similarly, whenever the input voltage is between VIH(Input High Voltage) and Vdd, the output remains at VOL(Output Low Voltage).
 -  This defines the valid logic regions of operation for the CMOS inverter and helps in determining the noise margins.
 
-### Lecture 2:-Noise Margin voltage paramters
+##### L2 Noise Margin voltage paramters
 
 - Now we will comside the more practical scenario and take the non-idealities of a CMOS inverter, the VTC curve deviates from the ideal case. Due to finite gain, parasitic resistances, and capacitances, the output levels are not perfectly equal to 0 and Vdd.
 - In this case:
@@ -843,7 +921,7 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
 - These relationships ensure proper cascading of CMOS inverters and define the noise margin of the circuit.
 - The slope is close to -1,as for increase in input, output is reducing.
   
-### Lecture 3:-margin equation and summary
+##### L3 margin equation and summary
 
 - Now we will calculate the noise margin equation, for that we will plot the voltages on the same scale.
   <img width="683" height="510" alt="image" src="https://github.com/user-attachments/assets/09e512be-294b-478a-b38c-384826066abb" />
@@ -857,7 +935,7 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
   <img width="666" height="354" alt="image" src="https://github.com/user-attachments/assets/abb16190-4fd1-455f-98e1-5cf6ff2c2200" />
   <img width="715" height="444" alt="image" src="https://github.com/user-attachments/assets/9055c109-4d9a-4d53-b501-a45db9184ee5" />
 
-### Lecture 4:-Noise margin variation with respect to PMOS width
+##### L4 Noise margin variation with respect to PMOS width
 
 - We will evaluate the noise margin as a function of the PMOS width and analyze how it influences the inverter characteristics. By varying the PMOS sizing and observing the corresponding changes in the VTC and noise margins, we can demonstrate the robustness of the CMOS inverter.
 - First step is to find out the point on the particular curve where the slope is -1 and we need to extend them towards x-y axis and find the Noise Margin High and Noise Margin Low.
@@ -900,7 +978,7 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
   <img width="693" height="559" alt="image" src="https://github.com/user-attachments/assets/a8e868bf-6ee6-404d-8bc5-1a90a2fc56fd" />
    - This area is use for amplification purpose.
 
-### Lecture 5:-Sky130 Noise margin labs
+##### L5 Sky130 Noise margin labs
 - We will calculate the noise margin in SPICE simulation.
  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/4000e653-b3c5-4a90-a5c0-ab31e0d8217a" />
  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/1f235a1d-7aff-4d32-88ff-4b8ceff152fb" />
@@ -913,9 +991,9 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
    -  Noise margin NH = VOH - VIH = 1.7153-0.98555 = 0.72975
    -  Noise margin NL = VIL - VOL = 0.77-0.1 = 0.67
 
-# NgspiceSky130-Day5-CMOS power supply and device variation robustness evaluation
-## Static behaviour evaluation-CMOS inverter robustness-Power supply variation
-### Lecture 1:-Smart SPICE simulations for power supply variations
+### NgspiceSky130-Day5-CMOS power supply and device variation robustness evaluation
+#### Static behaviour evaluation-CMOS inverter robustness-Power supply variation
+##### L1 Smart SPICE simulations for power supply variations
 
 - While we try to evaluate the inverter robustness of the CMOS we need to conside one more factor which is **Power Supply Scalling**. Whenever we move from 250nm to lower node like 20 nm we scale our supply voltage as well. Reducing the gate length lowers the operating power, and during power scaling, the CMOS characteristics should ideally remain unchanged to maintain proper circuit functionality.
 - Now we will do some SPICE simulation:-
@@ -967,7 +1045,7 @@ quit
 - This is the VTC charactersitics for Vdd= 0.5V, 1V, 1.5V, 2V, 2.5V.
 - Even at 0.5V CMOS is able to operate.
   
-### L2 Advantages and disadvantages using low supply voltage
+##### L2 Advantages and disadvantages using low supply voltage
 
 - We will analyze the curve we got after the simulation of the CMOS inverter against various supply voltages and we observer that CMOS inveter ia able to operate at low voltage. Now we will see the advantage and disadvantage of this voltage.
 - 1) We start with 1st factor which is **Gain**. Let's try to identify how much gain do we get by operating our CMOS inverter at a voltage of 2.5V VS operating the same CMOS inverter at 0.5V. Gain is defined as the rate of change of the output voltage with respect to the change in the input voltage.
@@ -1008,7 +1086,7 @@ quit
 - The disadvantage of not using CMOS inverter with supply voltage of 0.5V is
     - 1) Performance impact
      
-### Lecture 3:-Sky130 Supply variation Labs
+##### L3 Sky130 Supply variation Labs
 
 - Now we calculate the supply variation
   <img width="1920" height="891" alt="Screenshot from 2026-02-24 15-31-36" src="https://github.com/user-attachments/assets/5c253d09-b503-4f57-b000-0f2916645f8f" />
@@ -1029,8 +1107,8 @@ quit
 
         - |Gain|=(1.346-0.061)/(0.770-0.638)=9.73
 
-## Static behaviour evaluation-CMOS inverter robustness-Device variation
-### Lecture 1:-Sources of variation - Etching process
+#### Static behaviour evaluation-CMOS inverter robustness-Device variation
+##### L1 Sources of variation - Etching process
 
 - We will try to identify the sources of variation  of VTC characteristic of CMOS inverter:-
     - 1)**Etching Process**
@@ -1051,7 +1129,7 @@ quit
         <img width="807" height="539" alt="image" src="https://github.com/user-attachments/assets/47bb3740-427b-473a-bf6a-e858af392461" />
 		- Drain current is directly related to W and L, any variation in W and L will directly impact to the drain current
  
-### Lecture 2:-Sources of variation - Oxide thickness
+##### L2 Sources of variation - Oxide thickness
 
     - 2)**Oxide Thickness**
 	      <img width="1212" height="489" alt="image" src="https://github.com/user-attachments/assets/5fa8651a-df75-4dfe-9d36-67481455b77e" />
@@ -1066,7 +1144,7 @@ quit
 		  - The drain current directly get impacted due to the variation of oxide thickness.
               - We know Cox=Eox/tox, therefore change in tox can actually change the drain current.
 
-### Lecture 3:-Smart SPICE simulation for device variations
+##### L3 Smart SPICE simulation for device variations
 
 - Now we will do some SPICE simulation to identify how does the change in drain current effect the CMOS behaviour and prove the robustness of CMOS inverter inspite of different extreme conditions. We will see how the SPICE simulation responses the device variation.
 - We have strong PMOS and weak NMOS, strong PMOS means it is least resistance PMOS, it's size is wider as compared to NMOS. It will follow low resistace path for output capacitor to charge. Weak NMOS means that NMOS resistance is very high, it has least width. Also for weak PMOS and strong PMOS, that means the width of NMOS is more than PMOS and it has least resitance.
@@ -1123,7 +1201,7 @@ Vin in 0 2.5
 - The output curve we get :-
    <img width="754" height="608" alt="image" src="https://github.com/user-attachments/assets/c0c3f484-fc28-4db8-a1bf-bf42656c5e60" />
 
-### Lecture 4:-Conclusion
+##### L4 Conclusion
 
 - Let's conclude our discussion in CMOS inverter robustness, we prove on three different points in this robustness. Fourth one is device variation.
 - 4) **Device variation**
@@ -1142,7 +1220,7 @@ Vin in 0 2.5
               <img width="468" height="166" alt="image" src="https://github.com/user-attachments/assets/6646bc5f-8158-4c4d-b7bd-49c69c3c1c63" />
 
 
-### Lecture 5:-Sky130 device variations labs
+##### L5 Sky130 device variations labs
 - We will now do the SPICE simulations for the device variations
 
     <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/03732a82-112a-40d7-a07b-2006993c85e4" />
