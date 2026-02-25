@@ -26,8 +26,8 @@
     - [L3 Define Technology parameters](#l3-define-technology-parameters)
     - [L4 First SPICE simulation](#l4-first-spice-simulation)
     - [L5 SPICE lab with Sky130 models](#l5-spice-lab-with-sky130-models)
-      
-- [NgspiceSky130-Day2-Velocity saturation and basics of CMOS inverter VTC](ngspicesky130-day2-velocity-saturation-and-basics-of-cmos-inverter-vtc)
+    - 
+- [NgspiceSky130-Day2-Velocity saturation and basics of CMOS inverter VTC](#ngspicesky130-day2-velocity-saturation-and-basics-of-cmos-inverter-vtc)
   
   - [SPICE simulation for lower nodes and velocity saturation effect](#spice-simulation-for-lower-nodes-and-velocity-saturation-effect)
     
@@ -500,6 +500,7 @@
 
 
 ### NgspiceSky130-Day2-Velocity saturation and basics of CMOS inverter VTC
+
 #### SPICE simulation for lower nodes and velocity saturation effect
 ##### L1 SPICE simulation for lower nodes
 
