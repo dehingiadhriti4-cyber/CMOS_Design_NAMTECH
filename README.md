@@ -45,7 +45,7 @@
     - [L3 PMOS/NMOS drain current vs drain voltage](#l3-pmosnmos-drain-current-vs-drain-voltage)
     - [L4 Step1- Convert PMOS gate-source-voltage to Vin](#l4-step1--convert-pmos-gate-source-voltage-to-vin)
     - [L5 Step2 & Step3- Convert PMOS and NMOS drain-source-voltage to Vout](#l5-step2--step3--convert-pmos-and-nmos-drain-source-voltage-to-vout)
-    - [L6 Step4- Merge PMOS-NMOS load curves and plot VTC](#l6-step4--merge-pmos-nmos-load-curves-and-plot-vtc)
+    - [L6 Step4 – Merge PMOS – NMOS load curves and plot VTC](#l6-step4-–-merge-pmos-–-nmos-load-curves-and-plot-vtc)
       
 - [NgspiceSky130-Day3-CMOS switching threshold and dynamic simulations](#ngspicesky130-day3-cmos-switching-threshold-and-dynamic-simulations)
   
@@ -58,7 +58,7 @@
   - [Static behaviour evaluation-CMOS inverter robustness-Switching Threshold](#static-behaviour-evaluation-cmos-inverter-robustness-switching-threshold)
     
     - [L1 Switching Threshold, Vm](#l1-switching-threshold-vm)
-    - [L2 Analytical expression of Vm as a function of (W/L)n and (W/L)p](#l2-analytical-expression-of-vm-as-a-function-of-wln-and-wlp)
+    - [L2 Analytical expression of Vm as a function of (W/L)p and (W/L)n](#l2-analytical-expression-of-vm-as-a-function-of-(w/l)p-and-(w/l)n)
     - [L3 Analytical expression of (W/L)n and (W/L)p as a function of Vm](#l3-analytical-expression-of-wln-and-wlp-as-a-function-of-vm)
     - [L4 Static and Dynamic simulation of CMOS inverter](#l4-static-and-dynamic-simulation-of-cmos-inverter)
     - [L5 Static and Dynamic simulation of CMOS inverter with increased PMOS width](#l5-static-and-dynamic-simulation-of-cmos-inverter-with-increased-pmos-width)
@@ -79,7 +79,7 @@
   - [Static behaviour evaluation-CMOS inverter robustness-Power supply variation](#static-behaviour-evaluation-cmos-inverter-robustness-power-supply-variation)
     
     - [L1 Smart SPICE simulations for power supply variations](#l1-smart-spice-simulations-for-power-supply-variations)
-    - [L2 Advantages and disadvantages using low supply voltage](#l2-advantages-and-disadvantages-using-low-supply-voltage)
+    - [L2 Analytical expression of Vm as a function of (W/L)p and (W/L)n](#l2-analytical-expression-of-vm-as-a-function-of-(w/l)p-and-(w/l)n)
     - [L3 Sky130 Supply variation Labs](#l3-sky130-supply-variation-labs)
       
   - [Static behaviour evaluation-CMOS inverter robustness-Device variation](#static-behaviour-evaluation-cmos-inverter-robustness-device-variation)
@@ -896,22 +896,28 @@
 So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm=1.2V.
 
        <img width="1124" height="603" alt="image" src="https://github.com/user-attachments/assets/dc0b5143-cff7-4abf-a2a8-52901fb303a9" />
+	   
 	   <img width="1133" height="449" alt="image" src="https://github.com/user-attachments/assets/9b8eecb2-632d-4427-968f-5924cae09fe5" />
 
 
-      -  This is the area where PMOS and NMOS both are in saturation region(both are kind of turn ON). Current flows from both the transistor, it is actually a dangerous situation(There is a high possibility of leakage, which increases the chance of current flowing directly from the power supply to ground).
+  -  This is the area where PMOS and NMOS both are in saturation region(both are kind of turn ON). Current flows from both the transistor, it is actually a dangerous situation(There is a high possibility of leakage, which increases the chance of current flowing directly from the power supply to ground).
 
-       <img width="996" height="446" alt="image" src="https://github.com/user-attachments/assets/9263731d-5222-4a78-87da-08c674af5f14" />
+  <img width="996" height="446" alt="image" src="https://github.com/user-attachments/assets/9263731d-5222-4a78-87da-08c674af5f14" />
 
 ##### L2 Analytical expression of Vm as a function of (W/L)p and (W/L)n
+
 - There are two parts of solving the equation
     - 1)Try to evaluate the value of Vm for given W/L PMOS and NMOS
     - 2)Define the value of Vm then find the value of W/L PMOS and NMOS
 - 1) We will now calculate the value of Vm w.r.t the NMOS and PMOS width and length.
+     
      <img width="774" height="287" alt="image" src="https://github.com/user-attachments/assets/68a6871a-ad2e-4b0c-8c42-d938f4b866f3" />
+	 
      <img width="510" height="209" alt="image" src="https://github.com/user-attachments/assets/18ddfa14-baf3-4663-94ab-5ac89dbb2707" />
 - Put the epression of ```Idsn``` and ```Idsp``` in the equation ```Idsn+Idsp=0```
-      <img width="797" height="227" alt="image" src="https://github.com/user-attachments/assets/c26af15a-6703-42bf-b6bc-794d4089cf75" />
+  
+     <img width="797" height="227" alt="image" src="https://github.com/user-attachments/assets/c26af15a-6703-42bf-b6bc-794d4089cf75" />
+	 
      - kn and kp are transconductance parameters.
           - kn=(Wn/Ln)Kn'
           - kp=(Wp/Lp)Kp'
@@ -929,73 +935,116 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
       - Vm=Vdd/2=2.5/2=1.25V
    - Our goal is to determine the appropriate W/L ratios of the PMOS and NMOS transistors such that the inverter switches precisely at 1.25V.
    - We will start from the current equation itself i.e. Idsn = -Idsp
+     
      <img width="437" height="89" alt="image" src="https://github.com/user-attachments/assets/fedbbb9c-27c9-416b-ac7b-e49cabf759a3" />
+	 
 	   - Expanding Kp and Kn (Gain factor)
+       
          <img width="510" height="86" alt="image" src="https://github.com/user-attachments/assets/643b325a-d496-4348-bb66-19af17070cfc" />
+		 
 	     <img width="481" height="94" alt="image" src="https://github.com/user-attachments/assets/09d5689d-1921-433d-93e7-6fb5b7889688" />
 	   - Now here on the RHS all of them are constant except Vm, If we know Vm then we can get the W/L ratios.
+       
        - So now this will allow us to find out for what value of W/L ratio of PMOS will be N times greater than NMOS, we can decide the value od N based on the size of the transistor(Vm value).
  - Now we will analyze the behaviour of CMOS for below difference in W/L ratios of PMOS and NMOS and see where does the switching threshold lies.
+   
    <img width="325" height="256" alt="image" src="https://github.com/user-attachments/assets/7cd5d605-b870-4c9b-b93b-2d91070696a2" />
+   
 ##### L4 Static and dynamic simulation of CMOS inverter
+
 - 1) For (W/L)n = (W/L)p = 1.5
+
+  
      <img width="749" height="605" alt="image" src="https://github.com/user-attachments/assets/2f17b5ca-2d57-42b6-9990-88b15ccd9713" />
+
+	 
       - We can also calculate the "Rise Delay" and "Fall Delay" by using the transient analysis.
+
+  
       <img width="219" height="158" alt="image" src="https://github.com/user-attachments/assets/81ed0696-1226-461c-b805-2244f3fcfe14" />
+
+	  
       <img width="746" height="609" alt="image" src="https://github.com/user-attachments/assets/ecee09c7-2846-41ef-a3eb-5700fa126453" />
+
 
 	  - Rise delay = 1.162ns-1.014ns = 0.148ns
       - Fall delay = 2.076ns-2.004ns = 0.071ns
+
+  
      <img width="1168" height="511" alt="image" src="https://github.com/user-attachments/assets/f70574e5-9107-4d31-84d0-ef904837420b" />
+
+	 
 	  - Switching threshold is 0.99V.
 - Similarly we do the same thing for all the set of combination and plot table specifying the value of the switching voltage.
 
 ##### L5 Static and Dynamic simulation of CMOS inverter with increased PMOS width
+
 -  2) For (W/L)p = 2(W/L)n
+      
       <img width="755" height="602" alt="image" src="https://github.com/user-attachments/assets/8f662877-63df-40be-b5ac-e22fb3eef273" />
+	  
 	  - The curve has shifted toward the right side because the PMOS transistor is stronger than the NMOS transistor in this configuration. Since the PMOS has a larger W/L ratio, it provides higher drive strength.
       - Rise delay = 1.094ns-1.014ns = 0.08ns
       - Fall delay = 2.081ns-2.004ns = 0.076ns
+        
       <img width="1169" height="498" alt="image" src="https://github.com/user-attachments/assets/54eb88e4-8ccf-42e5-9114-11eae1484fce" />
+	  
 	  - We can see that the Vm is now increased as the PMOS has become more stronger and it needs more current to charge the output load capacitor.
 - 3) For (W/L)p = 3(W/L)n
+     
       <img width="1172" height="486" alt="image" src="https://github.com/user-attachments/assets/802808d7-8073-4e2c-af1f-5473daa7557e" />
+	  
 	  - Switching threshold lies exactly at the centre or somewhere near the centre.
 - 4) For (W/L)p = 4(W/L)n
+     
       <img width="1169" height="492" alt="image" src="https://github.com/user-attachments/assets/a0650293-51de-44da-a148-1b599fc10f6d" />
+	  
 	  - Switching threshold moves towards the right, it is about 1.35V.
 - 5) For (W/L)p = 5(W/L)n
+     
       <img width="1173" height="493" alt="image" src="https://github.com/user-attachments/assets/5f0bc8cf-3a9c-4775-80cd-7701e977edd1" />
+	  
 	  - The rise delay has significantly reduced
 - Rise delay decreases with increase in PMOS width, this shows the time required to charge the output capacitor decreases significantly this is because we have a bigger area.
 
 ##### L6 Applications of CMOS inverter in clock network and STA
+
 - We try to tabulate everything what we got:-
+  
     <img width="702" height="250" alt="image" src="https://github.com/user-attachments/assets/ed6eb011-b9b9-4077-8fd8-20144669a9f0" />
+	
 - From this experiment, we can draw the following conclusions:-
    - 1) If we vary the PMOS size w.r.t NMOS by some few numbers, the variation of the switching threshold is very small range. It is due to the robustness of CMOS inverter.
    - 2) When (W/L)p = 2(W/L)n, in this case the rise delay approximately equal to the fall delay, By performing simulation, we can determine the appropriate sizing ratio between PMOS and NMOS such that the rise delay and fall delay become equal. When the rising and falling propagation delays are equal, the CMOS inverter exhibits symmetrical switching behavior. This symmetry indicates that both pull-up and pull-down networks have balanced drive strengths.
 
 - This is a typical characteristic of Clock Inverter/buffer where we want the rise delay and fall delay to be equal.
+  
   <img width="1229" height="688" alt="image" src="https://github.com/user-attachments/assets/f7446eb4-8b60-4c3e-8a4a-bcdb692e3323" />
+  
 - Other types of cells can be used according to the data path requirement.
+  
   <img width="1241" height="676" alt="image" src="https://github.com/user-attachments/assets/f3021af0-2725-4266-8590-733322cfa342" />
 
 - SLACK should be either +ve or 0, data arrival time<data required time
 - In a situation when data required time<data arrival time, increase the delay of data arrival time by plug in the right inverter.The theta(θ), combinational delay is much higher, in that case we must use a cell which got lower delay.
 
 ### NgspiceSky130-Day4-CMOS Noise Margin robustness evaluation
+
 #### Static behaviour evaluation-CMOS inverter robustness-Noise Margin
+
 ##### L1 Introduction to noise margin
+
 - The next step in evaluating the robustness of the CMOS inverter is to determine its noise margin. Every digital device has a certain noise margin, which defines its tolerance to unwanted disturbances.
 - Noise margin is primarily related to issues such as crosstalk noise and transient glitches. It indicates how much noise can be superimposed on the input signal without causing an incorrect logic transition at the output.
 - By varying the CMOS inverter switching threshold, how does the noise margin varies.
+  
   <img width="535" height="498" alt="image" src="https://github.com/user-attachments/assets/327db8db-ea94-43e5-9a33-c8e96fc25ced" />
 
 - For example if we consider an ideal Inverter, for inputs 0/1 it gives output as 1/0. The slope of switch is infinite.
 - At Vdd/2 switch happening (sudden shift of output voltage from logic '1' to logic '0'),slope defines the change in the output voltage w.r.t input voltage.The slope of switch is ideally infinite.
 - However, in practical circuits, this is not possible. Due to the presence of parasitic resistances and capacitances, the inverter exhibits delay during switching.
 - The slope is finite slope, it has some value, putput will be a gradual move.
+  
   <img width="360" height="335" alt="image" src="https://github.com/user-attachments/assets/73c16c08-bd0b-4303-931b-4efdd1f10e49" />
 
 - Now, we observe the following behavior from the VTC curve:
@@ -1016,6 +1065,7 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
            -  because VOH must be recognized as a valid logic high by the next inverter stage.
         -  0<VOL<VIL
            -   because VOL must be safely interpreted as a logic low by the next stage.
+             
    <img width="352" height="340" alt="image" src="https://github.com/user-attachments/assets/625c0a1d-e12a-4348-89f2-66400b4330e9" />
 
 - These relationships ensure proper cascading of CMOS inverters and define the noise margin of the circuit.
@@ -1024,6 +1074,7 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
 ##### L3 margin equation and summary
 
 - Now we will calculate the noise margin equation, for that we will plot the voltages on the same scale.
+  
   <img width="683" height="510" alt="image" src="https://github.com/user-attachments/assets/09e512be-294b-478a-b38c-384826066abb" />
 
 - In the above scale:-
@@ -1032,7 +1083,9 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
    - 2)Noise Margin Low(NML) - value between VIL and VOL.
        -  It says that any voltage level whether it is in input or output side will be detected as logic'0'
 - If the induced noise remains within these allowable ranges, it will not affect the circuit operation. This is because the signal will still be correctly interpreted as  logic ‘1’ or logic ‘0’.Such noise levels fall within the noise margin and, therefore, do not cause any logic error. This type of noise can be safely tolerated and effectively rejected by the CMOS inverter. Apart from this region the value is "Undefined" and the logic level can swing between 'high' and 'low'.
+  
   <img width="666" height="354" alt="image" src="https://github.com/user-attachments/assets/abb16190-4fd1-455f-98e1-5cf6ff2c2200" />
+  
   <img width="715" height="444" alt="image" src="https://github.com/user-attachments/assets/9055c109-4d9a-4d53-b501-a45db9184ee5" />
 
 ##### L4 Noise margin variation with respect to PMOS width
@@ -1040,29 +1093,34 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
 - We will evaluate the noise margin as a function of the PMOS width and analyze how it influences the inverter characteristics. By varying the PMOS sizing and observing the corresponding changes in the VTC and noise margins, we can demonstrate the robustness of the CMOS inverter.
 - First step is to find out the point on the particular curve where the slope is -1 and we need to extend them towards x-y axis and find the Noise Margin High and Noise Margin Low.
    - 1)For (W/L)p = (W/L)n
+     
      <img width="1185" height="527" alt="image" src="https://github.com/user-attachments/assets/cfef7365-c7d5-47ed-b57c-9122326d6a5d" />
 
         - NMH=0.3V
         - NML=0.3V
         - It's able gto sustain the noise which are lying on the spacific ranges.
     - 2)For (W/L)p = 2(W/L)n
+      
       <img width="1162" height="534" alt="image" src="https://github.com/user-attachments/assets/a71cc0c3-bfe3-4e26-bb2c-7ddb675a0be8" />
 
         - Noise Margin High is increased by 0.05, NMH=0.35V
         - NML=0.3V
         - The larger the Noise margin, stronger is CMOS inverter and immune to Noises.
     - 3)For (W/L)p = 3(W/L)n
+      
       <img width="1175" height="514" alt="image" src="https://github.com/user-attachments/assets/77244b67-c8d1-471d-aa1a-ddff0bde27cb" />
 
         - NMH=0.4V(increase more)
         - NML=0.3V
         - PMOS is resoinsible for holding logic '1' on the output capacitor and NMOS is responsible for holding logic '0' on the output capacitor
      - 4)For (W/L)p = 4(W/L)n
+       
        <img width="1169" height="523" alt="image" src="https://github.com/user-attachments/assets/df1b1cc7-3f08-44f7-aa62-a973e3bea675" />
 	    - NMH=0.42V
         - NML=0.27V
         - Dorp in the NML because NMOS becomes weaker as compared to the PMOS, the ability for the noise margin for NMOS to hold the logic '0' has deminished.
      - 5)For (W/L)p = 5(W/L)n
+       
        <img width="1164" height="527" alt="image" src="https://github.com/user-attachments/assets/fd5fdd2f-6e71-4403-a2f3-47963047b1c9" />
 
         - NMH=0.42V
@@ -1070,34 +1128,52 @@ So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm
         - The noise margin high almost comes to static value,so even if we increase the widths further noise margin will be static.
 
 - Now we will try to bring everything in tabular format:-
+  
   <img width="700" height="249" alt="image" src="https://github.com/user-attachments/assets/3f16ec3d-0780-48dc-9ab0-eb611efb4522" />
 
 - Also we come to know the ranges for **Digital desig** and **Analog design** in the CMOS inverter.
+  
   <img width="683" height="537" alt="image" src="https://github.com/user-attachments/assets/899702e3-2311-44bb-b914-57606ddab243" />
+  
    - This area is use for switching purpose.
+     
   <img width="693" height="559" alt="image" src="https://github.com/user-attachments/assets/a8e868bf-6ee6-404d-8bc5-1a90a2fc56fd" />
+  
    - This area is use for amplification purpose.
 
 ##### L5 Sky130 Noise margin labs
+
 - We will calculate the noise margin in SPICE simulation.
+  
  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/4000e653-b3c5-4a90-a5c0-ab31e0d8217a" />
+ 
  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/1f235a1d-7aff-4d32-88ff-4b8ceff152fb" />
+ 
 - We have set the PMOS to NMOS W/L ratio as 2.77 and are sweeping the input voltage from 0 V to 1.8 V with a step size of 0.01 V to obtain the VTC of the CMOS inverter.
+  
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/413edc5a-e3c2-458b-8c96-3fcf137646cd" />
+  
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/ccf003de-6d1c-4e59-92ec-17911b9e4e7d" />
+  
 - To plot the noise margin we have to consider the slope where it will be -1, x axis will give VIL and VIH, whereas y axis will give VOH and VOL.
+  
   <img width="236" height="63" alt="image" src="https://github.com/user-attachments/assets/880d1968-7cd6-46e7-a4ff-1d7b6bf63fdd" />
+  
 -The noice magin :-
    -  Noise margin NH = VOH - VIH = 1.7153-0.98555 = 0.72975
    -  Noise margin NL = VIL - VOL = 0.77-0.1 = 0.67
 
 ### NgspiceSky130-Day5-CMOS power supply and device variation robustness evaluation
+
 #### Static behaviour evaluation-CMOS inverter robustness-Power supply variation
+
 ##### L1 Smart SPICE simulations for power supply variations
 
 - While we try to evaluate the inverter robustness of the CMOS we need to conside one more factor which is **Power Supply Scalling**. Whenever we move from 250nm to lower node like 20 nm we scale our supply voltage as well. Reducing the gate length lowers the operating power, and during power scaling, the CMOS characteristics should ideally remain unchanged to maintain proper circuit functionality.
 - Now we will do some SPICE simulation:-
+  
   <img width="1064" height="254" alt="image" src="https://github.com/user-attachments/assets/e99f9f9f-33f1-4d2a-90a7-2b447060e010" />
+  
    - We sweep the voltage from 2.5V to 1V by keeping the same width Wp=0.9375u and Wn=0.375u.
    - The goal is that the CMOS inveter behaviour should not be change.That eventually the CMOS robustness.
 ```*** MODEL Descriptions ***
@@ -1145,13 +1221,16 @@ quit
 - This is the VTC charactersitics for Vdd= 0.5V, 1V, 1.5V, 2V, 2.5V.
 - Even at 0.5V CMOS is able to operate.
   
-##### L2 Advantages and disadvantages using low supply voltage
+##### L2 Analytical expression of Vm as a function of (W/L)p and (W/L)n 
 
 - We will analyze the curve we got after the simulation of the CMOS inverter against various supply voltages and we observer that CMOS inveter ia able to operate at low voltage. Now we will see the advantage and disadvantage of this voltage.
 - 1) We start with 1st factor which is **Gain**. Let's try to identify how much gain do we get by operating our CMOS inverter at a voltage of 2.5V VS operating the same CMOS inverter at 0.5V. Gain is defined as the rate of change of the output voltage with respect to the change in the input voltage.
     - For 2.5V, Gain is 7.38
+      
        <img width="1084" height="580" alt="image" src="https://github.com/user-attachments/assets/c45ee9a7-aedf-4d4f-b211-e519f2319cf5" />
+	   
     - For 0.5V, Gain is 11.53
+      
        <img width="1112" height="576" alt="image" src="https://github.com/user-attachments/assets/dd05ccb2-2bb6-4275-9dff-6d9c1e7986bc" />
 
     - There is very huge increase in the gain, it is about 56% improvement in the gain between the same CMOS inverter just being operated at two different voltage level.
@@ -1162,9 +1241,13 @@ quit
           - V is the voltage
       - Half CV2 is lost in power dissipation and half of the energy being consumed while transferring from logic '1' to logic '0'.
       - For 2.5V, Energy is = 1/2C(2.5)2
-          <img width="1131" height="580" alt="image" src="https://github.com/user-attachments/assets/560441e0-27d5-48c1-b2f8-e5d52440da9e" />
+  
+   <img width="1131" height="580" alt="image" src="https://github.com/user-attachments/assets/560441e0-27d5-48c1-b2f8-e5d52440da9e" />
+   
       - For 0.5V, Energy is = 1/2C(0.5)2
-          <img width="1138" height="583" alt="image" src="https://github.com/user-attachments/assets/2d210196-eef9-49b4-aa76-2248835024c2" />
+  
+   <img width="1138" height="583" alt="image" src="https://github.com/user-attachments/assets/2d210196-eef9-49b4-aa76-2248835024c2" />
+   
       - There is very significant improvement or reduction in the energy, it is about 96% reduction in the energy.
  - The advantage of using low voltage 0.5V supply:-
      - 1) Increase in gain(close to 50% improvement)
@@ -1173,14 +1256,18 @@ quit
      - For 2.5V,
          - Rise delay=66ps
          - Fall delay=78ps
+           
        <img width="1112" height="581" alt="image" src="https://github.com/user-attachments/assets/ea11b8c0-7e36-435f-8aed-02f2af1359de" />
+	   
 	- For 0.5V,
+   
        <img width="1128" height="581" alt="image" src="https://github.com/user-attachments/assets/2ee50f53-7183-4655-8ae0-493001db6de2" />
 
          - The device not even able to charge or completely discharge the load capacitance because for this amount of voltage, the rise time is not sufficient enough to charge the output load capacitance to 0.5V, that impact the performance of our device. So the device might get slow. It need some extra amount of time to perform the same which is operating at 2.5V.
     - For 1V,
         - Rise delay=220ps
         - Fall delay=165ps
+          
       <img width="1121" height="577" alt="image" src="https://github.com/user-attachments/assets/f7b341cf-4717-41f2-a4f3-96f8b1f83095" />
 
 - The disadvantage of not using CMOS inverter with supply voltage of 0.5V is
@@ -1189,69 +1276,96 @@ quit
 ##### L3 Sky130 Supply variation Labs
 
 - Now we calculate the supply variation
+  
   <img width="1920" height="891" alt="Screenshot from 2026-02-24 15-31-36" src="https://github.com/user-attachments/assets/5c253d09-b503-4f57-b000-0f2916645f8f" />
 
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/d26adc95-d913-49d6-9d7b-39ece28ea455" />
 
 - we will
+  
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/62260f86-63e6-487e-9e98-2d403e8ec5ff" />
+  
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/b9f796e6-069d-480b-b5ae-99c4b679d089" />
+  
 - Now we will calculate the gain:-
    - For Vdd=1.8V,
+     
       <img width="289" height="65" alt="image" src="https://github.com/user-attachments/assets/882cd18d-49b1-4d25-8e4f-6d0af9753890" />
 
         - |Gain|=(1.7-0.115)/(0.976-0.777)=7.53
 
    - For Vdd=0.8V,
+     
       <img width="289" height="65" alt="image" src="https://github.com/user-attachments/assets/f407bd36-d164-4e88-8b77-69e00cd2df5f" />
 
         - |Gain|=(1.346-0.061)/(0.770-0.638)=9.73
 
 #### Static behaviour evaluation-CMOS inverter robustness-Device variation
+
 ##### L1 Sources of variation - Etching process
 
 - We will try to identify the sources of variation  of VTC characteristic of CMOS inverter:-
     - 1)**Etching Process**
          - It is basically a fabrication step and it define the width ond height of the structure. It is very important step and based on the structure that get define by this process is directly impact the delay.
     - Now we will see how the etching process can effect the behaviour of a single inverter:-
+      
      <img width="1098" height="517" alt="image" src="https://github.com/user-attachments/assets/e113c442-554a-41e3-ada3-26282928a859" />
+	 
     - If we try to look into the layout, it has P diffusion region of some width and height,N diffusion, poly-silicon area, input and output with contacts.
     - Now we look into chain of inverter.
+      
       <img width="1229" height="630" alt="image" src="https://github.com/user-attachments/assets/6b806d27-eef6-490b-9ff7-d0c4e693b283" />
+	  
 	- There could be flip-flop setting in input and output, as it could be part of data path or clock path.
     - Now we look fabrication of only of them how it looks:-
+      
       <img width="896" height="630" alt="image" src="https://github.com/user-attachments/assets/a60120cd-dff2-4d3d-ae55-f7b88c80bcd5" />
+	  
 	  - The L and W shape will be destorted in actual mask senario,the variation is more at the edges or sides than at the center. So the area will be different.
       - This variation is occur in all of the inverter because they are connected back to back.
+        
         <img width="1228" height="654" alt="image" src="https://github.com/user-attachments/assets/4f7f40de-1c30-40c5-9b06-670e436bad74" />
+		
 	  - It is possible that the structure of the middle inverter and edge inverter will be different because the edge inveters are connected with some flip-fliops.
     - Now we will look into how does the W and L will effect:-
+      
         <img width="807" height="539" alt="image" src="https://github.com/user-attachments/assets/47bb3740-427b-473a-bf6a-e858af392461" />
-		- Drain current is directly related to W and L, any variation in W and L will directly impact to the drain current
+		
+		- Drain current is directly related to W and L, any variation in W and L will directly impact to the drain current.
  
 ##### L2 Sources of variation - Oxide thickness
 
-    - 2)**Oxide Thickness**
-	      <img width="1212" height="489" alt="image" src="https://github.com/user-attachments/assets/5fa8651a-df75-4dfe-9d36-67481455b77e" />
+- 2) **Oxide Thickness**
 
-	      - Now we will look into the cross-sectional view of the transistors of the CMOS inverter, it has gate oxide, poly-silicon or metal gate, P-type substrate, n+ diffusion area or source terminal and drain terminal.
-		  - We are talking about oxide thickness variation, we take only a single inverter from the chain of the inverters and see the cross sectional view of it:-
-		   <img width="719" height="365" alt="image" src="https://github.com/user-attachments/assets/3901fc09-83b6-42f8-ade0-832be3ae6409" />
-		  - In ideal case, the gate oxide thickness will be  constant throughout the channel but in real oxidation process the oxide thickness is not constant along the gate length.
-		  <img width="1155" height="592" alt="image" src="https://github.com/user-attachments/assets/1d8bf861-757c-4e6a-ae97-48a57fcf1dba" />
-		  - Similarly, in a circuit containing many transistors, each transistor may exhibit some variation in oxide thickness. The variation is generally smaller for the transistors located in the middle of the layout, while the edge transistors show greater variation because they are more exposed to surrounding structures and process non-uniformities.
-		  <img width="1013" height="468" alt="image" src="https://github.com/user-attachments/assets/6175cee5-6837-45d7-9470-ea0e7626e45f" />
-		  - The drain current directly get impacted due to the variation of oxide thickness.
-              - We know Cox=Eox/tox, therefore change in tox can actually change the drain current.
+	
+ <img width="1212" height="489" alt="image" src="https://github.com/user-attachments/assets/5fa8651a-df75-4dfe-9d36-67481455b77e" />
+
+   - Now we will look into the cross-sectional view of the transistors of the CMOS inverter, it has gate oxide, poly-silicon or metal gate, P-type substrate, n+ diffusion area or source terminal and drain terminal.
+	- We are talking about oxide thickness variation, we take only a single inverter from the chain of the inverters and see the cross sectional view of it:-
+		  
+ <img width="719" height="365" alt="image" src="https://github.com/user-attachments/assets/3901fc09-83b6-42f8-ade0-832be3ae6409" />
+ 
+  - In ideal case, the gate oxide thickness will be  constant throughout the channel but in real oxidation process the oxide thickness is not constant along the gate length.
+		  
+ <img width="1155" height="592" alt="image" src="https://github.com/user-attachments/assets/1d8bf861-757c-4e6a-ae97-48a57fcf1dba" />
+ 
+  - Similarly, in a circuit containing many transistors, each transistor may exhibit some variation in oxide thickness. The variation is generally smaller for the transistors located in the middle of the layout, while the edge transistors show greater variation because they are more exposed to surrounding structures and process non-uniformities.
+		
+ <img width="1013" height="468" alt="image" src="https://github.com/user-attachments/assets/6175cee5-6837-45d7-9470-ea0e7626e45f" />
+ 
+  - The drain current directly get impacted due to the variation of oxide thickness.
+     - We know Cox=Eox/tox, therefore change in tox can actually change the drain current.
 
 ##### L3 Smart SPICE simulation for device variations
 
 - Now we will do some SPICE simulation to identify how does the change in drain current effect the CMOS behaviour and prove the robustness of CMOS inverter inspite of different extreme conditions. We will see how the SPICE simulation responses the device variation.
 - We have strong PMOS and weak NMOS, strong PMOS means it is least resistance PMOS, it's size is wider as compared to NMOS. It will follow low resistace path for output capacitor to charge. Weak NMOS means that NMOS resistance is very high, it has least width. Also for weak PMOS and strong PMOS, that means the width of NMOS is more than PMOS and it has least resitance.
-- We will sewwp the width of the NMOS from 0.375u to 1.875u and lower down the width of the PMOS from 1.875u to 0.375u.
+- We will sweep the width of the NMOS from 0.375u to 1.875u and lower down the width of the PMOS from 1.875u to 0.375u.
+  
   <img width="1059" height="262" alt="image" src="https://github.com/user-attachments/assets/955a9fd0-2e5b-47a2-a58a-2b5c1d1ea70c" />
 
-- ```*** MODEL Descriptions ***
+```
+*** MODEL Descriptions ***
 *** NETLIST Description ***
 ***Nominal transistors***
 
@@ -1297,8 +1411,9 @@ Vin in 0 2.5
 .end
 ```
 
-
 - The output curve we get :-
+
+
    <img width="754" height="608" alt="image" src="https://github.com/user-attachments/assets/c0c3f484-fc28-4db8-a1bf-bf42656c5e60" />
 
 ##### L4 Conclusion
@@ -1309,15 +1424,21 @@ Vin in 0 2.5
        - In this case we are looking for two parameters:-
            - i)Switching Threshold
            - ii)Noise Margin
-       - i)Switching Threshold:- 
-            <img width="861" height="530" alt="image" src="https://github.com/user-attachments/assets/ebbcf3d0-93e1-4ce7-a102-8563871cd826" />
-             - The Switching threshold 'Vm' is shifted right in case of strong PMOS and shifted left in case of Strong NMOS.
-             - Shift is minimal compared to the supply voltage.
-       - ii)Noise Margin:-
-             <img width="891" height="529" alt="image" src="https://github.com/user-attachments/assets/26d020f0-9e7e-4e42-b619-5a5ca9ab4d8a" />
-             - THere not much variation in NOise Margins in both the extreme cases, that means it behaves as a robust inverter in both the cases.
-             - It is easy to filter out those particular noise so it behaves as an inverter.
-              <img width="468" height="166" alt="image" src="https://github.com/user-attachments/assets/6646bc5f-8158-4c4d-b7bd-49c69c3c1c63" />
+       - i)Switching Threshold:-
+
+<img width="861" height="530" alt="image" src="https://github.com/user-attachments/assets/ebbcf3d0-93e1-4ce7-a102-8563871cd826" />
+
+ - The Switching threshold 'Vm' is shifted right in case of strong PMOS and shifted left in case of Strong NMOS.
+ - Shift is minimal compared to the supply voltage.
+     
+   - ii)Noise Margin:-
+
+<img width="891" height="529" alt="image" src="https://github.com/user-attachments/assets/26d020f0-9e7e-4e42-b619-5a5ca9ab4d8a" />
+
+ - THere not much variation in NOise Margins in both the extreme cases, that means it behaves as a robust inverter in both the cases.
+ - It is easy to filter out those particular noise so it behaves as an inverter.
+
+<img width="468" height="166" alt="image" src="https://github.com/user-attachments/assets/6646bc5f-8158-4c4d-b7bd-49c69c3c1c63" />
 
 
 ##### L5 Sky130 device variations labs
