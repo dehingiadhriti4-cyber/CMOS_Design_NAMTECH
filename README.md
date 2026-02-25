@@ -16,7 +16,7 @@
     - [L2 Drift current theory](#l2-drift-current-theory)
     - [L3 Drain current model for Linear region of operation](#l3-drain-current-model-for-linear-region-of-operation)
     - [L4 SPICE conclusion to resistive operation](#l4-spice-conclusion-to-resistive-operation)
-    - [L5 SPICE conclusion to resistive operation](#l5-spice-conclusion-to-resistive-operation)
+    - [L5 Pinch-off region condition](#l5-Pinch-off-region-condition)
     - [L6 Drain current model for saturation region of operation](#l6-drain-current-model-for-saturation-region-of-operation)
 
   - [Introduction to SPICE](#introduction-to-spice)
@@ -300,7 +300,7 @@
 - To calculate ID for different values of VGS, at every value of VGS, sweep VDS from 0 till (VGS − Vt).
 - In this region, drain current(Id) follows the linear-region equation, and SPICE simulations can be used to obtain and verify the Id–Vds characteristics for each Vgs.
   
-##### L5 SPICE conclusion to resistive operation
+##### L5 Pinch-off region condition
 
 <img width="1233" height="584" alt="image" src="https://github.com/user-attachments/assets/54f571ed-d057-4b84-b368-376b32fd9124" />
 
