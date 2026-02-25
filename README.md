@@ -45,7 +45,7 @@
     - [L3 PMOS/NMOS drain current vs drain voltage](#l3-pmosnmos-drain-current-vs-drain-voltage)
     - [L4 Step1- Convert PMOS gate-source-voltage to Vin](#l4-step1--convert-pmos-gate-source-voltage-to-vin)
     - [L5 Step2 & Step3- Convert PMOS and NMOS drain-source-voltage to Vout](#l5-step2--step3--convert-pmos-and-nmos-drain-source-voltage-to-vout)
-    - [L6 Step4 – Merge PMOS – NMOS load curves and plot VTC](#l6-step4-–-merge-pmos-–-nmos-load-curves-and-plot-vtc)
+    - [L6 Step4 – Merge PMOS – NMOS load curves and plot VTC](#l6-step4-merge-pmos-nmos-load-curves-and-plot-vtc)
       
 - [NgspiceSky130-Day3-CMOS switching threshold and dynamic simulations](#ngspicesky130-day3-cmos-switching-threshold-and-dynamic-simulations)
   
