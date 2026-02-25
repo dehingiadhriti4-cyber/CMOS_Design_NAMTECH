@@ -16,7 +16,7 @@
     - [L2 Drift current theory](#l2-drift-current-theory)
     - [L3 Drain current model for Linear region of operation](#l3-drain-current-model-for-linear-region-of-operation)
     - [L4 SPICE conclusion to resistive operation](#l4-spice-conclusion-to-resistive-operation)
-    - [L5 Pinch-off region condition](#l5-pinch-off-region-condition)
+    - [L5 SPICE conclusion to resistive operation](#l5-spice-conclusion-to-resistive-operation)
     - [L6 Drain current model for saturation region of operation](#l6-drain-current-model-for-saturation-region-of-operation)
 
   - [Introduction to SPICE](#introduction-to-spice)
@@ -104,13 +104,13 @@
 - All the logic gates such as NAND, NOR, OR, AND etc are implemented at the transistor level using combinations of PMOS (p-channel MOSFET) and NMOS (n-channel MOSFET) devices arranged in specific configurations. They perform their required functionality of that particular respective gate. Example- Inverter.
 <img width="495" height="378" alt="image" src="https://github.com/user-attachments/assets/93ef85d4-0137-4bb4-8929-32b889fe4741" />
 
-This circuit is fed with some wavefrom to identify the output response, the characteristic curve of this circuit decide the delay and based on that delay we will get the W/L ratio of the particular transistor using SPICE simulation.
+- This circuit is fed with some wavefrom to identify the output response, the characteristic curve of this circuit decide the delay and based on that delay we will get the W/L ratio of the particular transistor using SPICE simulation.
 <img width="890" height="698" alt="image" src="https://github.com/user-attachments/assets/39991449-4568-4f5f-b87c-84bf0f80ccde" />
 
 ###### WHy do we need SPICE?
--The physical design flow, clock tree synthesis, crosstalks, and timing are built on SPICE (Simulation Program with Integrated Circuit Emphasis),it allows designers to analyze, verify, and optimize a circuit’s performance using delay tables before physical fabrication.
+- The physical design flow, clock tree synthesis, crosstalks, and timing are built on SPICE (Simulation Program with Integrated Circuit Emphasis),it allows designers to analyze, verify, and optimize a circuit’s performance using delay tables before physical fabrication.
 
--Assume that the given circuit has undergone Clock Tree Synthesis (CTS), where multiple clock buffers have been inserted throughout the design. These buffers are sized appropriately to drive varying capacitive loads at different output nodes, ensuring balanced clock distribution and controlled skew across the network.
+- Assume that the given circuit has undergone Clock Tree Synthesis (CTS), where multiple clock buffers have been inserted throughout the design. These buffers are sized appropriately to drive varying capacitive loads at different output nodes, ensuring balanced clock distribution and controlled skew across the network.
 <img width="1077" height="389" alt="image" src="https://github.com/user-attachments/assets/a8d2b6e3-a367-4466-bb4b-ab6639f3ec2f" />
 
 - We receive a "Delay Table" with input slew and output load following the SPICE simulation. 
@@ -118,21 +118,35 @@ This circuit is fed with some wavefrom to identify the output response, the char
 - There are delay tables displayed for both level 1 and level 2 buffers. This is calculated by circuit design and simulation.
 <img width="1223" height="669" alt="image" src="https://github.com/user-attachments/assets/68c95e15-e176-41d7-9fcf-7fad4f53abed" />
 
-The circuit design process employing SPICE simulations is the source of the delay tables seen above. Characterization of any CMOS logic is part of SPICE simulations.
-- Due to lower drive and higher drive of 
+- The circuit design process employing SPICE simulations is the source of the delay tables seen above. Characterization of any CMOS logic is part of SPICE simulations.
+  <img width="2141" height="518" alt="image" src="https://github.com/user-attachments/assets/10e93f86-3345-4cd4-92b5-e4036c5d772f" />
+   - To determine the cell delay, select the row corresponding to the given input slew and the column corresponding to the output load capacitance. The value at their intersection represents the propagation delay of the cell.
+   - If the exact input slew or load capacitance is not available in the table, interpolation between the nearest values can be used to estimate the delay accurately.
+   - Each delay table corresponds to a specific Wn/Wp ratio, so differences between tables indicate how transistor sizing affects the propagation delay.
+   - SPICE simulations are used to accurately characterize the NMOS and PMOS transistors, allowing precise modeling and optimization of the delay characteristics.
 
 ##### L2 Introduction to basic element in circuit design-NMOS
 -An NMOS transistor is a four-terminal device built on lightly doped p-type substrate, with two heavily doped n-type regions which are source and drain . The isolation region isolate the transistor from other transistor,There is a thin gate oxide layer of Silicon Dioxide separates gate from semiconductor and prevents direct current flow and above it metal or Polysilicon is deposited which is the gate terminal.
+| Component Part | Symbol | Function in Circuit           | Practical Note                     |
+| -------------- | ------ | ----------------------------- | ---------------------------------- |
+| Gate           | G      | Controls ON/OFF state         | High input impedance               |
+| Drain          | D      | Output terminal               | Current flows from Drain to Source |
+| Source         | S      | Reference/Input terminal      | Usually connected to Ground        |
+| Body (Bulk)    | B      | Substrate terminal            | Often tied to Source               |
+| Channel        | —      | Conducting path between D & S | Formed when VGS > VTH              |
+| Oxide Layer    | SiO₂   | Insulates Gate from channel   | Prevents gate current              |
+| Substrate      | P-type | Base material                 | Forms inversion layer              |
+
 <img width="1094" height="472" alt="image" src="https://github.com/user-attachments/assets/8496d382-0ad1-4808-85e7-7c59f506080c" />
 
   **Threshold Voltage (Vt)**
 - Threshold voltage is the minimum gate-to-source voltage required to create a conducting channel in an NMOS transistor. It determines when the device turns ON and controls current flow, switching speed, and power consumption.
   
   **Threshold Voltage Modelling**
-- Let Vgs=0
-- Drain, Source and Body is connected to GND
-- Substrate-Source(B-S) and Substrate-Drain(B-D) form p-n junction diodes
-- Both junctions are OFF, no conduction path between source and drain hence Source-Drain resistance is High
+   - Let Vgs=0
+   - Drain, Source and Body is connected to GND.
+   - Substrate-Source(B-S) and Substrate-Drain(B-D) form p-n junction diodes.
+   - Both junctions are OFF, no conduction path between source and drain hence Source-Drain resistance is High.
   
 <img width="1185" height="425" alt="image" src="https://github.com/user-attachments/assets/d0643f77-6f5f-4c70-be2a-90ab2f123416" />
 
@@ -140,70 +154,72 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 <img width="763" height="445" alt="image" src="https://github.com/user-attachments/assets/be0b6d73-a480-4b08-83c4-b003a61c4566" />
 
-- Positive charges appears on gate surface
-- An electric field is created from gate toward substrate
-- It forms oxide capacitor, holes(majority carriers in P-substrate) are pushed away from substrate
-- Fixed negative acceptors ions remain near to the surface
+- Positive charges appears on gate surface.
+- An electric field is created from gate toward substrate.
+- It forms oxide capacitor, holes(majority carriers in P-substrate) are pushed away from substrate.
+- Fixed negative acceptors ions remain near to the surface.
     
 <img width="780" height="385" alt="image" src="https://github.com/user-attachments/assets/0ac8b1bf-641c-4408-a6e7-2469eb9e7b25" />
 
 - Due to negative charges accumulation, a depletion layer forms under the gate where majority carriers are delpeted.
 
-##### L3 Strong Inversion
+##### L3 Strong inversion and threshold voltage
 **When we increase the gate voltage(Vgs=Vth)**
 
 <img width="769" height="425" alt="image" src="https://github.com/user-attachments/assets/c479621c-5c1f-49c9-bc3c-0cfe98084bea" />
 
-- Width of the depletion region increases
-- More number of electrones accumalate at the surface
+- Width of the depletion region increases.
+- More number of electrones accumalate at the surface.
 - Finally it reached at a point where the surface region of the substrate gets completely inverted to n-type material which is known as inversion layer.This is called **strong inversion** or **surface inversion**.
 
 **When we increase the gate voltage further(Vgs>Vth)**
 
 <img width="477" height="396" alt="image" src="https://github.com/user-attachments/assets/6575192f-8f2f-4c32-871f-1683ff147461" />
 
-- Large number of electrons are accumulated the surface
-- The positive potential of the gate area attract the negative charge particle from the n+ source area like a magnet
-- Channel width get increased and no change of the depletion layer width
-- 
+- Large number of electrons are accumulated the surface.
+- The positive potential of the gate area attract the negative charge particle from the n+ source area like a magnet.
+- Channel width get increased and no change of the depletion layer width.
+  
 <img width="503" height="411" alt="image" src="https://github.com/user-attachments/assets/264ecd41-982b-4f01-80b1-318555beb6d5" />
 
-- There will be a point at which a continuous n-channel formation from Source to Drain, posibility of current flow whose conductivity is modulated by Vgs
-- Initially Vgs=0, the Source to Drain resistance is so high, there was absolutely zero current flow
+- There will be a point at which a continuous n-channel formation from Source to Drain, posibility of current flow whose conductivity is modulated by Vgs.
+- Initially Vgs=0, the Source to Drain resistance is so high, there was absolutely zero current flow.
 
   **Case 1(Vsb=0)**
 
-<img width="494" height="469" alt="image" src="https://github.com/user-attachments/assets/5ada57f4-4f1d-49e4-a19c-6f680c0474dd" />
+    <img width="494" height="469" alt="image" src="https://github.com/user-attachments/assets/5ada57f4-4f1d-49e4-a19c-6f680c0474dd" />
 
-- When Gate to Source potential will be increase, a strong inversion is observed here
-- Semiconductor surface inverts to n-type material at Vgs=Vto,Vsb=0(say)
-- Threshold voltage equation:- Vth=Vto
+    - When Gate to Source potential will be increase, a strong inversion is observed here.
+    - Semiconductor surface inverts to n-type material at Vgs=Vto,Vsb=0(say).
+    - Threshold voltage equation:- Vth=Vto
     
-**Case 2(Vsb=positive potential to the source and negative potential to the body)**
+  **Case 2(Vsb=positive potential to the source and negative potential to the body)**
 
-<img width="629" height="479" alt="image" src="https://github.com/user-attachments/assets/6a646079-757e-4efd-8cac-c41dc1c6c1a5" />
+    <img width="629" height="479" alt="image" src="https://github.com/user-attachments/assets/6a646079-757e-4efd-8cac-c41dc1c6c1a5" />
 
-- Depletion region will be slightly high near 'S', there is more additional reverse bias between Source'S' and Body'B' to this p-n junction diode
-- More holes (positive charges) are drawn deeper into the substrate and away from the surface as a result of the increased electric field between the source and the p-substrate.
- - Due to positive Vsb few charges from channel are pulled towards source 'S'
- - This indicates that more ionized acceptor ions, or negative fixed charge, are left behind close to the surface, more gate voltage is required to form inversion, causing the threshold voltage to increase. This phenomenon is called the **body effect**.
-- When we increase Vgs more then finally at some potential Vgs=Vth+V1, additional potential V1 needed for the strong inversion of the surface due to Vsb=+ve
-- Threshold voltage equation:-
-<img width="622" height="248" alt="image" src="https://github.com/user-attachments/assets/f7293435-f519-4900-9a78-78579c32a64c" />
+    - Depletion region will be slightly high near 'S', there is more additional reverse bias between Source'S' and Body'B' to this p-n junction diode.
+    - More holes (positive charges) are drawn deeper into the substrate and away from the surface as a result of the increased electric field between the source and the p-substrate.
+    - Due to positive Vsb few charges from channel are pulled towards source 'S'.
+    - This indicates that more ionized acceptor ions, or negative fixed charge, are left behind close to the surface, more gate voltage is required to form inversion, causing the threshold voltage to increase. This phenomenon is called the **body effect**.
+    - When we increase Vgs more then finally at some potential Vgs=Vth+V1, additional potential V1 needed for the strong inversion of the surface due to Vsb=+ve.
+      
+##### L4 Threshold voltage with positive substrate potential
+ - Threshold voltage equation:-
+   
+   <img width="622" height="248" alt="image" src="https://github.com/user-attachments/assets/f7293435-f519-4900-9a78-78579c32a64c" />
 
-- Vto is the threshold voltage at Vsb=0
+ - Vto is the threshold voltage at Vsb=0
 
-<img width="403" height="230" alt="image" src="https://github.com/user-attachments/assets/0b67a726-ba6c-4cca-bb1c-af95c3e185a8" />
+   <img width="403" height="230" alt="image" src="https://github.com/user-attachments/assets/0b67a726-ba6c-4cca-bb1c-af95c3e185a8" />
 
 - γ is the body effect coefficient, it shows how strongly Vth changes with Vsb.It depends on substrate doping and oxide capacitance.
 
-<img width="486" height="137" alt="image" src="https://github.com/user-attachments/assets/a8770307-b5a4-46ad-a1fd-cb3081cf4a08" />
+   <img width="486" height="137" alt="image" src="https://github.com/user-attachments/assets/a8770307-b5a4-46ad-a1fd-cb3081cf4a08" />
 
-- φF is the Fermi potential of the substrate, represents energy difference between fermi level and intrinsic level
-- NA is substrate doping concentration
-
-- This all vales are fef into SPICE simulator, SPICE tool derive the threshold voltage, that threshold voltage represent the device NMOS
-- This is about the behaviour of the NMOS below threshold.
+    - φF is the Fermi potential of the substrate, represents energy difference between fermi level and intrinsic level
+    - NA is substrate doping concentration
+    - This all vales are fef into SPICE simulator, SPICE tool derive the threshold voltage, that threshold voltage represent the device NMOS
+    - This is about the behaviour of the NMOS below threshold.
 
 #### NMOS resistive region and saturation region of operation
 ##### L1 Resistive region of operation with small drain-source voltage
@@ -308,12 +324,16 @@ The circuit design process employing SPICE simulations is the source of the dela
 - When Vgs-Vds ≤ Vt, the channel disappears at the drain side
 - In the saturation region, the channel voltage is approximately fixed at Vgs-Vt, unlike in the linear region where it changes along the channel as V(x).
 - Ideally, the drain current becomes independent of Vds and is primarily determined by Vgs-Vt, provided channel length modulation is ignored.
+  
 <img width="399" height="227" alt="image" src="https://github.com/user-attachments/assets/fb104807-7c02-42c9-8b13-8aedcb7091f5" />
+
 - Replace Vds by Vgs-Vt
+  
 <img width="435" height="207" alt="image" src="https://github.com/user-attachments/assets/da32c0c3-7a05-4bba-adde-e4e1c76b09c9" />
 
 
-- Drain Current (Id) is no more linear function of Vt, if we keep Vgs at constant value and increase Vds as such extent Id act as a constant current 
+- Drain Current (Id) is no more linear function of Vt, if we keep Vgs at constant value and increase Vds as such extent Id act as a constant current
+  
 <img width="268" height="90" alt="image" src="https://github.com/user-attachments/assets/0f4b78f4-c262-41ce-b8b3-219c054ad95f" />
 
 - Drain current(Id) looks to be a perfect current source because it is the function of all the constants.
@@ -321,7 +341,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 - Drain current is increase a bit when Vds increases, depletion resion at the drain increases( minor linear function of Vds)
 <img width="726" height="131" alt="image" src="https://github.com/user-attachments/assets/9378f5ea-39d8-4c97-ace1-ca3a38f9b1ca" />
 
-- Drain current is slightly increase when Vds is increases
+- Drain current is slightly increase when Vds is increases.
 
 #### Introduction to SPICE
 
@@ -330,7 +350,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 - The waveforms are eventually used to calculate the delays, characterize cells, and further support analyses such as Static Timing Analysis (STA) and other performance evaluations. These are accurate delays used to STA.
 - First step is to create a correct SPICE setup, feed the model into SPICE engine and evaluate the drain current equation.
    <img width="436" height="491" alt="image" src="https://github.com/user-attachments/assets/d1b93bc0-54f1-4bcb-b541-3bf1ef58cc03" />
-   - In the equations, certain parameters remain constant for a given fabrication process. Parameters such as Vth, kn, γ, and λ are referred to as technology constants, as their values are determined by the semiconductor manufacturing technology used.
+   - In the equations, certain parameters remain constant for a given fabrication process. Parameters such as Vth, kn, γ, and λ are referred to as **technology constants**, as their values are determined by the semiconductor manufacturing technology used.
      <img width="1143" height="589" alt="image" src="https://github.com/user-attachments/assets/41dda52c-820b-4fe1-b4d1-448c0b3e4e68" />
 
    - These constants are provided by the foundry, and therefore do not need to be derived by the designer. Each technology node has its own unique set of parameter values, which are defined by the specific fabrication process used.
@@ -343,11 +363,14 @@ The circuit design process employing SPICE simulations is the source of the dela
 
   - The device must be specified using a particular syntax that is recognized and interpreted by the SPICE simulation engine.
   - A MOSFET is defined by specifying its node connections (Drain, Gate, Source, and Bulk), along with the device dimensions (W/L) and the applied bias sources. The corresponding circuit representation of the MOSFET is then modeled accordingly, and the simulator internally utilizes the provided model parameters to calculate its electrical characteristics and behavior.
+    
     <img width="1124" height="562" alt="image" src="https://github.com/user-attachments/assets/b77767ae-e02b-460e-97bc-4d4aba37d751" />
+	
   - In the SPICE netlist, the MOSFET is defined using four nodes: Drain, Gate, Source, Bulk (Body)	
   - Voltage sources are connected to apply VGS and VDS, while the bulk is usually tied to VSS (ground) for NMOS.
   - The simulator does not model the physical cross-section directly; instead, it uses the mathematical model parameters from the model file to compute the electrical behavior.
   - A protection resistor is connected in series with the gate, and the supply is applied through it. This precaution prevents excessive current from flowing directly into the gate terminal, thereby protecting the thin gate oxide from potential damage.
+    
     <img width="466" height="261" alt="image" src="https://github.com/user-attachments/assets/60ceffe5-dc11-4d77-b3ac-86f30e9d7c82" />
 
   - All VSS nodes are connected together and treated as a common reference node. Each component in the circuit is assigned a unique name or identifier. The complete description of these connections and component definitions constitutes the SPICE netlist.
@@ -356,13 +379,18 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 - The next step is to provide the SPICE netlist to the simulator in the required input format so that the SPICE engine can interpret and execute the simulation correctly.
 - 1) We are giving some parameter value example Vin= 2.5V, R1=55ohms, M1=1.8u/1.2u, Vdd=2.5V, we have to put these in a way that our SPICE engine can understand.
+     
      <img width="453" height="264" alt="image" src="https://github.com/user-attachments/assets/b6959ba5-efbb-4082-acfa-32b5747d76c1" />
 
 - 2) Next step is to create node,
      - Each element in a circuit must be connected between two electrical points known as nodes.A node represents a junction where two or more components are interconnected, and in a SPICE netlist, every node must be assigned a unique identifier to ensure proper circuit definition and simulation.
+       
      <img width="466" height="254" alt="image" src="https://github.com/user-attachments/assets/39218e1f-e8a9-44bb-b8fd-153e87472d53" />
+	 
 - 3) Naming the nodes
+     
      <img width="472" height="266" alt="image" src="https://github.com/user-attachments/assets/8587718e-8ab9-48d8-9536-9e71427a16b3" />
+	 
 - 4) Defining the spice netlist
       - MOSFET lies between four diffrent nodes, similarly resistor is lying between 2 nodes.
          - ```M1 vdd n1 0 0 nmos W=1.8u L=1.2u```
@@ -415,11 +443,11 @@ The circuit design process employing SPICE simulations is the source of the dela
 ##### L4 First SPICE simulation
 
 - Open Vertual Box
-- Type ```cd`` in comand prompt
+- Type ```cd``` in comand prompt
 - ```git clone https://github.com/kunalg123/sky130CircuitDesignWorkshop.git```
 - ```cd sky130CircuitDesignWorkshop/design/```
 - ```ls```(get list of files)
-- ```cd sky130_fd_pr/
+- ```cd sky130_fd_pr/```
 - ```ls``` (Contains cells, models and tech files)
 - ```cd cells/```
 - ```ls```(contains nfet_01 and pfet_01 weight,)
@@ -442,18 +470,30 @@ The circuit design process employing SPICE simulations is the source of the dela
  <img width="1920" height="892" alt="Screenshot from 2026-02-19 14-34-11" src="https://github.com/user-attachments/assets/9505ac92-40a0-402b-985b-b92978160a33" />
 <img width="1254" height="175" alt="Screenshot from 2026-02-19 14-35-33" src="https://github.com/user-attachments/assets/ccca539f-4b0c-4c2d-a659-01f1c093a0fd" />
 
- - Now go inside models --> lib.spice file. We will see library files which are present for nfet and pfet. The corner files are present, include Typical, slow-fast and fast-fast corner files
+ - Now go inside models ```--> lib.spice file```. We will see library files which are present for nfet and pfet. The corner files are present, include Typical, slow-fast and fast-fast corner files.
 <img width="1459" height="175" alt="image" src="https://github.com/user-attachments/assets/7ab57c72-c1a7-41b7-bd48-e51551e5f8b7" />
 
+ - Inside ```design```--> open day1 file.
+  
 <img width="1920" height="892" alt="Screenshot from 2026-02-19 14-39-23" src="https://github.com/user-attachments/assets/3c74b2d6-3812-4b65-a3b3-5d61c48657f0" />
 
+ - Above we see Vdd varying from 0 to 1.8 volts with step size of 0.1V and Vgs sweeping from 0 to 1.8V and with step size of 0.2V
+ - Let us do the spice simulations:
+  
 <img width="1920" height="892" alt="image" src="https://github.com/user-attachments/assets/22be82cf-e225-4d7c-be4e-7b62204dd0bd" />
 
+ - We will get the plot of Id vs Vds at different Vgs values.
+   
+  
 <img width="1920" height="892" alt="Screenshot from 2026-02-19 14-49-30" src="https://github.com/user-attachments/assets/4af7034e-b77b-44fa-a8c0-76b367cbb501" />
 
+- To check the value of Id for corresponding Vds and Vgs, just left click and see.
+  
 <img width="308" height="155" alt="image" src="https://github.com/user-attachments/assets/221a3a0d-e586-45e4-920e-3380a637e8f4" />
 
 ##### L5 SPICE lab with Sky130 models
+
+- If we go inside models folder, we will see ```all.spice``` file. If we open it we will see the scale of Width and Length.
 
 - dddd
 
@@ -469,7 +509,7 @@ The circuit design process employing SPICE simulations is the source of the dela
    - x-axis is Vds(Drain-to-Source Voltage)
    - Y-axis is Id(Drain Current)
 - When Vgs=0, zero drain current so the device is not turn on hence no channel.
-- At Vgs=1V, it just cross the threshold voltage so bare minimum channel is available for drain current flow so small amount of drain current at Vgs=0.5v
+- At Vgs=1V, it just cross the threshold voltage so bare minimum channel is available for drain current flow so small amount of drain current at Vgs=0.5v.
   
  <img width="1167" height="663" alt="image" src="https://github.com/user-attachments/assets/1a44c54a-40e4-4211-90d6-7fc599a25f86" />
 
@@ -480,27 +520,31 @@ The circuit design process employing SPICE simulations is the source of the dela
 - When W/L ratio is constant, drain current will same at any node.
 - Now we are taking different W and L, but the ration of W/L is same as previous, so the Id should not change. But this is not the case practically.
 - Below is the spice deck, where only the values of W and L is changed, rest everything remains same.
+   
     ```*** MODEL Description ***
-       *** NETLIST Description ***
-       M1 vdd n1 0 0 nmos W=0.375u L=0.25u
-       R1 in n1 55
-       Vdd vdd 0 2.5
-       Vin in 0 2.5
-       *** SIMULATION Command ***
-       .op
-       .dc Vdd 0 2.5 0.1 Vin 0 2.5 0.5
-       *** .include mosis_1um_model.mod
-       .LIB "tsmc_025um_model.mod" CMOS_MODELS
-       .end
-    
+    *** NETLIST Description ***
+    M1 vdd n1 0 0 nmos W=0.375u L=0.25u
+    R1 in n1 55
+    Vdd vdd 0 2.5
+    Vin in 0 2.5
+    *** SIMULATION Command ***
+    .op
+    .dc Vdd 0 2.5 0.1 Vin 0 2.5 0.5
+    *** .include mosis_1um_model.mod
+    .LIB "tsmc_025um_model.mod" CMOS_MODELS
+    .end
+    ```
+   
+
 <img width="785" height="307" alt="image" src="https://github.com/user-attachments/assets/45b897de-0d34-4796-a85d-131912ee17bc" />
 
 - Below is the setplot of the code
+  
 <img width="769" height="609" alt="image" src="https://github.com/user-attachments/assets/de12d5e4-b925-4497-b4a0-64a6a66e0d6e" />
 
 
-- In the previous case the current value for saturation region is different
-- The difference between two adjacent curve appeared to be constant
+- In the previous case the current value for saturation region is different.
+- The difference between two adjacent curve appeared to be constant.
 
   ##### L2 Drain current vs gate voltage for long and short channel device
 <img width="1248" height="538" alt="image" src="https://github.com/user-attachments/assets/a6ece7e4-b229-4eb5-888e-cdcee4f04586" />
@@ -509,43 +553,38 @@ The circuit design process employing SPICE simulations is the source of the dela
 - The technology nodes of the two graphs are different
 - **Observation 1**:-
      - In 1st graph(1.2u), the drain current at each and every gate voltage at Vds=2.5v there is a quadratic dependance (the drain current quadratically increases with increase in gate voltage)
+       
        <img width="650" height="518" alt="image" src="https://github.com/user-attachments/assets/a022f365-ad9f-41dc-839f-cb169c125442" />
 
      - For short channel device 2nd graph(0.25u), initially the lower value of gate voltage still have a quadratic dependence, as gate voltage will increases the drain current will increasing linearly due to velocity saturation.
   
 - Now we will plot graph of Id vs Vgs and sweeping Vds or keeping Vds constant = 2.5V.
-        ```*** MODEL Description ***
-       *** NETLIST Description ***
-       M1 vdd n1 0 0 nmos W=0.375u L=0.25u
-       R1 in n1 55
-       Vdd vdd 0 2.5
-       Vin in 0 2.5
-       *** .include mosis_1um_model.mod ***
-       .LIB "tsmc_025um_model.mod" CMOS_MODELS
-       *** SIMULATION Commands ***
-       .op
-       .dc Vin 0 2.5 0.1 Vdd 0 2.5 2.5
-       .end
+    ```  
+    *** MODEL Description ***
+    *** NETLIST Description ***
+    M1 vdd n1 0 0 nmos W=0.375u L=0.25u
+    R1 in n1 55
+    Vdd vdd 0 2.5
+    Vin in 0 2.5
+    *** SIMULATION Command ***
+    .op
+    .dc Vdd 0 2.5 0.1 Vin 0 2.5 0.5
+    *** .include mosis_1um_model.mod
+    .LIB "tsmc_025um_model.mod" CMOS_MODELS
+    *** SIMULATION Commands ***
+    .op
+    .dc Vin 0 2.5 0.1 Vdd 0 2.5 2.5
+    .end
+    ```
+ 
 - In the syntex whatever in the left hand side that will be tunned every value of right hand side
+  
 <img width="756" height="298" alt="image" src="https://github.com/user-attachments/assets/47ebb653-c354-42d2-8b3f-0c981fbe0d26" />
 <img width="719" height="559" alt="image" src="https://github.com/user-attachments/assets/6936b584-0426-420f-9f59-8449d7d5d1a6" />
 
 - For example, in this case, for each value of Vdd, the input voltage Vin is swept across a specified range.The resulting plot exhibits a quadratic characteristic, which is observed specifically when Vds=2.5V.
    
 - Let us see the same effect for short channel device. For L=0.25 micron.
-        ```*** MODEL Description ***
-       *** NETLIST Description ***
-       M1 vdd n1 0 0 nmos W=0.375u L=0.25u
-       R1 in n1 55
-       Vdd vdd 0 2.5
-       Vin in 0 2.5
-       *** .include mosis_1um_model.mod ***
-       .LIB "tsmc_025um_model.mod" CMOS_MODELS
-       *** SIMULATION Commands ***
-       .op
-       .dc Vin 0 2.5 0.1 Vdd 0 2.5 2.5
-       .end
-   
 
 ##### L3 Velocity saturation at lower and higher electric fields  
 <img width="1266" height="600" alt="image" src="https://github.com/user-attachments/assets/bd83447d-3ab6-4a23-a290-73f6cd938181" />
@@ -569,8 +608,10 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 -   Let us take Vgs-Vt=Vgt because we will be taking Vgs as large values. Current equation we will be using as shown above, For lower values of Vds the channel length modulation parameter λ can be ignored. 
 - There is another important technology parameter called 𝑉dsat. It represents the drain-to-source voltage at which the device just begins to enter the velocity saturation region.
-   <img width="349" height="74" alt="image" src="https://github.com/user-attachments/assets/35a7e0b8-c419-4713-b7f9-5a7a830254ce" />
-   <img width="572" height="249" alt="image" src="https://github.com/user-attachments/assets/dd75dfa8-e23a-40e2-bb59-65a95c346889" />
+  
+  - <img width="349" height="74" alt="image" src="https://github.com/user-attachments/assets/35a7e0b8-c419-4713-b7f9-5a7a830254ce" />
+   
+  - <img width="572" height="249" alt="image" src="https://github.com/user-attachments/assets/dd75dfa8-e23a-40e2-bb59-65a95c346889" />
 
    - When Vgs-Vt is minimum, Vds is at maximum voltage
      
@@ -591,19 +632,19 @@ The circuit design process employing SPICE simulations is the source of the dela
      
 ##### L5 Labs Sky130 Id-Vgs
 
-<img width="1920" height="891" alt="Screenshot from 2026-02-22 21-02-52" src="https://github.com/user-attachments/assets/7eee0388-827f-4ac9-800f-d7d5c83dcb14" />
-<img width="1920" height="891" alt="Screenshot from 2026-02-22 21-09-40" src="https://github.com/user-attachments/assets/f30e2dc8-439b-439b-aac6-2dd6d39079f2" />
-<img width="1920" height="891" alt="Screenshot from 2026-02-22 21-19-31" src="https://github.com/user-attachments/assets/0564abed-5cc9-40b8-99c4-4ec663fa9f4b" />
-<img width="1920" height="891" alt="Screenshot from 2026-02-22 21-20-04" src="https://github.com/user-attachments/assets/00fd61c0-b34f-4c65-a091-c4927f09ae29" />
-<img width="1920" height="891" alt="Screenshot from 2026-02-22 21-20-56" src="https://github.com/user-attachments/assets/28445160-0191-475f-bc06-1786c7ab4154" />
+- We will now do simulation for lower nodes. Inside day2 design file.
+  <img width="1920" height="891" alt="Screenshot from 2026-02-22 21-02-52" src="https://github.com/user-attachments/assets/7eee0388-827f-4ac9-800f-d7d5c83dcb14" />
+  <img width="1920" height="891" alt="Screenshot from 2026-02-22 21-09-40" src="https://github.com/user-attachments/assets/f30e2dc8-439b-439b-aac6-2dd6d39079f2" />
+- We can see above, simulation is being done for L=0.15u and W=0.39u.
+ <img width="1920" height="891" alt="Screenshot from 2026-02-22 21-19-31" src="https://github.com/user-attachments/assets/0564abed-5cc9-40b8-99c4-4ec663fa9f4b" />
+ <img width="1920" height="891" alt="Screenshot from 2026-02-22 21-20-04" src="https://github.com/user-attachments/assets/00fd61c0-b34f-4c65-a091-c4927f09ae29" />
+ <img width="1920" height="891" alt="Screenshot from 2026-02-22 21-20-56" src="https://github.com/user-attachments/assets/28445160-0191-475f-bc06-1786c7ab4154" />
 
-
-
-
-
-
-
-<img width="284" height="58" alt="image" src="https://github.com/user-attachments/assets/5f5939bb-1cf1-4f2a-b52a-db906055e40a" />
+- The above plot shows Id vs VDS for different values of Vgs. For lower values of Vgs, the curve exhibits quadratic behavior, while for higher values of Vgs, it becomes more linear due to velocity saturation effects. To observe the peak current at Vgs=1.8V, simply left-click on the curve corresponding to Vgs=1.8V.
+  
+ <img width="284" height="58" alt="image" src="https://github.com/user-attachments/assets/5f5939bb-1cf1-4f2a-b52a-db906055e40a" />
+ 
+ - So we can see it is approximately 198uA.
 
 
 - Similarly we observe Id vs Vgs graph
@@ -611,11 +652,13 @@ The circuit design process employing SPICE simulations is the source of the dela
   <img width="1920" height="891" alt="Screenshot from 2026-02-22 23-07-55" src="https://github.com/user-attachments/assets/999e8493-c145-4de6-95a5-0a8fd2474da3" />
 
 - Keeping Vds constant which is 1.8V
-<img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/08f14279-15b6-4298-ab09-a5412211a95a" 
- - It is showing linear behaviour
+  
+  <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/08f14279-15b6-4298-ab09-a5412211a95a" >
+ - It is showing linear behaviour.
+##### L6 Labs Sky130 Vt
 
-- Calculate threshold voltage for Id vs Vgs graph
-- In the graph current starts increasing rapidly with a small change of Vgs value. To plot threshold voltage we have to take the tengent of the slope and extended on the x-axis
+- Calculate threshold voltage for Id vs Vgs graph.
+- In the graph current starts increasing rapidly with a small change of Vgs value. To plot threshold voltage we have to take the tengent of the slope and extended on the x-axis.
 
 #### CMOS voltage transfer characteristics (VTC)
 ##### L1 MOSFET as a switch
@@ -625,43 +668,48 @@ The circuit design process employing SPICE simulations is the source of the dela
 - It's just a MOS transistor, it is work when |Vgs| is greater than Vt
     -  In case of N-MOS it is +ve Vgs
     -  In case of P-MOS it is -ve Vgs
-- Whenever |Vgs|>Vt, the device turns ON,  it acts as closed switch
+- Whenever |Vgs|>Vt, the device turns ON,  it acts as closed switch.
 - Let's try to bias the devices properly. We will take one PMOS and one NMOS transistor, connect them together, and form a CMOS configuration.
   
 - CMOS stands for Complementary MOSFET. It is called “complementary” because it uses both NMOS and PMOS transistors, which operate in opposite (complementary) manners—when one transistor turns ON, the other turns OFF. 
-- We have PMOS at the top and NMOS at the bottom, the source of NMOS is connected to the GND(Vss) and the source of PMOS is connected to the Vdd, both the gates are tie together and connected to Vin, both the drains are tie together to get the output potential Vout, also we have a load Cl
+- We have PMOS at the top and NMOS at the bottom, the source of NMOS is connected to the GND(Vss) and the source of PMOS is connected to the Vdd, both the gates are tie together and connected to Vin, both the drains are tie together to get the output potential Vout, also we have a load Cl.
  <img width="1143" height="690" alt="image" src="https://github.com/user-attachments/assets/64e6990f-3ce5-400f-ac35-efd54729dd5b" />
 
 - The calculation of Vgs will differ by the value of potential that we apply
     -  In the case of NMOS, if Vin=0V then Vgs is 0V, NMOS is OFF
     -  In the case of PMOS, if Vin=0V then Vgs is negative Vdd, PMOS is ON
     
-- When Vgs>Vt, NMOS can be replaced by a resistor and we have output load as well when Vin=Vdd
+- When Vgs>Vt, NMOS can be replaced by a resistor and we have output load as well when Vin=Vdd.
 
 ##### L2 Introduction to standard MOS voltage current parameters
 - We are trying to get the equivalent circuit of CMOS when Vin is 'high' and 'low', so that we can get the Voltage Transfer Characteristics (VTC) and therefore calculate the delay of the cell(the cell here is inverter).
   
   <img width="1172" height="700" alt="image" src="https://github.com/user-attachments/assets/a18fd590-26b0-4da3-8337-144f67b73c4a" />
 
-- We take different condition when Vin is 'low' or 0V
+- We take different condition when Vin is 'low' or 0V.
     -  For PMOS Vgs will be -5V, it turn ON the PMOS, it can be modeled as resistor
     -  For NMOS Vgs will be 0V, NMOS is OFF
-- Now, we need to analyze and understand how the currents behave in the circuit under different input conditions
+- Now, we need to analyze and understand how the currents behave in the circuit under different input conditions.
    <img width="1183" height="645" alt="image" src="https://github.com/user-attachments/assets/80fd94ed-2920-443c-a68e-d143471d7e42" />
 
 
-    -  when Vin=Vdd, there is a direct path exists between Vout and Vss, resulting in Vout=0( if the capacitance is completely charged, all the charges will discharged through the resistor Rn)
-    -   when Vin=0V, there is a direct current flow from Vdd to the capacitance, resulting in Vout=Vdd(charging this caapacitor under this condition) 
+    -  when Vin=Vdd, there is a direct path exists between Vout and Vss, resulting in Vout=0( if the capacitance is completely charged, all the charges will discharged through the resistor Rn).
+    -   when Vin=0V, there is a direct current flow from Vdd to the capacitance, resulting in Vout=Vdd(charging this caapacitor under this condition).
 
 - Let us give the naming convention of the CMOS
    <img width="1183" height="630" alt="image" src="https://github.com/user-attachments/assets/35b3ecdb-24d9-40e5-b1e2-2183b045f87c" />
     -  Idsp = -Idsn, both are opposite in direction to each other.
 
 ##### L3 PMOS/NMOS drain current vs drain voltage
-- We try to get some equations and tune them to get voltage-current characteristics, voltage transfer characteristics is purely a function of voltage
+
+- We try to get some equations and tune them to get voltage-current characteristics, voltage transfer characteristics is purely a function of voltage.
+  
   <img width="441" height="687" alt="image" src="https://github.com/user-attachments/assets/8e6732f8-7f43-495d-96a8-95f83f95607b" />
+  
 - When we plot the Id VS Vds for both the NMOS and PMOS devices, the characteristic curves look like the ones shown here.
+  
   <img width="825" height="442" alt="image" src="https://github.com/user-attachments/assets/7be81114-098e-4bb6-b64a-d7ff97f83c3b" />
+  
 - On the left, we see how NMOS drain current increases with drain voltage for different gate voltages. At low VDS it behaves like a resistor, and at high VDS it enters saturation where current becomes constant. On the right, PMOS shows similar behavior but with negative voltages and current direction reversed. 
 
 ##### L4 Step1- Convert PMOS gate-source-voltage to Vin
@@ -679,6 +727,7 @@ The circuit design process employing SPICE simulations is the source of the dela
 	<img width="810" height="382" alt="image" src="https://github.com/user-attachments/assets/0f3c0f3b-2da3-428c-8515-d90677c04d31" />
 ​
 ##### L5 Step2 & Step3 – Convert PMOS and NMOS drain-source-voltage to vout
+
 - Now we have to convert the Vdsp into the function of output voltage​, we know Vdsp = Vout-Vdd
 - Let us convert Vdsp into Vout. So to get Vout there is a shift of Vdd towards left hand side.
   
@@ -692,19 +741,24 @@ The circuit design process employing SPICE simulations is the source of the dela
  <img width="461" height="392" alt="image" src="https://github.com/user-attachments/assets/af33fbc4-8312-4f0c-b609-17b167128a49" />
 
 - Now we will try to get the "load curve" for NMOS transistor from this equations.
+  
   <img width="241" height="88" alt="image" src="https://github.com/user-attachments/assets/7497c15e-fd07-4120-947a-db663dbfc96b" />
+  
 - It is actually simple as Vgsn = Vin and Vdsn = Vout, directly we can get the graphs.
 
 <img width="400" height="299" alt="image" src="https://github.com/user-attachments/assets/dc350e43-a8d9-49c9-915b-d7018e00650c" />
 
 - It is just a matter of replacing the names.
+  
   <img width="858" height="378" alt="image" src="https://github.com/user-attachments/assets/a43307db-11af-47ae-b1f3-f0a013f106b3" />
 
 ##### L6 Step4 – Merge PMOS – NMOS load curves and plot VTC
 
 - Now we will combine the two characteristic curves and use them to obtain the Voltage Transfer Characteristics (VTC) of the CMOS inverter.
 - We will superimpose the load curve of NMOS on the load curve of POMS because Vin and Vout common to PMOS and NMOS so graphically if we want to derive the VTC of CMOS it has to be the intersection point between the PMOS and NMOS load curve.
+  
    <img width="547" height="361" alt="image" src="https://github.com/user-attachments/assets/a994f23d-2ce8-40d4-8448-48b1d492feb3" />
+   
 - So the range of Vin and Vout is 0V-2V.
 
 <img width="1267" height="699" alt="image" src="https://github.com/user-attachments/assets/b0ded0b1-71a1-422d-9524-32a2625f262c" />
@@ -721,20 +775,41 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 ### NgspiceSky130-Day3-CMOS switching threshold and dynamic simulations
 
-#### Voltage transfer characteristics-SPICE simulations
-##### L1 SPICE deck creation for CMOS inverter
+#### Voltage transfer characteristics-SPICE simulations 
+##### L1 SPICE deck creation for CMOS inverter  
+
 - 1) For this, we first need to create a SPICE deck, which contains the connectivity information of the circuit in the form of a netlist. This netlist defines the devices, their parameters, and how they are interconnected in the CMOS inverter configuration.
+
+
    <img width="415" height="429" alt="image" src="https://github.com/user-attachments/assets/db819675-42c5-4a02-ad4e-5ad874917431" />
-- 2) The next task is to define the component values,  keeping W/L for both NMOS and PMOS same( i.e. same size of POMS and NMOS)
+
+	
+- 2) The next task is to define the component values,  keeping W/L for both NMOS and PMOS same( i.e. same size of POMS and NMOS).
+
+     
    <img width="399" height="437" alt="image" src="https://github.com/user-attachments/assets/dd5145f8-f492-493c-b085-9269ac1c6800" />
 
-- 3) Next we will assume the Vin and Vout values, both are 2.5V and the output load is 10fF
+
+- 3) Next we will assume the Vin and Vout values, both are 2.5V and the output load is 10fF.
+
+      
    <img width="527" height="414" alt="image" src="https://github.com/user-attachments/assets/c0ff7919-62c9-407f-a469-7f179a877b46" />
+
+   
 - 4) Next step is to identify the Nodes (Node is the point where two components meet)
+
+      
    <img width="683" height="524" alt="image" src="https://github.com/user-attachments/assets/938d61a1-0d82-4a1b-ae6f-a3a9f903e229" />
+
+   
 - 5) Name the nodes (example-2.5V input lies between Vin and 0, similarly Vdd lies between vdd and 0)
+
+      
    <img width="528" height="453" alt="image" src="https://github.com/user-attachments/assets/533f3181-c16c-43f9-99d1-17807f16efdf" />
+
+   
 - 6) Now we write the SPICE deck
+     
      ```*** MODEL Descriptions ***
         *** NETLIST Description ***
         M1 out in vdd vdd pmos W=0.375u L=0.25u(Drain-Gate-Substrate-Source)
@@ -750,51 +825,76 @@ The circuit design process employing SPICE simulations is the source of the dela
 
 - 7) Next we have to give simulation command, Here we will be sweeping the gate input voltage from 0 to 2.5V with steps of 0.05. The reason we are doing this to calculate the VTC, the voltage at the output while sweeping the input voltage.
 - 8) The final step is to describe the model file, all the technological parameters is describe in the model file.
+     
    <img width="1176" height="558" alt="image" src="https://github.com/user-attachments/assets/138c83f7-5433-4710-9eb5-c093888f4ccf" />
+   
 - Now we will do the SPICE simulation for Wn=Wp=0.375u, Ln=Lp=0.25u, Wn/ln=Wp/Lp=1.5. Below is the VTC we get for the above netlist.
+  
    <img width="754" height="618" alt="image" src="https://github.com/user-attachments/assets/75d94d09-0b9e-400d-87a6-8792840c54e6" />
+   
 - Next we will get the VTC for Wn= 0.375u, Wp= 0.9375u, Ln,p=0.25u; Wn/Ln=1.5, Wp/Lp=2.5 (PMOS width is 2.5 times more than NMOS)
+  
    <img width="753" height="606" alt="image" src="https://github.com/user-attachments/assets/5bf03145-65c9-40fa-ba41-87ab0771cae2" />
+   
 - If we closely look this waveform and previous waveform, we notice that it is slightly shifted toward the left(in previous waveform it is exactly in the middle). This shift occurs because the NMOS transistor is stronger than the PMOS transistor in that configuration.
   
 ##### L3 Labs Sky130 SPICE simulation for CMOS
 - Now we will get the VTC characteristics
+  
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/14545e14-17de-494b-8934-0eece06034eb" />
+  
 - We are using both a PFET and an NFET to implement the CMOS inverter. The W/L ratio of the PMOS is chosen to be 2.33 times larger than that of the NMOS, so that their drive strengths are properly balanced. Now, we will perform a DC sweep of Vin from 0 V to 1.8 V, with a step size of 0.01 V, and observe the corresponding variation in Vout. From this, we can plot the Voltage Transfer Characteristics (VTC) of the CMOS inverter.
+  
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/6bbdab1f-88f6-48df-abc4-9ea7bf8538c5" />
+  
 - To get the plot type ```ngspice``` and ```plot out vs in```.
+  
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/d90735c5-090d-4e65-87eb-f1f255f26771" />
+  
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/48c012ce-1c2c-4d30-9fa2-fa56daa0ee37" />
 - Now we need to plot switching threshold from the graph, it is the point when Vin=Vout.To zoom in the curve; press righ mouse button + hold it.
+  
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/c9656a91-c772-4d29-9ed4-ec1d80ada6b7" />
-  So switching threshold for W/L=2.3 is around 0.876V
+  
+  So switching threshold for W/L=2.3 is around 0.876V.
+  
    <img width="280" height="30" alt="image" src="https://github.com/user-attachments/assets/070ab57e-33ce-4770-b29e-2f8ef5f49b6b" />
 
 - We will se the transient analysis, for that we will go inside the tansient SPICE file for day3
+  
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/b76d281f-e91c-47a1-9fe9-0ea55f42a281" />
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/4a431c39-bd2f-449a-ad21-ded7f850f912" />
+  
 - We can observe that this simulation is performed at the typical process corner, and the W/L ratios remain the same as before.Now, instead of a DC sweep, we are applying a transient pulse input that switches from 0 V to 1 V, with no time delay. The rise time and fall time are both 0.1 ns. The pulse width is 2 ns, and the total time period is 4 ns. Let us run the transient simulation to analyze the dynamic response of the CMOS inverter.
+  
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/949158f8-b03f-4354-9b3a-b65cc24f46d7" />
  
 
 - To calculate rise delay and fall delay we have to consider the 50% of Vdd, i.e. at 0.9V.
+  
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/3dfa2a43-f6d5-43b1-8c9d-1cf1f737ae6c" />
   <img width="341" height="76" alt="image" src="https://github.com/user-attachments/assets/24b21a61-fada-4e55-a5ee-4858270ec34d" />
+  
      - Rise delay = 2.482ns-2.15ns = 0.333ns
 - For calculation of fall delay fall delay
+  
   <img width="1920" height="891" alt="image" src="https://github.com/user-attachments/assets/cd67b09e-6d2e-4384-bf52-9753d00b8d25" />
   <img width="292" height="109" alt="image" src="https://github.com/user-attachments/assets/f855c68d-49c6-4d7b-bfcc-afabf8386f60" />
-      - Fall Delay = 4.334ns-4.050ns = 0.285ns
+  
+     - Fall Delay = 4.334ns-4.050ns = 0.285ns
   
 #### Static behaviour evaluation-CMOS inverter robustness-Switching Threshold
 
 ##### L1 Switching Threshold, Vm
+
 - Now we will compare the two CMOS inverters that have different W/L ratios for the PMOS and NMOS transistors(one is Wn/Ln=Wp/Lp=1.5 and another one is Wn/Ln=1.5,Wp/Lp=3.75). We observe that in both cases, the overall shape of the Voltage Transfer Characteristics (VTC) remains the same. However, the switching threshold voltage shifts depending on the relative strength of the transistors.
+  
   <img width="1148" height="545" alt="image" src="https://github.com/user-attachments/assets/50091d6b-fda6-46cc-b623-51e68e607a6f" />
 
 - Whe we look into the waveforms, the shapes of the waveform are same irrespective of voltage level in which they are switching, this tells us the CMOS inverter is a very robust device. There are certain parameters which define the robustness of the CMOS.
     -  1)**Switching threshold**:- It is the point at which the device switches, it is a point when Vin=Vout. Vm in both the cases by drawing a 45 degree line.
 So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm=1.2V.
+
        <img width="1124" height="603" alt="image" src="https://github.com/user-attachments/assets/dc0b5143-cff7-4abf-a2a8-52901fb303a9" />
 	   <img width="1133" height="449" alt="image" src="https://github.com/user-attachments/assets/9b8eecb2-632d-4427-968f-5924cae09fe5" />
 
