@@ -1,3 +1,33 @@
+# CMOS-Circuit-Design and SPICE simulation using SKY130
+## VirtualBox Setup
+
+- 1)Install VirtualBox
+    - Download and install VirtualBox from the official website: https://www.virtualbox.org/wiki/Downloads
+- 2)Create a Virtual Machine
+    - Open VirtualBox
+    - Click New
+    - Set the following:
+      | Setting | Value                               |
+      | ------- | ----------------------------------- |
+      | Type    | Linux                               |
+      | Version | Ubuntu 18.04 Bionic Beaver (64-bit) |
+    - Click Next
+- 3)Allocate Memory
+    - Assign RAM as needed (Recommended: 4096 MB)
+    - Click Next
+- 4)Attach CMOS VDI File
+    - Select Use an existing virtual hard disk file
+    - Click the folder icon
+    - Browse and select the unzipped CMOS VDI file
+    - Click Open → Next → Finish
+      <img width="1102" height="927" alt="image" src="https://github.com/user-attachments/assets/cf2349d3-6467-4c14-96a2-ffccbc9b5288" />
+
+- 5)Start the Virtual Machine
+   - Select the created VM
+   - Click Start
+
+
+
 # CMOS-Circuit-Design-Spice-Simulation-using-Sky130nm-technology
 ## Table Of Contents
 
@@ -491,7 +521,9 @@
 
 - If we go inside models folder, we will see ```all.spice``` file. If we open it we will see the scale of Width and Length.
 
-- dddd
+  <img width="1301" height="651" alt="image" src="https://github.com/user-attachments/assets/ec54ea35-fc11-4705-b089-38960f21b568" />
+
+ - We can see that W and L values are in microns.
 
 
 
