@@ -622,7 +622,7 @@
 - For lower node, we have four region of operations:- **Cut-off**,**Linear**,**Saturation** and **velocity saturation**
   <img width="458" height="199" alt="image" src="https://github.com/user-attachments/assets/9bc6f4a1-d247-439f-87c2-b84dae169c32" />
 
-- **velocity saturation** is for lower value of electric field the velocity tends to be linear function of electric field but after cut-off point velocity saturated(velocity becomes constat due to scattering effect)
+- **velocity saturation** is for lower value of electric field the velocity tends to be linear function of electric field but after cut-off point velocity saturated(velocity becomes constant due to scattering effect)
     -   Velocity Vn(x)=mobilty.electric field
     -   <img width="398" height="81" alt="image" src="https://github.com/user-attachments/assets/c51155a3-4ce0-4f97-8a2d-079a7d9579e3" />
     -   <img width="418" height="129" alt="image" src="https://github.com/user-attachments/assets/03a75a09-c334-4827-b688-ec39725c55c9" />
